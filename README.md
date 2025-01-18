@@ -1,36 +1,39 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Mobile Solutionz
+
+Mobile Solutionz is a premium mobile car detailing service based in Medford, Oregon. This project is a web application built using Next.js, a popular React-based framework for building server-rendered and statically generated websites.
+
+The application allows users to learn more about Mobile Solutionz's services, including their premium car detailing packages and eco-friendly cleaning solutions. The site also features a modern design and a responsive layout, making it easy to navigate on desktop and mobile devices.
+
+## Features
+
+* Learn about Mobile Solutionz's premium car detailing services
+* View their services and packages
+* Get in touch with the team through a contact form
+* Modern design and responsive layout
+
+## Technologies Used
+
+* Next.js
+* React
+* TypeScript
+* Tailwind CSS
 
 ## Getting Started
 
-First, run the development server:
+To run the application locally, follow these steps:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+1. Clone the repository: `git clone https://github.com/your-username/mobile-solutionz.git`
+2. Install dependencies: `npm install` or `yarn install`
+3. Start the development server: `npm run dev` or `yarn dev`
+4. Open the application in your browser: `http://localhost:3000`
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Deploying to Production
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+To deploy the application to production, follow these steps:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+1. Build the application: `npm run build` or `yarn build`
+2. Deploy the application to your hosting platform of choice (e.g. Vercel, Netlify, etc.)
 
-## Learn More
+## Contributing
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Contributions are welcome! If you have any ideas or suggestions for improving the application, please open an issue or submit a pull request.
