@@ -3,7 +3,7 @@
 import React from 'react'
 import Image from 'next/image'
 import { motion } from 'framer-motion'
-import { Car, Leaf, Wrench, Star, MapPin } from 'lucide-react' // Lucide Icons
+import { Car, Leaf, Wrench, Star, MapPin, Sun, House } from 'lucide-react' // Lucide Icons
 
 const GlowBar = () => {
   return (
@@ -63,7 +63,7 @@ export default function About() {
             {/* Image with Overlay */}
             <div className="relative h-96 rounded-lg overflow-hidden shadow-xl">
               <Image
-                src="/images/ceramic-coating.png"
+                src="/images/about-image.png"
                 alt="Mobile Solutionz team at work"
                 fill
                 className="object-cover"
@@ -105,11 +105,26 @@ export default function About() {
                   Why Choose Us
                 </h4>
                 <ul className="grid grid-cols-1 gap-2 text-gray-300">
-                  <li>🚘 Convenient mobile service</li>
-                  <li>🌎 Eco-friendly detailing options</li>
-                  <li>🔥 Premium products for Oregon’s climate</li>
-                  <li>🛠️ Tailored packages for all vehicle types</li>
-                  <li>🏠 Serving residential & commercial clients</li>
+                  <li className="flex items-center">
+                    <Car className="mr-2 text-[#606c38] w-6 h-6" />
+                    Convenient mobile service
+                  </li>
+                  <li className="flex items-center">
+                    <Leaf className="mr-2 text-[#606c38] w-6 h-6" />
+                    Eco-friendly detailing options
+                  </li>
+                  <li className="flex items-center">
+                    <Sun className="mr-2 text-[#606c38] w-6 h-6" />
+                    Premium products for Oregon’s climate
+                  </li>
+                  <li className="flex items-center">
+                    <Wrench className="mr-2 text-[#606c38] w-6 h-6" />
+                    Tailored packages for all vehicle types
+                  </li>
+                  <li className="flex items-center">
+                    <House className="mr-2 text-[#606c38] w-6 h-6" />
+                    Serving residential & commercial clients
+                  </li>
                 </ul>
               </div>
             </div>

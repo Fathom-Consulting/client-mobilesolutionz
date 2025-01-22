@@ -6,24 +6,16 @@ interface AddOnPageProps {
   description: string
   benefits: string[]
   process: string[]
-  price: string
   imageSrc: string
 }
 
-export default function AddOnPage({ title, description, benefits, process, price, imageSrc }: AddOnPageProps) {
+export default function AddOnPage({ title, description, benefits, process, imageSrc }: AddOnPageProps) {
   return (
     <div className="text-white p-8">
       <div className="grid md:grid-cols-2 gap-8">
         <div>
           <h1 className="text-4xl font-bold mb-6">{title}</h1>
           <p className="text-xl text-gray-300 mb-8">{description}</p>
-          <Image
-            src={imageSrc}
-            alt={title}
-            width={600}
-            height={400}
-            className="rounded-lg mb-8"
-          />
           <div className="mb-8">
             <h2 className="text-2xl font-semibold mb-4">Benefits</h2>
             <ul className="space-y-2">
@@ -37,6 +29,13 @@ export default function AddOnPage({ title, description, benefits, process, price
           </div>
         </div>
         <div>
+          <Image
+            src={imageSrc}
+            alt={title}
+            width={600}
+            height={400}
+            className="rounded-lg mb-8"
+          />
           <div className="mb-8">
             <h2 className="text-2xl font-semibold mb-4">Our Process</h2>
             <ol className="space-y-2">
@@ -47,11 +46,6 @@ export default function AddOnPage({ title, description, benefits, process, price
                 </li>
               ))}
             </ol>
-          </div>
-          <div className="bg-white/10 backdrop-blur-sm border border-white/10 rounded-xl p-6 mb-8">
-            <h2 className="text-2xl font-semibold mb-2">Pricing</h2>
-            <p className="text-3xl font-bold text-[#606c38]">{price}</p>
-            <p className="text-sm text-gray-400 mt-2">Price may vary based on vehicle size and condition</p>
           </div>
           <Link 
             href="/#contact" 
@@ -64,4 +58,3 @@ export default function AddOnPage({ title, description, benefits, process, price
     </div>
   )
 }
-

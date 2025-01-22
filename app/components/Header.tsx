@@ -21,7 +21,7 @@ export default function Header() {
     <header className={`fixed w-full z-50 transition-all duration-300 ${
       isScrolled ? 'bg-black/90 backdrop-blur-md py-2' : 'bg-transparent py-6'
     }`}>
-      <nav className="container mx-auto px-6">
+      <nav className="container mx-auto px-6 py-4">
         <div className="flex justify-between items-center">
           {/* Left Navigation */}
           <div className="hidden md:flex space-x-8 items-center">
@@ -46,16 +46,18 @@ export default function Header() {
           </div>
 
           {/* Center Logo */}
-          <div className="absolute left-1/2 transform -translate-x-1/2 top-0">
+          <div className={`absolute left-1/2 transform -translate-x-1/2 transition-all duration-500 ${
+            isScrolled ? 'top-0 mt-4' : 'top-24 mt-8'
+          }`}>
             <Image
               src="/images/mobile-solutionz-logo-nobg.png"
               alt="Mobile Solutionz"
-              width={400}
-              height={400}
-              className={`transition-all duration-300 w-auto ${
+              width={200}
+              height={200}
+              className={`transition-all duration-500 w-auto ${
                 isScrolled 
-                ? 'h-16 sm:h-20 md:h-24' 
-                : 'h-26 sm:h-32 md:h-48'
+                ? 'h-12 sm:h-14 md:h-16' 
+                : 'h-32 sm:h-40 md:h-48'
               }`}
               priority
             />
@@ -88,16 +90,17 @@ export default function Header() {
 
           {/* Mobile Navigation */}
           <div className={`
-            fixed inset-0 bg-black/95 backdrop-blur-lg transform transition-transform duration-300 
+            fixed top-0 left-0 right-0 bottom-0 bg-black/95 backdrop-blur-lg
             flex flex-col items-center justify-center space-y-8 md:hidden
-            ${isMenuOpen ? 'translate-x-0' : 'translate-x-full'}
+            transition-[opacity,visibility] duration-300
+            ${isMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible'}
           `}>
             <Image
               src="/images/mobile-solutionz-logo-nobg.png"
               alt="Mobile Solutionz"
               width={200}
               height={200}
-              className="w-auto h-24 sm:h-32 mb-8"
+              className="w-auto h-40 sm:h-20 mb-8"
               priority
             />
             <Link 

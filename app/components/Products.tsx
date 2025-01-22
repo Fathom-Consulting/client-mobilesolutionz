@@ -12,12 +12,12 @@ const products = [
   },
   {
     name: 'CarPro',
-    logo: '/images/carpro.png',
+    logo: '/images/products/carpro.png',
     url: 'https://carpro-us.com',
   },
   {
     name: 'Gyeon',
-    logo: '/images/gyeon.png',
+    logo: '/images/products/gyeon.png',
     url: 'https://gyeonusa.com'
   },
   {

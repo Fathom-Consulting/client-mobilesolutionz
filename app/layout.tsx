@@ -7,6 +7,9 @@ export const metadata = {
   title: 'Mobile Solutionz - Premium Mobile Car Detailing in Medford, Oregon',
   description: 'Experience professional mobile car detailing services in Medford and Southern Oregon. We bring excellence to your doorstep with our premium auto detailing solutions.',
   keywords: 'car detailing, mobile detailing, Medford, Southern Oregon, auto detailing, vehicle cleaning, ceramic coating',
+  icons: {
+    icon: '/favicon.ico',
+  },
 }
 
 export default function RootLayout({
@@ -15,7 +18,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
+    <html lang="en" className="overflow-x-hidden">
       <head>
         {/* Import your additional font (Impact) from Google Fonts */}
         <link
@@ -24,7 +27,7 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${inter.className} bg-black overflow-x-hidden`}
+        className={`${inter.className} bg-black overflow-x-hidden max-w-[100vw]`}
         style={{ minHeight: '100vh' }}
       >
         {children}
@@ -32,3 +35,4 @@ export default function RootLayout({
     </html>
   )
 }
+

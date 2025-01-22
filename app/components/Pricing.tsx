@@ -94,8 +94,7 @@ const addOns = [
       "Air out the vehicle thoroughly after treatment",
       "Perform a final inspection to ensure odor elimination"
     ],
-    price: "$100 - $200",
-    imageSrc: "/placeholder.svg?height=400&width=600"
+    imageSrc: "/images/add-ons/ozone-treatment.jpg"
   },
   {
     name: 'Glass Polish and Coating',
@@ -115,8 +114,7 @@ const addOns = [
       "Cure the coating for maximum durability",
       "Final inspection and touch-ups"
     ],
-    price: "$100 - $200",
-    imageSrc: "/placeholder.svg?height=400&width=600"
+    imageSrc: "/images/add-ons/glass-cleaning.jpg"
   },
   {
     name: 'Paint Correction',
@@ -136,8 +134,7 @@ const addOns = [
       "Refine the finish for maximum gloss",
       "Apply a protective sealant or coating"
     ],
-    price: "$100 - $200",
-    imageSrc: "/placeholder.svg?height=400&width=600"
+    imageSrc: "/images/add-ons/paint-correction.jpg"
   },
   {
     name: 'Spot Extraction',
@@ -157,8 +154,7 @@ const addOns = [
       "Thoroughly dry the cleaned areas",
       "Final inspection to ensure all spots are removed"
     ],
-    price: "$100 - $200",
-    imageSrc: "/placeholder.svg?height=400&width=600"
+    imageSrc: "/images/add-ons/spot-extraction.jpg"
   },
   {
     name: 'Engine Bay Clean-up',
@@ -179,7 +175,7 @@ const addOns = [
       "Dry and inspect the engine bay"
     ],
     price: "$100 - $200",
-    imageSrc: "/placeholder.svg?height=400&width=600"
+    imageSrc: "/images/add-ons/engine-bay-cleanup.jpg"
   },
   {
     name: 'Interior Ceramic Leather Coating',
@@ -199,8 +195,7 @@ const addOns = [
       "Allow the coating to cure",
       "Inspect and buff for a perfect finish"
     ],
-    price: "$100 - $200",
-    imageSrc: "/placeholder.svg?height=400&width=600"
+    imageSrc: "/images/add-ons/leather-ceramic-coating.jpg"
   },
   {
     name: 'Wheel Polish and Coating',
@@ -220,8 +215,7 @@ const addOns = [
       "Apply ceramic coating to wheels and calipers",
       "Allow coating to cure before reinstalling wheels"
     ],
-    price: "$100 - $200",
-    imageSrc: "/placeholder.svg?height=400&width=600"
+    imageSrc: "/images/add-ons/wheel-polish.jpg"
   },
   {
     name: 'Trim Restoration',
@@ -241,8 +235,7 @@ const addOns = [
       "Allow the product to cure",
       "Apply a protective sealant for long-lasting results"
     ],
-    price: "$100 - $200",
-    imageSrc: "/placeholder.svg?height=400&width=600"
+    imageSrc: "/images/add-ons/trim-restoration.jpg"
   }
 ]
 
@@ -329,12 +322,14 @@ export default function Pricing() {
                 <h3 className="text-2xl font-bold text-white mb-4">Custom</h3>
                 <p className="text-gray-400 mb-4">Build your own custom package tailored to your vehicle's needs</p>
                 <p className="text-3xl font-bold text-white mb-6">Price Varies</p>
-                <a 
-                  href="#contact"
-                  className="w-full bg-white text-[#606c38] py-3 px-6 rounded-full hover:bg-gray-100 transition-all duration-300 hover:scale-105 text-center block"
-                >
-                  Contact Us to Customize
-                </a>
+                <div className="flex justify-center">
+                  <a 
+                    href="#contact"
+                    className="w-1/2 bg-white text-[#606c38] py-3 px-6 rounded-full hover:bg-gray-100 transition-all duration-300 hover:scale-105 text-center"
+                  >
+                    Contact Us to Customize
+                  </a>
+                </div>
               </div>
             </div>
           </div>
@@ -355,7 +350,6 @@ export default function Pricing() {
                 className="bg-white/10 backdrop-blur-sm border border-white/10 rounded-xl p-4 flex flex-col justify-between items-center hover:border-[#606c38] transition-all duration-300 text-center cursor-pointer group"
                 onClick={() => setSelectedAddOn(addon)}
               >
-                {/*Removed Diamond icon here*/}
                 <span className="text-white mb-2">{addon.name}</span>
                 <span className="text-[#606c38] hover:underline text-sm">
                   Learn More
@@ -386,7 +380,6 @@ export default function Pricing() {
             description={selectedAddOn.description}
             benefits={selectedAddOn.benefits}
             process={selectedAddOn.process}
-            price={selectedAddOn.price}
             imageSrc={selectedAddOn.imageSrc}
           />
         )}
