@@ -27,7 +27,22 @@ export default function About() {
 
           {/* About Content */}
           <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div className="space-y-6 text-gray-300 text-lg">
+            {/* Image with Overlay */}
+            <div className="relative h-96 rounded-lg overflow-hidden shadow-xl order-1 md:order-2">
+              <Image
+                src="https://res.cloudinary.com/dkgpsncrn/image/upload/v1737580200/about-image_bpcczk.webp"
+                alt="Mobile Solutionz team at work"
+                fill
+                className="object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+              <div className="absolute bottom-4 left-4 right-4 text-white">
+                <h3 className="text-xl font-semibold mb-2">Our Commitment</h3>
+                <p className="text-sm">Delivering excellence in every detail, every time.</p>
+              </div>
+            </div>
+
+            <div className="space-y-6 text-gray-300 text-lg order-2 md:order-1">
               <p>
                 <strong className="text-white">Mobile Solutionz</strong> brings premium car detailing services directly to your location. 
                 With our state-of-the-art equipment and experienced professionals, we transform your vehicle to showroom condition while saving you valuable time.
@@ -57,21 +72,6 @@ export default function About() {
                   <Leaf className="text-[#606c38] w-6 h-6" />
                   <span>Eco-friendly solutions</span>
                 </div>
-              </div>
-            </div>
-
-            {/* Image with Overlay */}
-            <div className="relative h-96 rounded-lg overflow-hidden shadow-xl">
-              <Image
-                src="https://res.cloudinary.com/dkgpsncrn/image/upload/v1737580200/about-image_bpcczk.webp"
-                alt="Mobile Solutionz team at work"
-                fill
-                className="object-cover"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-              <div className="absolute bottom-4 left-4 right-4 text-white">
-                <h3 className="text-xl font-semibold mb-2">Our Commitment</h3>
-                <p className="text-sm">Delivering excellence in every detail, every time.</p>
               </div>
             </div>
           </div>

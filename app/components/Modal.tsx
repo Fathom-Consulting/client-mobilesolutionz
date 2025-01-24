@@ -31,7 +31,6 @@ export default function Modal({ isOpen, onClose, children }: ModalProps) {
     }
   }
 
-  // If we are closed and not animating, no need to render in the DOM
   if (!isOpen && !isAnimating) return null
 
   return (
@@ -44,7 +43,6 @@ export default function Modal({ isOpen, onClose, children }: ModalProps) {
         transition-opacity duration-300
         ${isOpen ? 'opacity-100' : 'opacity-0'}
       `}
-      // Prevent horizontal scrolling if any child tries to exceed viewport width
       style={{ overflowX: 'hidden' }}
       onClick={onClose}
       onTransitionEnd={handleTransitionEnd}
@@ -52,30 +50,27 @@ export default function Modal({ isOpen, onClose, children }: ModalProps) {
       <div
         className={`
           relative w-full
-          // Scale properly across breakpoints:
-          // - On mobile: up to 95% of viewport width
-          // - On md+: up to 80% of viewport width
-          // - On xl+: up to a specific max (e.g., 6xl)
-          max-w-[95vw] md:max-w-[80vw] xl:max-w-6xl
-
-          // Take up most of the screen’s height, but be scrollable
-          max-h-[90vh] overflow-y-auto
-
+          max-w-[90vw] md:max-w-[80vw] xl:max-w-6xl
+          max-h-[65vh] md:max-h-[90vh]  // Reduced on mobile
+          overflow-y-auto
           bg-gray-900 rounded-lg shadow-xl
           transition-all duration-300
           ${isOpen ? 'scale-100 opacity-100' : 'scale-95 opacity-0'}
         `}
-        onClick={(e) => e.stopPropagation()} // Prevent closing on inner click
+        onClick={(e) => e.stopPropagation()}
       >
-        <button
-          onClick={onClose}
-          className="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors duration-200"
-        >
-          <X size={24} />
-        </button>
+        {/* Sticky Close Button */}
+        <div className="sticky top-0 z-10 bg-gray-900/80 backdrop-blur-sm">
+          <button
+            onClick={onClose}
+            className="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors duration-200"
+          >
+            <X size={24} />
+          </button>
+        </div>
 
-        {/* Render the modal content (e.g. Pricing Box) */}
-        <div className="p-6">
+        {/* Content with Top Padding */}
+        <div className="p-6 pt-8">
           {children}
         </div>
       </div>
