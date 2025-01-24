@@ -94,7 +94,7 @@ const addOns = [
       "Air out the vehicle thoroughly after treatment",
       "Perform a final inspection to ensure odor elimination"
     ],
-    imageSrc: "/images/add-ons/ozone-treatment.webp"
+    imageSrc: "https://res.cloudinary.com/dkgpsncrn/image/upload/v1737580062/ozone-treatment_ry1fz4.webp"
   },
   {
     name: 'Glass Polish and Coating',
@@ -114,7 +114,7 @@ const addOns = [
       "Cure the coating for maximum durability",
       "Final inspection and touch-ups"
     ],
-    imageSrc: "/images/add-ons/glass-cleaning.webp"
+    imageSrc: "https://res.cloudinary.com/dkgpsncrn/image/upload/v1737580062/glass-cleaning_f7ieuo.webp"
   },
   {
     name: 'Paint Correction',
@@ -134,7 +134,7 @@ const addOns = [
       "Refine the finish for maximum gloss",
       "Apply a protective sealant or coating"
     ],
-    imageSrc: "/images/add-ons/paint-correction.webp"
+    imageSrc: "https://res.cloudinary.com/dkgpsncrn/image/upload/v1737580062/paint-correction_ooyhnf.webp"
   },
   {
     name: 'Spot Extraction',
@@ -154,7 +154,7 @@ const addOns = [
       "Thoroughly dry the cleaned areas",
       "Final inspection to ensure all spots are removed"
     ],
-    imageSrc: "/images/add-ons/spot-extraction.webp"
+    imageSrc: "https://res.cloudinary.com/dkgpsncrn/image/upload/v1737580062/spot-extraction_bx1a8q.webp"
   },
   {
     name: 'Engine Bay Clean-up',
@@ -194,7 +194,7 @@ const addOns = [
       "Allow the coating to cure",
       "Inspect and buff for a perfect finish"
     ],
-    imageSrc: "/images/add-ons/leather-ceramic-coating.webp"
+    imageSrc: "https://res.cloudinary.com/dkgpsncrn/image/upload/v1737580062/leather-ceramic-coating_e39ms4.webp"
   },
   {
     name: 'Wheel Polish and Coating',
@@ -214,7 +214,7 @@ const addOns = [
       "Apply ceramic coating to wheels and calipers",
       "Allow coating to cure before reinstalling wheels"
     ],
-    imageSrc: "/images/add-ons/wheel-polish.webp"
+    imageSrc: "https://res.cloudinary.com/dkgpsncrn/image/upload/v1737580063/wheel-polish_vbuczp.webp"
   },
   {
     name: 'Trim Restoration',
