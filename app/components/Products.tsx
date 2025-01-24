@@ -1,6 +1,5 @@
 'use client'
-
-import { useState } from 'react'
+import Image from 'next/image'
 
 const products = [
   {
@@ -8,16 +7,15 @@ const products = [
     logo: 'https://kcxusa.com/cdn/shop/files/White_Square.png',
     url: 'https://kcxusa.com',
     description: 'Koch Chemie offers high-quality German car care products that provide excellent results for both interior and exterior detailing.',
-    imageSrc: '/placeholder.svg?height=400&width=600',
   },
   {
     name: 'CarPro',
-    logo: '/images/products/carpro.png',
+    logo: 'https://res.cloudinary.com/dkgpsncrn/image/upload/v1737580278/carpro_kjdbps.png',
     url: 'https://carpro-us.com',
   },
   {
     name: 'Gyeon',
-    logo: '/images/products/gyeon.png',
+    logo: 'https://res.cloudinary.com/dkgpsncrn/image/upload/v1737580278/gyeon_j2ffc8.png',
     url: 'https://gyeonusa.com'
   },
   {
@@ -54,8 +52,10 @@ export default function Products() {
             className="bg-white/10 backdrop-blur-sm border border-white/10 rounded-xl p-6 flex items-center justify-center h-32
                       transition-colors duration-300 hover:bg-white/20"
           >
-            <img
-              src={product.logo || '/placeholder.svg'}
+            <Image
+              width={900}
+              height={900}
+              src={product.logo}
               alt={product.name}
               className={`
                 w-full h-full object-contain

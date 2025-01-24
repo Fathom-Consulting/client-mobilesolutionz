@@ -19,13 +19,6 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="overflow-x-hidden">
-      <head>
-        {/* Import your additional font (Impact) from Google Fonts */}
-        <link
-          href="https://fonts.googleapis.com/css2?family=Impact&display=swap"
-          rel="stylesheet"
-        />
-      </head>
       <body
         className={`${inter.className} bg-black overflow-x-hidden max-w-[100vw]`}
         style={{ minHeight: '100vh' }}

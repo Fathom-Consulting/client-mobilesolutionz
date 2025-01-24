@@ -33,10 +33,10 @@ export default function About() {
                 With our state-of-the-art equipment and experienced professionals, we transform your vehicle to showroom condition while saving you valuable time.
               </p>
               <p>
-                Our dedication to <strong className="text-[#606c38] ">excellence</strong> and <strong className="text-[#606c38]">attention to detail</strong> sets us apart. Whether you need a quick refresh or a complete detail, we deliver outstanding results that protect and enhance your vehicle's appearance.
+                Our dedication to <strong className="text-[#606c38] ">excellence</strong> and <strong className="text-[#606c38]">attention to detail</strong> sets us apart. Whether you need a quick refresh or a complete detail, we deliver outstanding results that protect and enhance your vehicle&apos;s appearance.
               </p>
               <p>
-                Based in <span className="text-[#606c38]"><strong>Medford, Oregon</strong></span>, we're proud to serve the entire Rogue Valley region. Our local expertise allows us to provide tailored detailing services that address the unique needs of Southern Oregon vehicles.
+                Based in <span className="text-[#606c38]"><strong>Medford, Oregon</strong></span>, we&apos;re proud to serve the entire Rogue Valley region. Our local expertise allows us to provide tailored detailing services that address the unique needs of Southern Oregon vehicles.
               </p>
 
               {/* Feature Icons */}
@@ -63,7 +63,7 @@ export default function About() {
             {/* Image with Overlay */}
             <div className="relative h-96 rounded-lg overflow-hidden shadow-xl">
               <Image
-                src="/images/about-image.png"
+                src="https://res.cloudinary.com/dkgpsncrn/image/upload/v1737580200/about-image_bpcczk.webp"
                 alt="Mobile Solutionz team at work"
                 fill
                 className="object-cover"

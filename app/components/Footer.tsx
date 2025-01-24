@@ -1,43 +1,10 @@
 export default function Footer() {
   return (
     <footer className="bg-[#606c38] text-white py-8">
-      <div className="container mx-auto px-6">
-        {/* Top Section */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <div>
-            <h3 className="text-lg font-semibold mb-4">Mobile Solutionz</h3>
-            <p>
-              Premium mobile car detailing services in Medford and throughout
-              Southern Oregon.
-            </p>
-          </div>
-          <div>
-            <h3 className="text-lg font-semibold mb-4">Contact Us</h3>
-            <p>
-              Phone:{' '}
-              <a
-                href="tel:+15413265822"
-                className="hover:underline"
-              >
-                +1 (541) 326-5822
-              </a>
-            </p>
-            <p>
-              Email:{' '}
-              <a
-                href="mailto:iconicion@gmail.com"
-                className="hover:underline"
-              >
-                iconicion@gmail.com
-              </a>
-            </p>
-          </div>
-        </div>
-
         {/* Bottom Section */}
         <div className="mt-8 pt-8 border-t border-gray-700 flex flex-col md:flex-row justify-between items-center">
           <div>
-            © {new Date().getFullYear()} Mobile Solutionz. All rights reserved.
+            &copy; {new Date().getFullYear()} Mobile Solutionz. All rights reserved.
           </div>
 
           {/* “Site created by” + pill link with shine effect */}
@@ -62,11 +29,10 @@ export default function Footer() {
                 hover:before:-translate-x-40
               "
             >
-              Fathom Consulting
+              Fathom
             </a>
           </div>
         </div>
-      </div>
     </footer>
   )
 }

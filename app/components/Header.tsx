@@ -3,145 +3,72 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
+import { Dialog, DialogPanel } from '@headlessui/react'
 import { Menu, X } from 'lucide-react'
 
-export default function Header() {
-  const [isScrolled, setIsScrolled] = useState(false)
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
+export default function Navbar() {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 0)
-    }
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
+      setIsScrolled(window.scrollY > 50);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   return (
-    <header className={`fixed w-full z-50 transition-all duration-300 ${
-      isScrolled ? 'bg-black/90 backdrop-blur-md py-2' : 'bg-transparent py-6'
-    }`}>
-      <nav className="container mx-auto px-6 py-4">
-        <div className="flex justify-between items-center">
-          {/* Left Navigation */}
-          <div className="hidden md:flex space-x-8 items-center">
-            <Link 
-              href="#services" 
-              className="text-white hover:text-[#606c38] transition-colors duration-300"
-            >
-              Services
-            </Link>
-            <Link 
-              href="#pricing" 
-              className="text-white hover:text-[#606c38] transition-colors duration-300"
-            >
-              Pricing
-            </Link>
-            <Link 
-              href="#about" 
-              className="text-white hover:text-[#606c38] transition-colors duration-300"
-            >
-              About
-            </Link>
-          </div>
-
-          {/* Center Logo */}
-          <div className={`absolute left-1/2 transform -translate-x-1/2 transition-all duration-500 ${
-            isScrolled ? 'top-0 mt-4' : 'top-24 mt-8'
-          }`}>
+    <header className={`fixed w-full z-50 transition-all duration-300 ${isScrolled || mobileMenuOpen ? 'bg-black' : 'bg-transparent'}`}>
+      <nav className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8 text-white">
+        <div className="flex lg:flex-2">
+          <Link href="/" className="-m-1.5 p-1.5">
+            <span className="sr-only">Mobile Solutionz</span>
             <Image
-              src="/images/mobile-solutionz-logo-nobg.png"
+              src="https://res.cloudinary.com/dkgpsncrn/image/upload/v1737580200/mobile-solutionz-logo_gielxw.webp"
               alt="Mobile Solutionz"
-              width={200}
-              height={200}
-              className={`transition-all duration-500 w-auto ${
-                isScrolled 
-                ? 'h-12 sm:h-14 md:h-16' 
-                : 'h-32 sm:h-40 md:h-48'
-              }`}
-              priority
+              width={250}
+              height={250}
+              className="h-32 w-auto transition-all duration-300"
             />
-          </div>
-
-          {/* Right Navigation */}
-          <div className="hidden md:flex space-x-8 items-center">
-            <a 
-              href="tel:+15413265822"
-              className="text-white hover:text-[#606c38] transition-colors duration-300 font-semibold tracking-wide"
-            >
-              <span className="mr-2">📞</span>(541) 326-5822
-            </a>
-            <Link 
-              href="#contact" 
-              className="bg-[#606c38] text-white px-6 py-2 rounded-full hover:bg-[#515c30] transition-all duration-300 hover:scale-105"
-            >
-              Book Now
-            </Link>
-          </div>
-
-          {/* Mobile Menu Button */}
-          <button 
-            className="md:hidden text-white z-50"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            aria-label="Toggle menu"
+          </Link>
+        </div>
+        <div className="hidden lg:flex lg:gap-x-12">
+          <Link href="#services" className="text-lg font-semibold hover:text-[#606c38]">Services</Link>
+          <Link href="#pricing" className="text-lg font-semibold hover:text-[#606c38]">Pricing</Link>
+          <Link href="#about" className="text-lg font-semibold hover:text-[#606c38]">About</Link>
+          <Link href="tel:+15413265822" className="text-lg font-semibold">(541) 326-5822</Link>
+        </div>
+        <div className="lg:hidden">
+          <button
+            type="button"
+            onClick={() => setMobileMenuOpen(true)}
+            className="p-2.5 text-white"
           >
-            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            <Menu className="h-6 w-6" />
           </button>
-
-          {/* Mobile Navigation */}
-          <div className={`
-            fixed top-0 left-0 right-0 bottom-0 bg-black/95 backdrop-blur-lg
-            flex flex-col items-center justify-center space-y-8 md:hidden
-            transition-[opacity,visibility] duration-300
-            ${isMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible'}
-          `}>
-            <Image
-              src="/images/mobile-solutionz-logo-nobg.png"
-              alt="Mobile Solutionz"
-              width={200}
-              height={200}
-              className="w-auto h-40 sm:h-20 mb-8"
-              priority
-            />
-            <Link 
-              href="#services" 
-              className="text-white text-2xl hover:text-[#606c38] transition-colors duration-300"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Services
-            </Link>
-            <Link 
-              href="#pricing" 
-              className="text-white text-2xl hover:text-[#606c38] transition-colors duration-300"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Pricing
-            </Link>
-            <Link 
-              href="#about" 
-              className="text-white text-2xl hover:text-[#606c38] transition-colors duration-300"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              About
-            </Link>
-            <a 
-              href="tel:+15413265822"
-              className="text-white text-2xl hover:text-[#606c38] transition-colors duration-300 font-semibold tracking-wide"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              <span className="mr-2">📞</span>(541) 326-5822
-            </a>
-            <Link 
-              href="#contact" 
-              className="bg-[#606c38] text-white px-8 py-3 rounded-full text-xl hover:bg-[#515c30] transition-all duration-300"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Book Now
-            </Link>
-          </div>
         </div>
       </nav>
+      
+      <Dialog open={mobileMenuOpen} onClose={setMobileMenuOpen} className="lg:hidden">
+        <div className="fixed inset-0 z-10 bg-black/100 backdrop-blur-lg" />
+        <DialogPanel className="fixed inset-0 z-20 flex flex-col items-center justify-center bg-black p-6">
+          <button
+            type="button"
+            onClick={() => setMobileMenuOpen(false)}
+            className="absolute top-6 right-6 text-white"
+          >
+            <X className="h-6 w-6" />
+          </button>
+          <div className="mt-6 flex flex-col items-center space-y-6 text-white text-lg">
+            <Link href="#services" onClick={() => setMobileMenuOpen(false)}>Services</Link>
+            <Link href="#pricing" onClick={() => setMobileMenuOpen(false)}>Pricing</Link>
+            <Link href="#about" onClick={() => setMobileMenuOpen(false)}>About</Link>
+            <Link href="tel:+15413265822" onClick={() => setMobileMenuOpen(false)}>(541) 326-5822</Link>
+            <Link href="#contact" className="bg-[#606c38] px-6 py-3 rounded-full text-center" onClick={() => setMobileMenuOpen(false)}>Book Now</Link>
+          </div>
+        </DialogPanel>
+      </Dialog>
     </header>
   )
 }
-

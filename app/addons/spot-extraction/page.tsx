@@ -1,4 +1,4 @@
-import AddOnPage from '@/app/components/AddOnPage'
+import AddOnPage from '../../components/AddOnPage'
 
 export default function SpotExtractionPage() {
   return (
@@ -20,7 +20,7 @@ export default function SpotExtractionPage() {
         "Thoroughly dry the cleaned areas",
         "Final inspection to ensure all spots are removed"
       ]}
-      price="$100 - $200"
+      imageSrc="https://res.cloudinary.com/dkgpsncrn/image/upload/v1737580062/spot-extraction_bx1a8q.webp"
     />
   )
 }

@@ -3,7 +3,6 @@
 import { useState, useEffect } from 'react'
 import { useSearchParams } from 'next/navigation'
 import { Check } from 'lucide-react'
-import Script from 'next/script'
 
 const packages = [
   {

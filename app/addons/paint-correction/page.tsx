@@ -1,4 +1,4 @@
-import AddOnPage from '@/app/components/AddOnPage'
+import AddOnPage from '../../components/AddOnPage'
 
 export default function PaintCorrectionPage() {
   return (
@@ -20,7 +20,7 @@ export default function PaintCorrectionPage() {
         "Refine the finish for maximum gloss",
         "Apply a protective sealant or coating"
       ]}
-      price="$100 - $200"
+      imageSrc = "https://res.cloudinary.com/dkgpsncrn/image/upload/v1737580062/paint-correction_ooyhnf.webp"
     />
   )
 }

@@ -1,4 +1,4 @@
-import AddOnPage from '@/app/components/AddOnPage'
+import AddOnPage from '../../components/AddOnPage'
 
 export default function WheelPolishAndCoatingPage() {
   return (
@@ -20,7 +20,7 @@ export default function WheelPolishAndCoatingPage() {
         "Apply ceramic coating to wheels and calipers",
         "Allow coating to cure before reinstalling wheels"
       ]}
-      price="$100 - $200"
+      imageSrc = "https://res.cloudinary.com/dkgpsncrn/image/upload/v1737580063/wheel-polish_vbuczp.webp"
     />
   )
 }

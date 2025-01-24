@@ -1,4 +1,4 @@
-import AddOnPage from '@/app/components/AddOnPage'
+import AddOnPage from '../../components/AddOnPage'
 
 export default function EngineBayCleanUpPage() {
   return (
@@ -20,8 +20,7 @@ export default function EngineBayCleanUpPage() {
         "Apply protectant to rubber and plastic components",
         "Dry and inspect the engine bay"
       ]}
-      price="$100 - $200"
-      imageSrc = "/images/placeholder.svg"
+      imageSrc = "https://res.cloudinary.com/dkgpsncrn/image/upload/f_auto,q_auto/engine-bay-cleanup_ppdntn"
 
     />
   )

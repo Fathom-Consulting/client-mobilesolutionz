@@ -1,4 +1,4 @@
-import AddOnPage from '@/app/components/AddOnPage'
+import AddOnPage from '../../components/AddOnPage'
 
 export default function GlassPolishAndCoatingPage() {
   return (
@@ -20,7 +20,7 @@ export default function GlassPolishAndCoatingPage() {
         "Cure the coating for maximum durability",
         "Final inspection and touch-ups"
       ]}
-      price="$100 - $200"
+      imageSrc = "https://res.cloudinary.com/dkgpsncrn/image/upload/v1737580062/glass-cleaning_f7ieuo.webp"
     />
   )
 }

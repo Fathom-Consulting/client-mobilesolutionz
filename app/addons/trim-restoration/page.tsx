@@ -1,4 +1,4 @@
-import AddOnPage from '@/app/components/AddOnPage'
+import AddOnPage from '../../components/AddOnPage'
 
 export default function TrimRestorationPage() {
   return (
@@ -20,7 +20,7 @@ export default function TrimRestorationPage() {
         "Allow the product to cure",
         "Apply a protective sealant for long-lasting results"
       ]}
-      price="$100 - $200"
+      imageSrc = "https://res.cloudinary.com/dkgpsncrn/image/upload/v1737580063/trim-restoration_8adu13o.webp"
     />
   )
 }

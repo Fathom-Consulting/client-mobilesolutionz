@@ -1,4 +1,4 @@
-import AddOnPage from '@/app/components/AddOnPage'
+import AddOnPage from '../../components/AddOnPage'
 
 export default function OZoneTreatmentPage() {
   return (
@@ -20,7 +20,7 @@ export default function OZoneTreatmentPage() {
         "Air out the vehicle thoroughly after treatment",
         "Perform a final inspection to ensure odor elimination"
       ]}
-      price="$100 - $200"
+      imageSrc = "https://res.cloudinary.com/dkgpsncrn/image/upload/v1737580062/ozone-treatment_ry1fz4.webp"
     />
   )
 }

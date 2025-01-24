@@ -27,7 +27,7 @@ export default function Loading() {
   return (
     <div className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-black">
       <Image
-        src="/images/mobile-solutionz-logo-nobg.png"
+        src="https://res.cloudinary.com/dkgpsncrn/image/upload/v1737580200/mobile-solutionz-logo_gielxw.webp"
         alt="Mobile Solutionz"
         width={300}
         height={300}

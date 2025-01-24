@@ -1,4 +1,4 @@
-import AddOnPage from '@/app/components/AddOnPage'
+import AddOnPage from '../../components/AddOnPage'
 
 export default function InteriorCeramicLeatherCoatingPage() {
   return (
@@ -20,7 +20,7 @@ export default function InteriorCeramicLeatherCoatingPage() {
         "Allow the coating to cure",
         "Inspect and buff for a perfect finish"
       ]}
-      price="$100 - $200"
+      imageSrc = "https://res.cloudinary.com/dkgpsncrn/image/upload/v1737580062/leather-ceramic-coating_e39ms4.webp"
     />
   )
 }

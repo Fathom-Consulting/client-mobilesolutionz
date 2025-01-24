@@ -8,7 +8,7 @@ import AddOnPage from './AddOnPage'
 const services = [
   {
     name: 'Economy',
-    price: '$100 - $200',
+    price: '$100 - $250',
     description: 'Basic detailing for regular maintenance',
     features: {
       interior: [
@@ -66,7 +66,7 @@ const services = [
   {
     name: 'Custom',
     price: 'Varies',
-    description: 'Build your own custom package tailored to your vehicle\'s needs',
+    description: "Build your own custom package tailored to your vehicle's needs",
     features: {
       interior: ['Customized interior detailing plan'],
       exterior: ['Customized exterior detailing plan']
@@ -94,7 +94,7 @@ const addOns = [
       "Air out the vehicle thoroughly after treatment",
       "Perform a final inspection to ensure odor elimination"
     ],
-    imageSrc: "/images/add-ons/ozone-treatment.jpg"
+    imageSrc: "/images/add-ons/ozone-treatment.webp"
   },
   {
     name: 'Glass Polish and Coating',
@@ -114,7 +114,7 @@ const addOns = [
       "Cure the coating for maximum durability",
       "Final inspection and touch-ups"
     ],
-    imageSrc: "/images/add-ons/glass-cleaning.jpg"
+    imageSrc: "/images/add-ons/glass-cleaning.webp"
   },
   {
     name: 'Paint Correction',
@@ -134,7 +134,7 @@ const addOns = [
       "Refine the finish for maximum gloss",
       "Apply a protective sealant or coating"
     ],
-    imageSrc: "/images/add-ons/paint-correction.jpg"
+    imageSrc: "/images/add-ons/paint-correction.webp"
   },
   {
     name: 'Spot Extraction',
@@ -154,7 +154,7 @@ const addOns = [
       "Thoroughly dry the cleaned areas",
       "Final inspection to ensure all spots are removed"
     ],
-    imageSrc: "/images/add-ons/spot-extraction.jpg"
+    imageSrc: "/images/add-ons/spot-extraction.webp"
   },
   {
     name: 'Engine Bay Clean-up',
@@ -174,8 +174,7 @@ const addOns = [
       "Apply protectant to rubber and plastic components",
       "Dry and inspect the engine bay"
     ],
-    price: "$100 - $200",
-    imageSrc: "/images/add-ons/engine-bay-cleanup.jpg"
+    imageSrc: "https://res.cloudinary.com/dkgpsncrn/image/upload/f_auto,q_auto/engine-bay-cleanup_ppdntn"
   },
   {
     name: 'Interior Ceramic Leather Coating',
@@ -195,7 +194,7 @@ const addOns = [
       "Allow the coating to cure",
       "Inspect and buff for a perfect finish"
     ],
-    imageSrc: "/images/add-ons/leather-ceramic-coating.jpg"
+    imageSrc: "/images/add-ons/leather-ceramic-coating.webp"
   },
   {
     name: 'Wheel Polish and Coating',
@@ -215,7 +214,7 @@ const addOns = [
       "Apply ceramic coating to wheels and calipers",
       "Allow coating to cure before reinstalling wheels"
     ],
-    imageSrc: "/images/add-ons/wheel-polish.jpg"
+    imageSrc: "/images/add-ons/wheel-polish.webp"
   },
   {
     name: 'Trim Restoration',
@@ -235,7 +234,7 @@ const addOns = [
       "Allow the product to cure",
       "Apply a protective sealant for long-lasting results"
     ],
-    imageSrc: "/images/add-ons/trim-restoration.jpg"
+    imageSrc: "https://res.cloudinary.com/dkgpsncrn/image/upload/v1737580063/trim-restoration_8adu13o.webp"
   }
 ]
 
@@ -320,7 +319,7 @@ export default function Pricing() {
             >
               <div className="p-6">
                 <h3 className="text-2xl font-bold text-white mb-4">Custom</h3>
-                <p className="text-gray-400 mb-4">Build your own custom package tailored to your vehicle's needs</p>
+                <p className="text-gray-400 mb-4">Build your own custom package tailored to your vehicle&apos;s needs</p>
                 <p className="text-3xl font-bold text-white mb-6">Price Varies</p>
                 <div className="flex justify-center">
                   <a 
