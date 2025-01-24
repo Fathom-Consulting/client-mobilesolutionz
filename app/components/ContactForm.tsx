@@ -1,151 +1,234 @@
-'use client'
+"use client";
 
-import { useState, useEffect } from 'react'
-import { useSearchParams } from 'next/navigation'
-import { Check } from 'lucide-react'
+import { useState, useEffect } from "react";
+import { useSearchParams } from "next/navigation";
+import { useForm } from "@formspree/react";
+import { Check } from "lucide-react";
+import { useRouter } from "next/navigation";
 
+type FormError = {
+  code: string;
+  message: string;
+  path: string;
+};
 const packages = [
   {
-    name: 'Economy',
-    price: '$100 - $200',
+    name: "Economy",
+    price: "$100 - $200",
     services: [
-      'Basic cleaning',
-      'Panel & seat conditioning',
-      'Windows cleaned',
-      'Pedals cleaned',
-      'Hand wash',
-      'Scrub wheels & tires',
-      'Wax & tire shine',
-      'Hand dry'
+      "Basic cleaning",
+      "Panel & seat conditioning",
+      "Windows cleaned",
+      "Pedals cleaned",
+      "Hand wash",
+      "Scrub wheels & tires",
+      "Wax & tire shine",
+      "Hand dry",
     ],
-    includedAddons: []
+    includedAddons: [],
   },
   {
-    name: 'Protection+',
-    price: '$400 - $500',
+    name: "Protection+",
+    price: "$400 - $500",
     services: [
-      'Deep clean',
-      'Steam disinfectant',
-      'Leather treatment',
-      'Spot extraction',
-      'Fenders scrubbed',
-      'Iron remover',
-      'Clay bar',
-      'Premium sealant',
-      'Plastic protection'
+      "Deep clean",
+      "Steam disinfectant",
+      "Leather treatment",
+      "Spot extraction",
+      "Fenders scrubbed",
+      "Iron remover",
+      "Clay bar",
+      "Premium sealant",
+      "Plastic protection",
     ],
-    includedAddons: ['Spot Extraction']
+    includedAddons: ["Spot Extraction"],
   },
   {
-    name: 'CeramicPro',
-    price: '$800 - $1400',
+    name: "CeramicPro",
+    price: "$800 - $1400",
     services: [
-      'Ceramic coating on paint',
-      'Full extraction',
-      'Protection & conditioning',
-      'Trim restoration',
-      'Engine bay cleanup'
+      "Ceramic coating on paint",
+      "Full extraction",
+      "Protection & conditioning",
+      "Trim restoration",
+      "Engine bay cleanup",
     ],
-    includedAddons: ['Glass Polish', 'Engine Bay Clean-up', 'Wheel Polish and Coating', 'Trim Restoration']
+    includedAddons: [
+      "Glass Polish",
+      "Engine Bay Clean-up",
+      "Wheel Polish and Coating",
+      "Trim Restoration",
+    ],
   },
   {
-    name: 'I\'m not sure yet',
-    price: 'Varies',
-    services: ['We\'ll help you choose the best package'],
-    includedAddons: []
-  }
-]
+    name: "I'm not sure yet",
+    price: "Varies",
+    services: ["We'll help you choose the best package"],
+    includedAddons: [],
+  },
+];
 
 const addOns = [
-  'O-Zone Treatment',
-  'Glass Polish',
-  'Paint Correction',
-  'Spot Extraction',
-  'Engine Bay Clean-up',
-  'Interior Ceramic Leather Coating',
-  'Wheel Polish and Coating',
-  'Trim Restoration'
-]
-
+  "O-Zone Treatment",
+  "Glass Polish",
+  "Paint Correction",
+  "Spot Extraction",
+  "Engine Bay Clean-up",
+  "Interior Ceramic Leather Coating",
+  "Wheel Polish and Coating",
+  "Trim Restoration",
+];
 
 export default function ContactForm() {
+  const router = useRouter();
+  const [state, handleSubmit] = useForm("mbldlgdp");
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    message: '',
-    package: '',
+    name: "",
+    email: "",
+    phone: "",
+    message: "",
+    package: "",
     addons: [] as string[],
-    year: '',
-    make: '',
-    model: ''
-  })
+    year: "",
+    make: "",
+    model: "",
+  });
 
-
-  const searchParams = useSearchParams()
+  const searchParams = useSearchParams();
 
   useEffect(() => {
-    const packageParam = searchParams.get('package')
-    const addonParam = searchParams.get('addon')
+    if (state.succeeded) {
+      router.push("/thanks");
+    }
+  }, [state.succeeded, router]);
+
+  useEffect(() => {
+    const packageParam = searchParams.get("package");
+    const addonParam = searchParams.get("addon");
 
     if (packageParam) {
-      setFormData(prev => ({ ...prev, package: packageParam }))
+      setFormData((prev) => ({ ...prev, package: packageParam }));
     }
 
     if (addonParam) {
-      setFormData(prev => ({ ...prev, addons: [...prev.addons, addonParam] }))
+      setFormData((prev) => ({
+        ...prev,
+        addons: [...prev.addons, addonParam],
+      }));
     }
 
     const handleUpdateContactForm = (event: CustomEvent) => {
       const { package: packageName, addon } = event.detail;
       if (packageName) {
-        setFormData(prev => ({ ...prev, package: packageName }))
+        setFormData((prev) => ({ ...prev, package: packageName }));
       }
       if (addon) {
-        setFormData(prev => ({ ...prev, addons: [...prev.addons, addon] }))
+        setFormData((prev) => ({ ...prev, addons: [...prev.addons, addon] }));
       }
-    }
+    };
 
-    window.addEventListener('updateContactForm', handleUpdateContactForm as EventListener)
+    window.addEventListener(
+      "updateContactForm",
+      handleUpdateContactForm as EventListener
+    );
 
     return () => {
-      window.removeEventListener('updateContactForm', handleUpdateContactForm as EventListener)
-    }
-  }, [searchParams])
+      window.removeEventListener(
+        "updateContactForm",
+        handleUpdateContactForm as EventListener
+      );
+    };
+  }, [searchParams]);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+  const formatPhoneNumber = (value: string) => {
+    if (!value) return value;
+    const phoneNumber = value.replace(/[^\d]/g, "");
+    const phoneNumberLength = phoneNumber.length;
+
+    if (phoneNumberLength < 4) return phoneNumber;
+    if (phoneNumberLength < 7) {
+      return `(${phoneNumber.slice(0, 3)}) ${phoneNumber.slice(3)}`;
+    }
+    return `(${phoneNumber.slice(0, 3)}) ${phoneNumber.slice(
+      3,
+      6
+    )}-${phoneNumber.slice(6, 10)}`;
+  };
+
+  const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const formattedValue = formatPhoneNumber(e.target.value);
+    setFormData((prev) => ({ ...prev, phone: formattedValue }));
+  };
+
+  const handleChange = (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
+  ) => {
     const { name, value, type } = e.target;
-    setFormData(prevState => {
-      if (type === 'checkbox') {
+    setFormData((prevState) => {
+      if (type === "checkbox") {
         const checked = (e.target as HTMLInputElement).checked;
         return {
           ...prevState,
           addons: checked
             ? [...prevState.addons, value]
-            : prevState.addons.filter(addon => addon !== value)
+            : prevState.addons.filter((addon) => addon !== value),
         };
-      } else if (name === 'package') {
-        const selectedPackage = packages.find(p => p.name === value);
-        return { ...prevState, package: value, addons: selectedPackage ? [...selectedPackage.includedAddons] : [] };
+      } else if (name === "package") {
+        const selectedPackage = packages.find((p) => p.name === value);
+        return {
+          ...prevState,
+          package: value,
+          addons: selectedPackage ? [...selectedPackage.includedAddons] : [],
+        };
       }
       return { ...prevState, [name]: value };
     });
-  }
+  };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    // Handle form submission
-    console.log('Form submitted:', formData)
-    setFormData({ name: '', email: '', phone: '', message: '', package: '', addons: [], year: '', make: '', model: '' })
-  }
-
-  const selectedPackage = packages.find(p => p.name === formData.package)
+  const selectedPackage = packages.find((p) => p.name === formData.package);
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
+      {state.errors && (
+        <div className="bg-red-900/20 p-4 rounded-lg">
+          <h3 className="text-red-400 font-medium mb-2">
+            Please fix these errors:
+          </h3>
+          <ul className="list-disc pl-4">
+            {state.errors && (
+              <div className="bg-red-900/20 p-4 rounded-lg">
+                <h3 className="text-red-400 font-medium mb-2">
+                  Please fix these errors:
+                </h3>
+                <ul className="list-disc pl-4">
+                  {Object.entries(state.errors).map(
+                    ([field, errors]: [string, FormError[]]) =>
+                      errors?.map((error: FormError, index: number) => (
+                        <li
+                          key={`${field}-${index}`}
+                          className="text-red-300 text-sm"
+                        >
+                          {field}: {error.message}
+                        </li>
+                      ))
+                  )}
+                </ul>
+              </div>
+            )}
+          </ul>
+        </div>
+      )}
+
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
-          <label htmlFor="name" className="block mb-2 text-sm font-medium text-white">Name</label>
+          <label
+            htmlFor="name"
+            className="block mb-2 text-sm font-medium text-white"
+          >
+            Name
+          </label>
           <input
             type="text"
             id="name"
@@ -158,7 +241,12 @@ export default function ContactForm() {
           />
         </div>
         <div>
-          <label htmlFor="email" className="block mb-2 text-sm font-medium text-white">Email</label>
+          <label
+            htmlFor="email"
+            className="block mb-2 text-sm font-medium text-white"
+          >
+            Email
+          </label>
           <input
             type="email"
             id="email"
@@ -171,21 +259,35 @@ export default function ContactForm() {
           />
         </div>
       </div>
+
       <div>
-        <label htmlFor="phone" className="block mb-2 text-sm font-medium text-white">Phone</label>
+        <label
+          htmlFor="phone"
+          className="block mb-2 text-sm font-medium text-white"
+        >
+          Phone
+        </label>
         <input
           type="tel"
           id="phone"
           name="phone"
           value={formData.phone}
-          onChange={handleChange}
+          onChange={handlePhoneChange}
+          pattern="\(\d{3}\) \d{3}-\d{4}"
+          required
           className="w-full px-4 py-3 bg-white/10 border border-white/10 rounded-lg focus:outline-none focus:border-[#606c38] text-white placeholder-gray-400"
           placeholder="(123) 456-7890"
         />
       </div>
+
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <div>
-          <label htmlFor="year" className="block mb-2 text-sm font-medium text-white">Year</label>
+          <label
+            htmlFor="year"
+            className="block mb-2 text-sm font-medium text-white"
+          >
+            Year
+          </label>
           <input
             type="text"
             id="year"
@@ -197,7 +299,12 @@ export default function ContactForm() {
           />
         </div>
         <div>
-          <label htmlFor="make" className="block mb-2 text-sm font-medium text-white">Make</label>
+          <label
+            htmlFor="make"
+            className="block mb-2 text-sm font-medium text-white"
+          >
+            Make
+          </label>
           <input
             type="text"
             id="make"
@@ -209,7 +316,12 @@ export default function ContactForm() {
           />
         </div>
         <div>
-          <label htmlFor="model" className="block mb-2 text-sm font-medium text-white">Model</label>
+          <label
+            htmlFor="model"
+            className="block mb-2 text-sm font-medium text-white"
+          >
+            Model
+          </label>
           <input
             type="text"
             id="model"
@@ -221,26 +333,36 @@ export default function ContactForm() {
           />
         </div>
       </div>
+
       <div>
-        <label htmlFor="package" className="block mb-2 text-sm font-medium text-white">Select Package</label>
+        <label
+          htmlFor="package"
+          className="block mb-2 text-sm font-medium text-white"
+        >
+          Select Package
+        </label>
         <select
           id="package"
           name="package"
           value={formData.package}
           onChange={handleChange}
           className="w-full px-4 py-3 bg-white/10 border border-white/10 rounded-lg focus:outline-none focus:border-[#606c38] text-white"
+          required
         >
           <option value="">Select a package</option>
-          {packages.map(pkg => (
-            <option key={pkg.name} value={pkg.name}>{pkg.name} ({pkg.price})</option>
+          {packages.map((pkg) => (
+            <option key={pkg.name} value={pkg.name}>
+              {pkg.name} ({pkg.price})
+            </option>
           ))}
         </select>
       </div>
+
       {selectedPackage && (
         <div className="bg-white/5 rounded-lg p-4">
           <h4 className="text-white font-semibold mb-2">Included Services:</h4>
           <ul className="grid grid-cols-1 md:grid-cols-2 gap-2">
-            {selectedPackage.services.map(service => (
+            {selectedPackage.services.map((service) => (
               <li key={service} className="flex items-center text-gray-300">
                 <Check className="w-4 h-4 mr-2 text-[#606c38]" />
                 {service}
@@ -249,13 +371,21 @@ export default function ContactForm() {
           </ul>
         </div>
       )}
+
       <div>
-        <label className="block mb-2 text-sm font-medium text-white">Add-ons (Contact for pricing)</label>
+        <label className="block mb-2 text-sm font-medium text-white">
+          Add-ons (Contact for pricing)
+        </label>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          {addOns.map(addon => {
+          {addOns.map((addon) => {
             const isIncluded = selectedPackage?.includedAddons.includes(addon);
             return (
-              <label key={addon} className={`flex items-center space-x-3 ${isIncluded ? 'opacity-50' : ''}`}>
+              <label
+                key={addon}
+                className={`flex items-center space-x-3 ${
+                  isIncluded ? "opacity-50" : ""
+                }`}
+              >
                 <div className="relative flex items-center">
                   <input
                     type="checkbox"
@@ -266,25 +396,40 @@ export default function ContactForm() {
                     disabled={isIncluded}
                     className="sr-only"
                   />
-                  <div className={`w-6 h-6 border-2 rounded-md flex items-center justify-center ${
-                    formData.addons.includes(addon) ? 'bg-[#606c38] border-[#606c38]' : 'border-white/30'
-                  }`}>
+                  <div
+                    className={`w-6 h-6 border-2 rounded-md flex items-center justify-center ${
+                      formData.addons.includes(addon)
+                        ? "bg-[#606c38] border-[#606c38]"
+                        : "border-white/30"
+                    }`}
+                  >
                     {formData.addons.includes(addon) && (
-                      <svg className="w-4 h-4 text-white fill-current" viewBox="0 0 20 20">
+                      <svg
+                        className="w-4 h-4 text-white fill-current"
+                        viewBox="0 0 20 20"
+                      >
                         <path d="M0 11l2-2 5 5L18 3l2 2L7 18z" />
                       </svg>
                     )}
                   </div>
                 </div>
                 <span className="text-white text-sm">{addon}</span>
-                {isIncluded && <span className="text-[#606c38] text-xs">(Included)</span>}
+                {isIncluded && (
+                  <span className="text-[#606c38] text-xs">(Included)</span>
+                )}
               </label>
             );
           })}
         </div>
       </div>
+
       <div>
-        <label htmlFor="message" className="block mb-2 text-sm font-medium text-white">Message</label>
+        <label
+          htmlFor="message"
+          className="block mb-2 text-sm font-medium text-white"
+        >
+          Message
+        </label>
         <textarea
           id="message"
           name="message"
@@ -296,27 +441,24 @@ export default function ContactForm() {
           placeholder="Tell us about your vehicle and service needs..."
         ></textarea>
       </div>
-      <div className="mt-8">
-        <h3 className="text-xl font-semibold text-white mb-4">Book and Pay Deposit</h3>
-        <p className="text-gray-300 mb-4">Ready to secure your appointment? Click the button below to book and pay your deposit through Square.</p>
-        
-        {/* Square Booking Button */}
-        <div id="square-booking-button"></div>
-      </div>
+
       <button
         type="submit"
-        className="w-full bg-[#606c38] text-white py-4 px-8 rounded-full hover:bg-[#515c30] transition-all duration-300 hover:scale-105 text-lg font-medium"
+        disabled={state.submitting}
+        className="w-full bg-[#606c38] text-white py-4 px-8 rounded-full hover:bg-[#515c30] transition-all duration-300 hover:scale-105 text-lg font-medium disabled:opacity-50 disabled:cursor-not-allowed"
       >
-        Schedule Consultation
+        {state.submitting ? "Submitting..." : "Schedule Consultation"}
       </button>
+
       <p className="text-center text-white mt-4">
-        Or call us at: <a href="tel:+15413265822" className="text-[#606c38] hover:underline font-semibold text-lg tracking-wide">+1 (541) 326-5822</a>
+        Or call us at:{" "}
+        <a
+          href="tel:+15413265822"
+          className="text-[#606c38] hover:underline font-semibold text-lg tracking-wide"
+        >
+          +1 (541) 326-5822
+        </a>
       </p>
-
-      {/* Square Appointments Script */}
-      {/* Add booking button here */}
     </form>
-  )
+  );
 }
-
-
