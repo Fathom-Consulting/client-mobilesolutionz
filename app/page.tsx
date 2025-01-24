@@ -20,7 +20,7 @@ export default function Home() {
     <>
     <Head>
        {/* General Meta Tags */}
-       <title>Mobile Solutionz - Premium Car Detailing</title>
+        <title>Mobile Solutionz - Premium Car Detailing</title>
         <meta name="description" content="Premium mobile car detailing in Medford, Oregon. We bring professional detailing to your doorstep." />
 
         {/* Open Graph (OG) Meta Tags for Social Media Preview */}
