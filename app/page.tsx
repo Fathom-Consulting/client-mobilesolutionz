@@ -19,13 +19,26 @@ export default function Home() {
   return (
     <>
     <Head>
-        <title>Mobile Solutionz - Premium Car Detailing</title>
-        <meta name="description" content="Experience professional mobile car detailing at your doorstep. We bring the excellence to you!" />
+       {/* General Meta Tags */}
+       <title>Mobile Solutionz - Premium Car Detailing</title>
+        <meta name="description" content="Premium mobile car detailing in Medford, Oregon. We bring professional detailing to your doorstep." />
+
+        {/* Open Graph (OG) Meta Tags for Social Media Preview */}
         <meta property="og:title" content="Mobile Solutionz - Premium Car Detailing" />
-        <meta property="og:description" content="Experience professional mobile car detailing at your doorstep." />
+        <meta property="og:description" content="Premium mobile car detailing in Medford, Oregon. We bring professional detailing to your doorstep." />
         <meta property="og:image" content="https://res.cloudinary.com/dkgpsncrn/image/upload/v1737580200/mobile-solutionz-logo_gielxw.webp" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
         <meta property="og:url" content="https://mobile-solutionz.com" />
         <meta property="og:type" content="website" />
+
+        {/* Twitter Card Meta Tags */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Mobile Solutionz - Premium Car Detailing" />
+        <meta name="twitter:description" content="Premium mobile car detailing in Medford, Oregon. We bring professional detailing to your doorstep." />
+        <meta name="twitter:image" content="https://res.cloudinary.com/dkgpsncrn/image/upload/v1737580200/mobile-solutionz-logo_gielxw.webp" />
+
+        {/* Viewport & SEO Enhancements */}
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
     <main>
