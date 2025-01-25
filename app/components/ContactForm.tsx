@@ -11,6 +11,7 @@ type FormError = {
   message: string;
   path: string;
 };
+
 const packages = [
   {
     name: "Economy",
@@ -92,6 +93,7 @@ export default function ContactForm() {
     year: "",
     make: "",
     model: "",
+    maintenance: "",
   });
 
   const searchParams = useSearchParams();
@@ -105,9 +107,14 @@ export default function ContactForm() {
   useEffect(() => {
     const packageParam = searchParams.get("package");
     const addonParam = searchParams.get("addon");
+    const maintenanceParam = searchParams.get("maintenance");
 
     if (packageParam) {
-      setFormData((prev) => ({ ...prev, package: packageParam }));
+      setFormData((prev) => ({ 
+        ...prev, 
+        package: packageParam,
+        maintenance: maintenanceParam || ""
+      }));
     }
 
     if (addonParam) {
@@ -118,9 +125,13 @@ export default function ContactForm() {
     }
 
     const handleUpdateContactForm = (event: CustomEvent) => {
-      const { package: packageName, addon } = event.detail;
+      const { package: packageName, addon, maintenance } = event.detail;
       if (packageName) {
-        setFormData((prev) => ({ ...prev, package: packageName }));
+        setFormData((prev) => ({ 
+          ...prev, 
+          package: packageName,
+          maintenance: maintenance || ""
+        }));
       }
       if (addon) {
         setFormData((prev) => ({ ...prev, addons: [...prev.addons, addon] }));
@@ -181,6 +192,7 @@ export default function ContactForm() {
           ...prevState,
           package: value,
           addons: selectedPackage ? [...selectedPackage.includedAddons] : [],
+          maintenance: ""
         };
       }
       return { ...prevState, [name]: value };
@@ -197,27 +209,39 @@ export default function ContactForm() {
             Please fix these errors:
           </h3>
           <ul className="list-disc pl-4">
-            {state.errors && (
-              <div className="bg-red-900/20 p-4 rounded-lg">
-                <h3 className="text-red-400 font-medium mb-2">
-                  Please fix these errors:
-                </h3>
-                <ul className="list-disc pl-4">
-                  {Object.entries(state.errors).map(
-                    ([field, errors]: [string, FormError[]]) =>
-                      errors?.map((error: FormError, index: number) => (
-                        <li
-                          key={`${field}-${index}`}
-                          className="text-red-300 text-sm"
-                        >
-                          {field}: {error.message}
-                        </li>
-                      ))
-                  )}
-                </ul>
-              </div>
+            {Object.entries(state.errors).map(
+              ([field, errors]: [string, FormError[]]) =>
+                errors?.map((error: FormError, index: number) => (
+                  <li
+                    key={`${field}-${index}`}
+                    className="text-red-300 text-sm"
+                  >
+                    {field}: {error.message}
+                  </li>
+                ))
             )}
           </ul>
+        </div>
+      )}
+
+      {(formData.package || formData.maintenance) && (
+        <div className="bg-white/5 rounded-lg p-4 space-y-2">
+          {formData.package && (
+            <p className="text-white">
+              Selected Package:{" "}
+              <span className="text-[#606c38] font-medium">
+                {formData.package}
+              </span>
+            </p>
+          )}
+          {formData.maintenance && (
+            <p className="text-white">
+              Maintenance Plan:{" "}
+              <span className="text-[#606c38] font-medium">
+                {formData.maintenance}
+              </span>
+            </p>
+          )}
         </div>
       )}
 
@@ -441,6 +465,8 @@ export default function ContactForm() {
           placeholder="Tell us about your vehicle and service needs..."
         ></textarea>
       </div>
+
+      <input type="hidden" name="maintenance" value={formData.maintenance} />
 
       <button
         type="submit"
