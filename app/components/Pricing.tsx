@@ -11,8 +11,8 @@ const services = [
     price: "$100 - $250",
     description: "Basic maintenance wash",
     features: {
-      interior: ["Quick vacuum", "Surface wipe-down", "Window cleaning"],
-      exterior: ["Express wash", "Tire shine", "Hand dry"],
+      interior: ["Quick vacuum", "Blow out cracks and crevices","Surface wipe-down", "Window cleaning"],
+      exterior: ["Pre wash","Two bucket hand wash", "Tire shine", "Hand dry"],
     },
     isBasic: true,
   },
@@ -29,15 +29,15 @@ const services = [
       ],
       exterior: [
         "Fenders scrubbed",
-        "Iron remover",
+        "Iron decon remover",
         "Clay bar",
         "Premium sealant",
         "Plastic protection",
       ],
     },
     maintenancePlan: {
-      price: "$100–150/month",
-      description: "Weekly/biweekly maintenance to preserve coating",
+      price: "$100/month – 150/month",
+      description: "Your choice of a weekly/biweekly maintenance to preserve cleaning and protection",
       features: {
         interior: [
           "Interior dusting",
@@ -72,8 +72,8 @@ const services = [
       ],
     },
     maintenancePlan: {
-      price: "$100–150/month",
-      description: "Weekly/biweekly maintenance to preserve coating",
+      price: "$100 – 150/month",
+      description: "Your choice of a weekly/biweekly maintenance to preserve cleaning and protection",
       features: {
         interior: [
           "Interior dusting",
@@ -399,11 +399,10 @@ export default function Pricing() {
                       ))}
                     </ul>
                   </div>
-
                   {service.maintenancePlan && (
-                    <div className="mt-6 pt-6 border-t border-gray-700">
-                      {/* ... other elements ... */}
-                      <div className="space-y-3">
+                    <div className="">
+                      <h4 className="text-lg font-bold text-white mb-4">Maintenance Plan (+ $100-200/month)</h4>
+                      <div className="space-y-3 border-t pt-6">
                         {["interior", "exterior", "both"].map((scope) => {
                           const isSelected =
                             maintenanceSelection?.packageName ===
