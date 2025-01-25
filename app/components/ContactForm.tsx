@@ -18,7 +18,7 @@ const packages = [
     price: "$100 - $200",
     services: [
       "Basic cleaning",
-      "Panel & seat conditioning",
+      "Panel",
       "Windows cleaned",
       "Pedals cleaned",
       "Hand wash",
@@ -48,7 +48,7 @@ const packages = [
     name: "CeramicPro",
     price: "$800 - $1400",
     services: [
-      "Ceramic coating on paint",
+      "Ceramic coating on painted surfaces",
       "Full extraction",
       "Protection & conditioning",
       "Trim restoration",
@@ -94,6 +94,7 @@ export default function ContactForm() {
     make: "",
     model: "",
     maintenance: "",
+    maintenancePlan: "",
   });
 
   const searchParams = useSearchParams();
@@ -192,7 +193,8 @@ export default function ContactForm() {
           ...prevState,
           package: value,
           addons: selectedPackage ? [...selectedPackage.includedAddons] : [],
-          maintenance: ""
+          maintenance: "",
+          maintenancePlan: "",
         };
       }
       return { ...prevState, [name]: value };
@@ -382,6 +384,29 @@ export default function ContactForm() {
         </select>
       </div>
 
+      {(formData.package === "Protection+" || formData.package === "CeramicPro") && (
+        <div>
+          <label
+            htmlFor="maintenancePlan"
+            className="block mb-2 text-sm font-medium text-white"
+          >
+            Maintenance Plan ($100-$200/month)
+          </label>
+          <select
+            id="maintenancePlan"
+            name="maintenancePlan"
+            value={formData.maintenancePlan}
+            onChange={handleChange}
+            className="w-full px-4 py-3 bg-white/10 border border-white/10 rounded-lg focus:outline-none focus:border-[#606c38] text-white"
+          >
+            <option value="">Select a maintenance plan</option>
+            <option value="interior">Interior</option>
+            <option value="exterior">Exterior</option>
+            <option value="both">Both Interior & Exterior</option>
+          </select>
+        </div>
+      )}
+
       {selectedPackage && (
         <div className="bg-white/5 rounded-lg p-4">
           <h4 className="text-white font-semibold mb-2">Included Services:</h4>
@@ -392,6 +417,12 @@ export default function ContactForm() {
                 {service}
               </li>
             ))}
+            {formData.maintenancePlan && (
+              <li className="flex items-center text-[#606c38] font-semibold">
+                <Check className="w-4 h-4 mr-2" />
+                {formData.maintenancePlan === "both" ? "Interior & Exterior Maintenance Plan" : formData.maintenancePlan.charAt(0).toUpperCase() + formData.maintenancePlan.slice(1) + " Maintenance Plan"}
+              </li>
+            )}
           </ul>
         </div>
       )}
@@ -467,6 +498,7 @@ export default function ContactForm() {
       </div>
 
       <input type="hidden" name="maintenance" value={formData.maintenance} />
+      <input type="hidden" name="maintenancePlan" value={formData.maintenancePlan} />
 
       <button
         type="submit"
