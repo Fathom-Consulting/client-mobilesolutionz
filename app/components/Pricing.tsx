@@ -118,7 +118,7 @@ const addOns = [
     process: [
       "Inspect the vehicle and identify odor sources",
       "Prepare the vehicle by removing loose items and debris",
-      "Set up the O-Zone generator in the vehicle",
+      "Set up the O-Zone generator or BioBomb in the vehicle (depending on condition)",
       "Run the treatment for the appropriate duration",
       "Air out the vehicle thoroughly after treatment",
       "Perform a final inspection to ensure odor elimination",
