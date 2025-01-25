@@ -240,7 +240,7 @@ export default function ContactForm() {
             <p className="text-white">
               Maintenance Plan:{" "}
               <span className="text-[#606c38] font-medium">
-                {formData.maintenance}
+              {formData.maintenancePlan === "both" ? "Interior & Exterior Maintenance Plan" : formData.maintenancePlan.charAt(0).toUpperCase() + formData.maintenancePlan.slice(1) + " Maintenance Plan"}
               </span>
             </p>
           )}
