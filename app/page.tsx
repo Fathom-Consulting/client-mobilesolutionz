@@ -24,13 +24,15 @@ export default function Home() {
         <meta name="description" content="Premium mobile car detailing in Medford, Oregon. We bring professional detailing to your doorstep." />
 
         {/* Open Graph (OG) Meta Tags for Social Media Preview */}
-        <meta property="og:title" content="Mobile Solutionz - Premium Car Detailing" />
+        <meta property="og:title" content="Mobile Solutionz | Premium Mobile Car Detailing" />
+        <meta property="keywords" content="car detailing, mobile detailing, Medford, Southern Oregon, auto detailing, vehicle cleaning, ceramic coating" />
         <meta property="og:description" content="Premium mobile car detailing in Medford, Oregon. We bring professional detailing to your doorstep." />
         <meta property="og:image" content="https://res.cloudinary.com/dkgpsncrn/image/upload/v1737580200/mobile-solutionz-logo_gielxw.webp" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:url" content="https://mobile-solutionz.com" />
         <meta property="og:type" content="website" />
+        <meta property="og:locale" content="en_US" />
 
         {/* Twitter Card Meta Tags */}
         <meta name="twitter:card" content="summary_large_image" />
@@ -40,6 +42,8 @@ export default function Home() {
 
         {/* Viewport & SEO Enhancements */}
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="robots" content="index, follow" />
+        <link rel="icon" href="/favicon.ico" />
       </Head>
     <main>
       <div className="flex flex-col min-h-screen bg-gradient-to-b from-black/60 via-black/40 to-black" id ="home">
