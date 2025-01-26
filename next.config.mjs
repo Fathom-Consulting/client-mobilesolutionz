@@ -12,7 +12,7 @@ export default {
         },
         {
             protocol: 'https',
-            hostname: '3dproducts.com'
+            hostname: 'upload.wikimedia.org'
         },
         {
             protocol: 'https',

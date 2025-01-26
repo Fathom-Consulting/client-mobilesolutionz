@@ -19,9 +19,9 @@ const products = [
     url: 'https://gyeonusa.com'
   },
   {
-    name: '3D Products',
-    logo: 'https://3dproducts.com/cdn/shop/files/Asset_6_3x_b38999b4-824d-449d-90c6-5269015c71e2.png',
-    url: 'https://3dproducts.com'
+    name: 'SONAX',
+    logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/Sonax_logo.svg/1600px-Sonax_logo.svg.png?20100707214957',
+    url: 'https://www.sonax.com/en'
   },
   {
     name: 'ProChoice',
@@ -53,7 +53,7 @@ export default function Products() {
                       transition-colors duration-300 hover:bg-white/20"
           >
             <Image
-              width={900}
+              width={1000}
               height={900}
               src={product.logo}
               alt={product.name}
