@@ -1,7 +1,8 @@
 ![image](https://github.com/user-attachments/assets/a0d75299-3234-4270-945d-a359e4273355)
 
 # Mobile Solutionz
-
+> Built by: **[Fathom Consulting](https://dtfathom.notion.site/welcome)**
+> 
 Mobile Solutionz is a premium mobile car detailing service based in Medford, Oregon. This project is a web application built using Next.js, a popular React-based framework for building server-rendered and statically generated websites.
 
 The application allows users to learn more about Mobile Solutionz's services, including their premium car detailing packages and eco-friendly cleaning solutions. The site also features a modern design and a responsive layout, making it easy to navigate on desktop and mobile devices.

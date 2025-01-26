@@ -297,14 +297,15 @@ export default function Pricing() {
   const handleChoosePackage = (packageName: string) => {
     const element = document.getElementById("contact");
     element?.scrollIntoView({ behavior: "smooth" });
+
+    // Dispatch event to update the contact form with both package and maintenance
     window.dispatchEvent(
       new CustomEvent("updateContactForm", {
         detail: {
           package: packageName,
-          maintenance:
-            maintenanceSelection?.packageName === packageName
-              ? `${packageName} Maintenance (${maintenanceSelection.scope})`
-              : null,
+          maintenance: maintenanceSelection
+            ? maintenanceSelection.scope
+            : null,
         },
       })
     );

@@ -127,16 +127,13 @@ export default function ContactForm() {
     }
 
     const handleUpdateContactForm = (event: CustomEvent) => {
-      const { package: packageName, addon, maintenance } = event.detail;
+      const { package: packageName, maintenance } = event.detail;
       if (packageName) {
-        setFormData((prev) => ({ 
-          ...prev, 
+        setFormData((prev) => ({
+          ...prev,
           package: packageName,
-          maintenance: maintenance || ""
+          maintenancePlan: maintenance || "",
         }));
-      }
-      if (addon) {
-        setFormData((prev) => ({ ...prev, addons: [...prev.addons, addon] }));
       }
     };
 
