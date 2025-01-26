@@ -18,7 +18,7 @@ const services = [
   },
   {
     name: "Protection+",
-    price: "$400 - $500",
+    price: "$400 - $600",
     description: "A comprehensive clean for your vehicle.",
     features: {
       interior: [
