@@ -291,7 +291,7 @@ export default function Pricing() {
   );
   const [maintenanceSelection, setMaintenanceSelection] = useState<{
     packageName: string;
-    scope: "interior" | "exterior" | "both";
+    scope: "interior" | "exterior" | "interior & exterior";
   } | null>(null);
 
   const handleChoosePackage = (packageName: string) => {
@@ -313,7 +313,7 @@ export default function Pricing() {
 
   const handleMaintenanceSelection = (
     packageName: string,
-    scope: "interior" | "exterior" | "both"
+    scope: "interior" | "exterior" | "interior & exterior"
   ) => {
     setMaintenanceSelection((prev) => {
       // Toggle if clicking the same package's option
@@ -404,7 +404,7 @@ export default function Pricing() {
                     <div className="">
                       <h4 className="text-lg font-bold text-white mb-4">Maintenance Plan (+ $100-200/month)</h4>
                       <div className="space-y-3 border-t pt-6">
-                        {["interior", "exterior", "both"].map((scope) => {
+                        {["interior", "exterior", "interior & exterior"].map((scope) => {
                           const isSelected =
                             maintenanceSelection?.packageName ===
                               service.name &&
@@ -415,7 +415,7 @@ export default function Pricing() {
                               onClick={() =>
                                 handleMaintenanceSelection(
                                   service.name,
-                                  scope as "interior" | "exterior" | "both"
+                                  scope as "interior" | "exterior" | "interior & exterior"
                                 )
                               }
                               className={`w-full text-left p-3 rounded-lg transition-colors ${
@@ -427,7 +427,7 @@ export default function Pricing() {
                               <div className="flex items-center justify-between">
                                 <span className="capitalize text-gray-300">
                                   {scope.replace(
-                                    "both",
+                                    "interior & exterior",
                                     "Both Interior & Exterior"
                                   )}
                                 </span>

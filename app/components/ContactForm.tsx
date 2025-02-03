@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
-import { useForm } from "@formspree/react";
+import { useFormspark } from "@formspark/use-formspark";
 import { Check } from "lucide-react";
 import { useRouter } from "next/navigation";
 
@@ -81,9 +81,13 @@ const addOns = [
   "Trim Restoration",
 ];
 
+const FORMSPARK_FORM_ID = "YOJFX3S30";
+
 export default function ContactForm() {
   const router = useRouter();
-  const [state, handleSubmit] = useForm("mbldlgdp");
+  const [submit, submitting] = useFormspark({
+    formId: FORMSPARK_FORM_ID,
+  });
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -94,17 +98,10 @@ export default function ContactForm() {
     year: "",
     make: "",
     model: "",
-    maintenance: "",
     maintenancePlan: "",
   });
 
   const searchParams = useSearchParams();
-
-  useEffect(() => {
-    if (state.succeeded) {
-      router.push("/thanks");
-    }
-  }, [state.succeeded, router]);
 
   useEffect(() => {
     const packageParam = searchParams.get("package");
@@ -115,7 +112,7 @@ export default function ContactForm() {
       setFormData((prev) => ({ 
         ...prev, 
         package: packageParam,
-        maintenance: maintenanceParam || ""
+        maintenancePlan: maintenanceParam || ""
       }));
     }
 
@@ -191,7 +188,6 @@ export default function ContactForm() {
           ...prevState,
           package: value,
           addons: selectedPackage ? [...selectedPackage.includedAddons] : [],
-          maintenance: "",
           maintenancePlan: "",
         };
       }
@@ -201,50 +197,14 @@ export default function ContactForm() {
 
   const selectedPackage = packages.find((p) => p.name === formData.package);
 
+  const handleFormSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    await submit(formData);
+    router.push("/thanks");
+  };
+
   return (
-    <form onSubmit={handleSubmit} className="space-y-6">
-      {state.errors && (
-        <div className="bg-red-900/20 p-4 rounded-lg">
-          <h3 className="text-red-400 font-medium mb-2">
-            Please fix these errors:
-          </h3>
-          <ul className="list-disc pl-4">
-            {Object.entries(state.errors).map(
-              ([field, errors]: [string, FormError[]]) =>
-                errors?.map((error: FormError, index: number) => (
-                  <li
-                    key={`${field}-${index}`}
-                    className="text-red-300 text-sm"
-                  >
-                    {field}: {error.message}
-                  </li>
-                ))
-            )}
-          </ul>
-        </div>
-      )}
-
-      {(formData.package || formData.maintenance) && (
-        <div className="bg-white/5 rounded-lg p-4 space-y-2">
-          {formData.package && (
-            <p className="text-white">
-              Selected Package:{" "}
-              <span className="text-[#606c38] font-medium">
-                {formData.package}
-              </span>
-            </p>
-          )}
-          {formData.maintenance && (
-            <p className="text-white">
-              Maintenance Plan:{" "}
-              <span className="text-[#606c38] font-medium">
-              {formData.maintenancePlan === "both" ? "Interior & Exterior Maintenance Plan" : formData.maintenancePlan.charAt(0).toUpperCase() + formData.maintenancePlan.slice(1) + " Maintenance Plan"}
-              </span>
-            </p>
-          )}
-        </div>
-      )}
-
+    <form onSubmit={handleFormSubmit} className="space-y-6">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
           <label
@@ -495,15 +455,14 @@ export default function ContactForm() {
         ></textarea>
       </div>
 
-      <input type="hidden" name="maintenance" value={formData.maintenance} />
       <input type="hidden" name="maintenancePlan" value={formData.maintenancePlan} />
 
       <button
         type="submit"
-        disabled={state.submitting}
+        disabled={submitting}
         className="w-full bg-[#606c38] text-white py-4 px-8 rounded-full hover:bg-[#515c30] transition-all duration-300 hover:scale-105 text-lg font-medium disabled:opacity-50 disabled:cursor-not-allowed"
       >
-        {state.submitting ? "Submitting..." : "Schedule Consultation"}
+        {submitting ? "Submitting..." : "Schedule Consultation"}
       </button>
 
       <p className="text-center text-white mt-4">

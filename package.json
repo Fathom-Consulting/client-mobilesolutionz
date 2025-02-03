@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@formspark/use-formspark": "^0.1.39",
     "@formspree/react": "^2.5.1",
     "@headlessui/react": "^2.2.0",
     "@radix-ui/react-navigation-menu": "^1.2.4",
