@@ -22,6 +22,7 @@ export default function WheelPolishAndCoatingPage() {
       ]}
       imageSrc = "https://res.cloudinary.com/dkgpsncrn/image/upload/v1737580063/wheel-polish_vbuczp.webp"
     />
+    // Need to make this more modular
   )
 }
 
