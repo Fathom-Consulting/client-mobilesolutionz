@@ -1,4 +1,5 @@
 import { Inter } from 'next/font/google'
+import { Analytics } from "@vercel/analytics/react"
 import './globals.css'
 
 const inter = Inter({ subsets: ['latin'] })
@@ -48,6 +49,7 @@ export default function RootLayout({
         className={`${inter.className} bg-black overflow-x-hidden max-w-[100vw]`}
         style={{ minHeight: '100vh' }}
       >
+        <Analytics />
         {children}
       </body>
     </html>

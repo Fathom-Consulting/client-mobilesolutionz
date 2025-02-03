@@ -1,5 +1,6 @@
 'use client';
-import { Suspense, useEffect, useState} from 'react'
+import { Suspense, useEffect, useState } from 'react'
+import { usePathname } from 'next/navigation'
 import Head from 'next/head'
 
 import Header from './components/Header'
@@ -21,9 +22,51 @@ const SkeletonLoader = () => (
 
 export default function Home() {
   const [videoLoaded, setVideoLoaded] = useState(false);
+  const [videoUrl, setVideoUrl] = useState('');
+  const pathname = usePathname();
+
+  useEffect(() => {
+    const sections = document.querySelectorAll('section[id]');
+    
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY + window.innerHeight / 2;
+
+      sections.forEach((section) => {
+        const sectionElement = section as HTMLElement; // Explicit type assertion
+        const sectionTop = sectionElement.offsetTop;
+        const sectionBottom = sectionTop + sectionElement.offsetHeight;
+        const sectionId = sectionElement.getAttribute('id');
+      
+        if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
+          if (pathname !== `/#${sectionId}`) {
+            window.history.replaceState({}, '', `/#${sectionId}`);
+          }
+        }
+      });
+      
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [pathname]);
+
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });
+
+  useEffect(() => {
+    const fetchVideo = async () => {
+      try {
+        const response = await fetch('/api/video');
+        const data = await response.json();
+        setVideoUrl(data.videoUrl);
+      } catch (error) {
+        console.error('Error fetching video:', error);
+      }
+    };
+
+    fetchVideo();
+  }, []);
 
   return (
     <>
@@ -61,16 +104,18 @@ export default function Home() {
           {/* Hero Section */}
           <section className="relative min-h-screen flex items-center justify-center">
             {!videoLoaded && <SkeletonLoader />}
-            <video
-              src="https://res.cloudinary.com/dkgpsncrn/video/upload/v1737580328/kvknx4m8ra0zq0hohxjo.mp4"
-              autoPlay
-              loop
-              muted
-              playsInline
-              className="absolute top-0 left-0 w-full h-full object-cover z-[-1]"
-              preload="auto"
-              onLoadedData={() => setVideoLoaded(true)}
-            />
+            {videoUrl && (
+              <video
+                src={videoUrl}
+                autoPlay
+                loop
+                muted
+                playsInline
+                className="absolute top-0 left-0 w-full h-full object-cover z-[-1]"
+                preload="auto"
+                onLoadedData={() => setVideoLoaded(true)}
+              />
+            )}
 
             <div className="relative z-1 container mx-auto px-6 text-center">
               <h1 className="text-5xl md:text-7xl font-bold mb-6 text-white">
@@ -111,6 +156,7 @@ export default function Home() {
           </Suspense>
           
           <Suspense fallback={<SkeletonLoader />}>
+          {/* Heading for the section styled in Tailwind */}
             <Instagram />
           </Suspense>
           

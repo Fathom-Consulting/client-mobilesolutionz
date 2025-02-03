@@ -6,12 +6,6 @@ import { useFormspark } from "@formspark/use-formspark";
 import { Check } from "lucide-react";
 import { useRouter } from "next/navigation";
 
-type FormError = {
-  code: string;
-  message: string;
-  path: string;
-};
-
 const packages = [
   {
     name: "Economy",
