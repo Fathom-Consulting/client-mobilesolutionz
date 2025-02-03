@@ -29,5 +29,12 @@ export default {
         }
       ]
     },
+    // Add a remote origin for the pexels API
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'api.pexels.com'
+      }
+    ]
   };
   
