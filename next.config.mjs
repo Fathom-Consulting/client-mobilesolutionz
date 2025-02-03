@@ -7,6 +7,11 @@ export default {
             hostname: 'res.cloudinary.com',
         },
         {
+            // https get request from pexels.com
+            protocol: 'https',
+            hostname: 'pexels.com'
+        },
+        {
             protocol: 'https',
             hostname: 'kcxusa.com'
         },
