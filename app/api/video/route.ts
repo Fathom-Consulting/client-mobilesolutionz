@@ -1,11 +1,11 @@
-
 import { NextResponse } from 'next/server';
+
 export async function GET() {
   try {
-    // Fetches the pressure washing hero video from the Pexels API.
     const response = await fetch('https://api.pexels.com/videos/videos/11641605', {
       headers: {
-        'Authorization': process.env.PEXELS_API_KEY || ''
+        'Authorization': process.env.PEXELS_API_KEY || '',
+        'Access-Control-Allow-Origin': '*',
       }
     });
     const data = await response.json();

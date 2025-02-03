@@ -7,9 +7,8 @@ export default {
             hostname: 'res.cloudinary.com',
         },
         {
-            // https get request from pexels.com
             protocol: 'https',
-            hostname: 'pexels.com'
+            hostname: 'api.pexels.com'
         },
         {
             protocol: 'https',
@@ -28,13 +27,6 @@ export default {
             hostname: 'psdetailproducts.com'
         }
       ]
-    },
-    // Add a remote origin for the pexels API
-    remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: 'api.pexels.com'
-      }
-    ]
+    }
   };
   
