@@ -1,15 +1,15 @@
 'use client';
-import { Suspense, useEffect, useState } from 'react'
-import { usePathname } from 'next/navigation'
-import Head from 'next/head'
+import { Suspense, useEffect, useState } from 'react';
+import { usePathname } from 'next/navigation';
+import Head from 'next/head';
 
-import Header from './components/Header'
-import Services from './components/Services'
-import Pricing from './components/Pricing'
-import ContactForm from './components/ContactForm'
-import Instagram from './components/Instagram'
-import Products from './components/Products'
-import About from './components/About'
+import Header from './components/Header';
+import Services from './components/Services';
+import Pricing from './components/Pricing';
+import ContactForm from './components/ContactForm';
+import Instagram from './components/Instagram';
+import Products from './components/Products';
+import About from './components/About';
 
 // Skeleton Loader Component
 const SkeletonLoader = () => (
@@ -25,35 +25,54 @@ export default function Home() {
   const [videoUrl, setVideoUrl] = useState('');
   const pathname = usePathname();
 
+  // Scroll handler to update URL with the active section
   useEffect(() => {
     const sections = document.querySelectorAll('section[id]');
-    
-    const handleScroll = () => {
-      const scrollPosition = window.scrollY + window.innerHeight / 2;
+    let ticking = false;
 
-      sections.forEach((section) => {
-        const sectionElement = section as HTMLElement; // Explicit type assertion
-        const sectionTop = sectionElement.offsetTop;
-        const sectionBottom = sectionTop + sectionElement.offsetHeight;
-        const sectionId = sectionElement.getAttribute('id');
-      
-        if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
-          if (pathname !== `/#${sectionId}`) {
-            window.history.replaceState({}, '', `/#${sectionId}`);
-          }
-        }
-      });
-      
+    const handleScroll = () => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          const scrollPosition = window.scrollY + window.innerHeight / 2;
+
+          sections.forEach((section) => {
+            const sectionElement = section as HTMLElement;
+            const sectionTop = sectionElement.offsetTop;
+            const sectionBottom = sectionTop + sectionElement.offsetHeight;
+            const sectionId = sectionElement.getAttribute('id');
+
+            if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
+              if (window.location.hash !== `#${sectionId}`) {
+                history.replaceState(null, '', `#${sectionId}`);
+              }
+            }
+          });
+
+          ticking = false;
+        });
+
+        ticking = true;
+      }
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  // Scroll to the top on initial load
+  useEffect(() => {
+    if (window.location.hash) {
+      const sectionId = window.location.hash.substring(1);
+      const sectionElement = document.getElementById(sectionId);
+      if (sectionElement) {
+        sectionElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
   }, [pathname]);
 
-  useEffect(() => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  });
-
+  // Fetch video on mount
   useEffect(() => {
     const fetchVideo = async () => {
       try {
@@ -70,21 +89,18 @@ export default function Home() {
 
   return (
     <>
-    <Head>
-       {/* General Meta Tags */}
+      <Head>
+        {/* General Meta Tags */}
         <title>Mobile Solutionz - Premium Car Detailing</title>
         <meta name="description" content="Premium mobile car detailing in Medford, Oregon. We bring professional detailing to your doorstep." />
 
-        {/* Open Graph (OG) Meta Tags for Social Media Preview */}
+        {/* Open Graph Meta Tags */}
         <meta property="og:title" content="Mobile Solutionz | Premium Mobile Car Detailing" />
         <meta property="keywords" content="car detailing, mobile detailing, Medford, Southern Oregon, auto detailing, vehicle cleaning, ceramic coating" />
         <meta property="og:description" content="Premium mobile car detailing in Medford, Oregon. We bring professional detailing to your doorstep." />
         <meta property="og:image" content="https://res.cloudinary.com/dkgpsncrn/image/upload/v1737580200/mobile-solutionz-logo_gielxw.webp" />
-        <meta property="og:image:width" content="1200" />
-        <meta property="og:image:height" content="630" />
         <meta property="og:url" content="https://mobile-solutionz.com" />
         <meta property="og:type" content="website" />
-        <meta property="og:locale" content="en_US" />
 
         {/* Twitter Card Meta Tags */}
         <meta name="twitter:card" content="summary_large_image" />
@@ -97,6 +113,7 @@ export default function Home() {
         <meta name="robots" content="index, follow" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      
       <main>
         <div className="flex flex-col min-h-screen bg-gradient-to-b from-black/60 via-black/40 to-black" id="home">
           <Header />
@@ -143,26 +160,11 @@ export default function Home() {
           </section>
 
           {/* Suspense Wrapped Sections */}
-          <Suspense fallback={<SkeletonLoader />}>
-            <Services />
-          </Suspense>
-          
-          <Suspense fallback={<SkeletonLoader />}>
-            <Pricing />
-          </Suspense>
-          
-          <Suspense fallback={<SkeletonLoader />}>
-            <Products />
-          </Suspense>
-          
-          <Suspense fallback={<SkeletonLoader />}>
-          {/* Heading for the section styled in Tailwind */}
-            <Instagram />
-          </Suspense>
-          
-          <Suspense fallback={<SkeletonLoader />}>
-            <About />
-          </Suspense>
+          <Suspense fallback={<SkeletonLoader />}><Services /></Suspense>
+          <Suspense fallback={<SkeletonLoader />}><Pricing /></Suspense>
+          <Suspense fallback={<SkeletonLoader />}><Products /></Suspense>
+          <Suspense fallback={<SkeletonLoader />}><Instagram /></Suspense>
+          <Suspense fallback={<SkeletonLoader />}><About /></Suspense>
 
           {/* Contact Section */}
           <section id="contact" className="py-24 bg-black">
@@ -170,9 +172,7 @@ export default function Home() {
               <div className="max-w-4xl mx-auto">
                 <h2 className="text-4xl md:text-5xl font-bold text-center mb-16 text-white">Get in Touch</h2>
                 <div className="bg-gray-900/50 backdrop-blur-sm p-8 md:p-12 rounded-2xl border border-white/10">
-                  <Suspense fallback={<SkeletonLoader />}>
-                    <ContactForm />
-                  </Suspense>
+                  <Suspense fallback={<SkeletonLoader />}><ContactForm /></Suspense>
                 </div>
               </div>
             </div>
@@ -180,20 +180,12 @@ export default function Home() {
 
           {/* Footer */}
           <footer className="py-8 bg-black border-t border-white/10">
-            <div className="container mx-auto px-6">
-              <div className="flex flex-col md:flex-row justify-between items-center">
-                <div className="text-gray-400 mb-4 md:mb-0">
-                  &copy; {new Date().getFullYear()} Mobile Solutionz. All rights reserved.
-                </div>
-                <div className="flex space-x-6">
-                  <p className="text-gray-400">Site Created by <a href="https://dtfathom.notion.site/welcome" className="text-gray-400 hover:underline decoration-wavy hover:text-[#606c38] transition-colors duration-300 font-semibold">Fathom Consulting</a></p>
-                </div>
-              </div>
+            <div className="container mx-auto px-6 text-center text-gray-400">
+              &copy; {new Date().getFullYear()} Mobile Solutionz. All rights reserved.
             </div>
           </footer>
         </div>
       </main>
     </>
-  )
+  );
 }
-
