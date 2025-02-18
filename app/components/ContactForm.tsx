@@ -9,7 +9,7 @@ import { useRouter } from "next/navigation";
 const packages = [
   {
     name: "Economy",
-    price: "$100 - $200",
+    price: "$100 - $250",
     services: [
       "Basic cleaning",
       "Panel",

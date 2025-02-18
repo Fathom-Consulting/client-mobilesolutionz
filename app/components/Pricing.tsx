@@ -11,7 +11,7 @@ const services = [
     price: "$100 - $250",
     description: "Basic maintenance wash",
     features: {
-      interior: ["Quick vacuum", "Blow out cracks and crevices","Surface wipe-down", "Window cleaning"],
+      interior: ["Vacuum deep clean", "Blow out cracks and crevices","Surface wipe-down", "Window cleaning"],
       exterior: ["Pre wash","Two bucket hand wash", "Tire shine", "Hand dry"],
     },
     isBasic: true,
