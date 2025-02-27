@@ -11,7 +11,7 @@ import Instagram from "./components/Instagram";
 import Products from "./components/Products";
 import About from "./components/About";
 
-import images from "./images";
+import images from "./images.json";
 
 // Skeleton Loader Component
 const SkeletonLoader = () => (
