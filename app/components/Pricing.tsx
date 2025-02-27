@@ -5,14 +5,21 @@ import { Check, HelpCircle } from "lucide-react";
 import Modal from "./Modal";
 import AddOnPage from "./AddOnPage";
 
+import images from "../images.json";
+
 const services = [
   {
     name: "Economy",
     price: "$100 - $250",
     description: "Basic maintenance wash",
     features: {
-      interior: ["Vacuum deep clean", "Blow out cracks and crevices","Surface wipe-down", "Window cleaning"],
-      exterior: ["Pre wash","Two bucket hand wash", "Tire shine", "Hand dry"],
+      interior: [
+        "Vacuum deep clean",
+        "Blow out cracks and crevices",
+        "Surface wipe-down",
+        "Window cleaning",
+      ],
+      exterior: ["Pre wash", "Two bucket hand wash", "Tire shine", "Hand dry"],
     },
     isBasic: true,
   },
@@ -37,7 +44,8 @@ const services = [
     },
     maintenancePlan: {
       price: "$100/month – 150/month",
-      description: "Your choice of a weekly/biweekly maintenance to preserve cleaning and protection",
+      description:
+        "Your choice of a weekly/biweekly maintenance to preserve cleaning and protection",
       features: {
         interior: [
           "Interior dusting",
@@ -73,7 +81,8 @@ const services = [
     },
     maintenancePlan: {
       price: "$100 – 150/month",
-      description: "Your choice of a weekly/biweekly maintenance to preserve cleaning and protection",
+      description:
+        "Your choice of a weekly/biweekly maintenance to preserve cleaning and protection",
       features: {
         interior: [
           "Interior dusting",
@@ -123,8 +132,7 @@ const addOns = [
       "Air out the vehicle thoroughly after treatment",
       "Perform a final inspection to ensure odor elimination",
     ],
-    imageSrc:
-      "https://res.cloudinary.com/dkgpsncrn/image/upload/v1737580062/ozone-treatment_ry1fz4.webp",
+    imageSrc: images["ozone-treatment.webp"],
   },
   {
     name: "Glass Polish and Coating",
@@ -145,8 +153,7 @@ const addOns = [
       "Cure the coating for maximum durability",
       "Final inspection and touch-ups",
     ],
-    imageSrc:
-      "https://res.cloudinary.com/dkgpsncrn/image/upload/v1737580062/glass-cleaning_f7ieuo.webp",
+    imageSrc: images["glass-cleaning.webp"],
   },
   {
     name: "Paint Correction",
@@ -167,8 +174,7 @@ const addOns = [
       "Refine the finish for maximum gloss",
       "Apply a protective sealant or coating",
     ],
-    imageSrc:
-      "https://res.cloudinary.com/dkgpsncrn/image/upload/v1737580062/paint-correction_ooyhnf.webp",
+    imageSrc: images["paint-correction.webp"],
   },
   {
     name: "Spot Extraction",
@@ -189,8 +195,7 @@ const addOns = [
       "Thoroughly dry the cleaned areas",
       "Final inspection to ensure all spots are removed",
     ],
-    imageSrc:
-      "https://res.cloudinary.com/dkgpsncrn/image/upload/v1737580062/spot-extraction_bx1a8q.webp",
+    imageSrc: images["spot-extraction.webp"],
   },
   {
     name: "Engine Bay Clean-up",
@@ -211,8 +216,7 @@ const addOns = [
       "Apply protectant to rubber and plastic components",
       "Dry and inspect the engine bay",
     ],
-    imageSrc:
-      "https://res.cloudinary.com/dkgpsncrn/image/upload/f_auto,q_auto/engine-bay-cleanup_ppdntn",
+    imageSrc: images["engine-bay-cleaning.webp"],
   },
   {
     name: "Interior Ceramic Leather Coating",
@@ -233,8 +237,7 @@ const addOns = [
       "Allow the coating to cure",
       "Inspect and buff for a perfect finish",
     ],
-    imageSrc:
-      "https://res.cloudinary.com/dkgpsncrn/image/upload/v1737580062/leather-ceramic-coating_e39ms4.webp",
+    imageSrc: images["interior-ceramic-coating.webp"],
   },
   {
     name: "Wheel Polish and Coating",
@@ -255,8 +258,7 @@ const addOns = [
       "Apply ceramic coating to wheels and calipers",
       "Allow coating to cure before reinstalling wheels",
     ],
-    imageSrc:
-      "https://res.cloudinary.com/dkgpsncrn/image/upload/v1737580063/wheel-polish_vbuczp.webp",
+    imageSrc: images["wheel-polish.webp"],
   },
   {
     name: "Trim Restoration",
@@ -277,17 +279,16 @@ const addOns = [
       "Allow the product to cure",
       "Apply a protective sealant for long-lasting results",
     ],
-    imageSrc:
-      "https://res.cloudinary.com/dkgpsncrn/image/upload/v1737580063/trim-restoration_8adu13o.webp",
+    imageSrc: images["trim-restoration.webp"],
   },
 ];
 
 export default function Pricing() {
   const [activeTab, setActiveTab] = useState<"interior" | "exterior">(
-    "interior"
+    "interior",
   );
   const [selectedAddOn, setSelectedAddOn] = useState<(typeof addOns)[0] | null>(
-    null
+    null,
   );
   const [maintenanceSelection, setMaintenanceSelection] = useState<{
     packageName: string;
@@ -303,17 +304,15 @@ export default function Pricing() {
       new CustomEvent("updateContactForm", {
         detail: {
           package: packageName,
-          maintenance: maintenanceSelection
-            ? maintenanceSelection.scope
-            : null,
+          maintenance: maintenanceSelection ? maintenanceSelection.scope : null,
         },
-      })
+      }),
     );
   };
 
   const handleMaintenanceSelection = (
     packageName: string,
-    scope: "interior" | "exterior" | "interior & exterior"
+    scope: "interior" | "exterior" | "interior & exterior",
   ) => {
     setMaintenanceSelection((prev) => {
       // Toggle if clicking the same package's option
@@ -402,46 +401,53 @@ export default function Pricing() {
                   </div>
                   {service.maintenancePlan && (
                     <div className="">
-                      <h4 className="text-lg font-bold text-white mb-4">Maintenance Plan (+ $100-200/month)</h4>
+                      <h4 className="text-lg font-bold text-white mb-4">
+                        Maintenance Plan (+ $100-200/month)
+                      </h4>
                       <div className="space-y-3 border-t pt-6">
-                        {["interior", "exterior", "interior & exterior"].map((scope) => {
-                          const isSelected =
-                            maintenanceSelection?.packageName ===
-                              service.name &&
-                            maintenanceSelection?.scope === scope;
-                          return (
-                            <button
-                              key={scope}
-                              onClick={() =>
-                                handleMaintenanceSelection(
-                                  service.name,
-                                  scope as "interior" | "exterior" | "interior & exterior"
-                                )
-                              }
-                              className={`w-full text-left p-3 rounded-lg transition-colors ${
-                                isSelected
-                                  ? "bg-[#606c38]/30 border border-[#606c38]"
-                                  : "bg-white/5 hover:bg-white/10 border border-transparent"
-                              }`}
-                            >
-                              <div className="flex items-center justify-between">
-                                <span className="capitalize text-gray-300">
-                                  {scope.replace(
-                                    "interior & exterior",
-                                    "Both Interior & Exterior"
-                                  )}
-                                </span>
-                                <Check
-                                  className={`w-5 h-5 ${
-                                    isSelected
-                                      ? "text-[#606c38]"
-                                      : "text-transparent"
-                                  }`}
-                                />
-                              </div>
-                            </button>
-                          );
-                        })}
+                        {["interior", "exterior", "interior & exterior"].map(
+                          (scope) => {
+                            const isSelected =
+                              maintenanceSelection?.packageName ===
+                                service.name &&
+                              maintenanceSelection?.scope === scope;
+                            return (
+                              <button
+                                key={scope}
+                                onClick={() =>
+                                  handleMaintenanceSelection(
+                                    service.name,
+                                    scope as
+                                      | "interior"
+                                      | "exterior"
+                                      | "interior & exterior",
+                                  )
+                                }
+                                className={`w-full text-left p-3 rounded-lg transition-colors ${
+                                  isSelected
+                                    ? "bg-[#606c38]/30 border border-[#606c38]"
+                                    : "bg-white/5 hover:bg-white/10 border border-transparent"
+                                }`}
+                              >
+                                <div className="flex items-center justify-between">
+                                  <span className="capitalize text-gray-300">
+                                    {scope.replace(
+                                      "interior & exterior",
+                                      "Both Interior & Exterior",
+                                    )}
+                                  </span>
+                                  <Check
+                                    className={`w-5 h-5 ${
+                                      isSelected
+                                        ? "text-[#606c38]"
+                                        : "text-transparent"
+                                    }`}
+                                  />
+                                </div>
+                              </button>
+                            );
+                          },
+                        )}
                       </div>
                     </div>
                   )}

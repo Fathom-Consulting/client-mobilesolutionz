@@ -1,36 +1,29 @@
-'use client'
+"use client";
 
-import React from 'react'
-import Image from 'next/image'
-import { motion } from 'framer-motion'
-import { Car, Leaf, Wrench, Star, MapPin, Sun, House } from 'lucide-react' // Lucide Icons
-
-const GlowBar = () => {
-  return (
-    <motion.div
-      initial={{ opacity: 0, width: '0%' }}
-      animate={{ opacity: 1, width: '100%' }}
-      transition={{ duration: 1, ease: 'easeInOut' }}
-      className="h-1 bg-gradient-to-r from-[#606c38] via-[#283618] to-[#606c38] rounded-full mb-8"
-    />
-  )
-}
+import React from "react";
+import Image from "next/image";
+import images from "../images.json";
+import { Car, Leaf, Wrench, Star, MapPin, Sun, House } from "lucide-react"; // Lucide Icons
 
 export default function About() {
+  const aboutImage = images["about-img.webp"];
+
   return (
     <section id="about" className="py-24 bg-black relative overflow-hidden">
       <div className="container mx-auto px-6 relative z-10">
         <div className="max-w-5xl mx-auto">
           {/* Header */}
-          <h2 className="text-4xl md:text-5xl font-bold mb-8 text-white text-center">About Mobile Solutionz</h2>
-          <GlowBar />
+          <h2 className="text-4xl md:text-5xl font-bold mb-8 text-white text-center">
+            About Mobile Solutionz
+          </h2>
 
           {/* About Content */}
           <div className="grid md:grid-cols-2 gap-12 items-center">
             {/* Image with Overlay */}
             <div className="relative h-96 rounded-lg overflow-hidden shadow-xl order-1 md:order-2">
               <Image
-                src="https://res.cloudinary.com/dkgpsncrn/image/upload/v1737580200/about-image_bpcczk.webp"
+                // Read from images.json and use the about-image.webp file
+                src={aboutImage}
                 alt="Mobile Solutionz team at work"
                 fill
                 className="object-cover"
@@ -38,20 +31,36 @@ export default function About() {
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
               <div className="absolute bottom-4 left-4 right-4 text-white">
                 <h3 className="text-xl font-semibold mb-2">Our Commitment</h3>
-                <p className="text-sm">Delivering excellence in every detail, every time.</p>
+                <p className="text-sm">
+                  Delivering excellence in every detail, every time.
+                </p>
               </div>
             </div>
 
             <div className="space-y-6 text-gray-300 text-lg order-2 md:order-1">
               <p>
-                <strong className="text-white">Mobile Solutionz</strong> brings premium car detailing services directly to your location. 
-                With our state-of-the-art equipment and experienced professionals, we transform your vehicle to showroom condition while saving you valuable time.
+                <strong className="text-white">Mobile Solutionz</strong> brings
+                premium car detailing services directly to your location. With
+                our state-of-the-art equipment and experienced professionals, we
+                transform your vehicle to showroom condition while saving you
+                valuable time.
               </p>
               <p>
-                Our dedication to <strong className="text-[#606c38] ">excellence</strong> and <strong className="text-[#606c38]">attention to detail</strong> sets us apart. Whether you need a quick refresh or a complete detail, we deliver outstanding results that protect and enhance your vehicle&apos;s appearance.
+                Our dedication to{" "}
+                <strong className="text-[#606c38] ">excellence</strong> and{" "}
+                <strong className="text-[#606c38]">attention to detail</strong>{" "}
+                sets us apart. Whether you need a quick refresh or a complete
+                detail, we deliver outstanding results that protect and enhance
+                your vehicle&apos;s appearance.
               </p>
               <p>
-                Based in <span className="text-[#606c38]"><strong>Medford, Oregon</strong></span>, we&apos;re proud to serve the entire Rogue Valley region. Our local expertise allows us to provide tailored detailing services that address the unique needs of Southern Oregon vehicles.
+                Based in{" "}
+                <span className="text-[#606c38]">
+                  <strong>Medford, Oregon</strong>
+                </span>
+                , we&apos;re proud to serve the entire Rogue Valley region. Our
+                local expertise allows us to provide tailored detailing services
+                that address the unique needs of Southern Oregon vehicles.
               </p>
 
               {/* Feature Icons */}
@@ -78,7 +87,9 @@ export default function About() {
 
           {/* Service Area & Why Choose Us */}
           <div className="mt-16">
-            <h3 className="text-3xl font-bold mb-8 text-white text-center">Serving Medford and Southern Oregon</h3>
+            <h3 className="text-3xl font-bold mb-8 text-white text-center">
+              Serving Medford and Southern Oregon
+            </h3>
             <div className="grid md:grid-cols-2 gap-8">
               {/* Service Area */}
               <div className="bg-gray-900 p-6 rounded-lg shadow-lg">
@@ -132,7 +143,7 @@ export default function About() {
 
           {/* Call to Action */}
           <div className="mt-12 text-center">
-            <a 
+            <a
               href="#contact"
               className="bg-[#606c38] text-white text-lg font-semibold px-8 py-4 rounded-lg shadow-lg hover:bg-[#4a522c] transition-all"
             >
@@ -142,5 +153,5 @@ export default function About() {
         </div>
       </div>
     </section>
-  )
+  );
 }
