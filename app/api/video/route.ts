@@ -6,7 +6,7 @@ export async function GET() {
       "https://api.pexels.com/videos/videos/13643113",
       {
         headers: {
-          Authorization: "process.env.PEXELS_API_KEY" || "",
+          Authorization: "process.env.PEXELS_API_KEY",
         },
       },
     );
