@@ -256,7 +256,7 @@ const addOns = [
       "Clay bar treatment to remove embedded contaminants",
       "Polish wheels to remove light scratches and oxidation",
       "Apply ceramic coating to wheels and calipers",
-      "Allow coating to cure before reinstalling wheels",
+      "Allow coating to cure",
     ],
     imageSrc: images["wheel-polish.webp"],
   },
