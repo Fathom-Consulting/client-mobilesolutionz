@@ -1,4 +1,4 @@
-import AddOnPage from '../../components/AddOnPage'
+import AddOnPage from "../../components/AddOnPage";
 
 export default function WheelPolishAndCoatingPage() {
   return (
@@ -10,7 +10,7 @@ export default function WheelPolishAndCoatingPage() {
         "Protects against brake dust and road grime",
         "Makes future cleaning easier and quicker",
         "Helps prevent corrosion and pitting",
-        "Can improve the overall look of your vehicle"
+        "Can improve the overall look of your vehicle",
       ]}
       process={[
         "Remove wheels from the vehicle (if necessary)",
@@ -18,11 +18,10 @@ export default function WheelPolishAndCoatingPage() {
         "Clay bar treatment to remove embedded contaminants",
         "Polish wheels to remove light scratches and oxidation",
         "Apply ceramic coating to wheels and calipers",
-        "Allow coating to cure before reinstalling wheels"
+        "Allow coating to cure",
       ]}
-      imageSrc = "https://res.cloudinary.com/dkgpsncrn/image/upload/v1737580063/wheel-polish_vbuczp.webp"
+      imageSrc="https://res.cloudinary.com/dkgpsncrn/image/upload/v1737580063/wheel-polish_vbuczp.webp"
     />
     // Need to make this more modular
-  )
+  );
 }
-
