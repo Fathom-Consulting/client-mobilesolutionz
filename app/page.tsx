@@ -1,8 +1,6 @@
 "use client";
 import { Suspense, useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
-import Head from "next/head";
-
 import Header from "./components/Header";
 import Services from "./components/Services";
 import Pricing from "./components/Pricing";
@@ -10,8 +8,6 @@ import ContactForm from "./components/ContactForm";
 import Instagram from "./components/Instagram";
 import Products from "./components/Products";
 import About from "./components/About";
-
-import images from "./images.json";
 
 // Skeleton Loader Component
 const SkeletonLoader = () => (
@@ -93,57 +89,7 @@ export default function Home() {
   }, []);
 
   return (
-    <>
-      <Head>
-        {/* General Meta Tags */}
-        <title>Mobile Solutionz - Premium Car Detailing</title>
-        <meta
-          name="description"
-          content="Premium mobile car detailing in Medford, Oregon. We bring professional detailing to your doorstep."
-        />
-
-        {/* Open Graph Meta Tags */}
-        <meta
-          property="og:title"
-          content="Mobile Solutionz | Premium Mobile Car Detailing"
-        />
-        <meta
-          property="keywords"
-          content="car detailing, mobile detailing, Medford, Southern Oregon, auto detailing, vehicle cleaning, ceramic coating"
-        />
-        <meta
-          property="og:description"
-          content="Premium mobile car detailing in Medford, Oregon. We bring professional detailing to your doorstep."
-        />
-        <meta
-          property="og:image"
-          content={images["mobile-solutionz-logo.webp"]}
-        />
-        <meta property="og:url" content="https://mobile-solutionz.com" />
-        <meta property="og:type" content="website" />
-
-        {/* Twitter Card Meta Tags */}
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta
-          name="twitter:title"
-          content="Mobile Solutionz - Premium Car Detailing"
-        />
-        <meta
-          name="twitter:description"
-          content="Premium mobile car detailing in Medford, Oregon. We bring professional detailing to your doorstep."
-        />
-        <meta
-          name="twitter:image"
-          content={images["mobile-solutionz-logo.webp"]}
-        />
-
-        {/* Viewport & SEO Enhancements */}
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="robots" content="index, follow" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
-      <main>
+    <main>
         <div
           className="flex flex-col min-h-screen bg-gradient-to-b from-black/60 via-black/40 to-black"
           id="home"
@@ -233,7 +179,6 @@ export default function Home() {
             </div>
           </footer>
         </div>
-      </main>
-    </>
+    </main>
   );
 }

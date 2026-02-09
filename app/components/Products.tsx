@@ -22,13 +22,13 @@ const products = [
   },
   {
     name: "SONAX",
-    logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/Sonax_logo.svg/1600px-Sonax_logo.svg.png?20100707214957",
+    logo: "/sonax-logo.svg",
     url: "https://www.sonax.com/en",
   },
   {
-    name: "ProChoice",
-    logo: "https://prochoicecarcare.com/data/files/img_4459.png",
-    url: "https://prochoicecarcare.com",
+    name: "Shine Supply",
+    logo: "/shine-supply-logo.png",
+    url: "https://shinesupply.com",
   },
   {
     name: "P&S",

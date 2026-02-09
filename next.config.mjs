@@ -16,15 +16,11 @@ export default {
       },
       {
         protocol: "https",
-        hostname: "upload.wikimedia.org",
-      },
-      {
-        protocol: "https",
-        hostname: "prochoicecarcare.com",
-      },
-      {
-        protocol: "https",
         hostname: "psdetailproducts.com",
+      },
+      {
+        protocol: "https",
+        hostname: "res.cloudinary.com",
       },
     ],
   },
