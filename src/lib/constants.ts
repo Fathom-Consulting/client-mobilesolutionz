@@ -171,7 +171,7 @@ export const PROCESS_STEPS = [
     step: "01",
     title: "Book Your Appointment",
     description:
-      "Choose your package, tell us about your vehicle, and pick a time. We come to you — driveway, parking garage, or job site.",
+      "Choose your package, tell us about your vehicle, and pick a time. We come to you. Driveway, parking garage, or job site.",
   },
   {
     step: "02",

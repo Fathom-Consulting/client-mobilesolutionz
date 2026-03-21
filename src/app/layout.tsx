@@ -25,7 +25,7 @@ const barlowCondensed = Barlow_Condensed({
 });
 
 export const metadata: Metadata = {
-  title: "Mobile Solutionz | Premium Mobile Detailing — Medford, Oregon",
+  title: "Mobile Solutionz | Premium Mobile Detailing, Medford, Oregon",
   description:
     "Certified System X installer and premium mobile car detailing studio serving the Rogue Valley. Paint correction, ceramic coating, and protection packages brought to your door.",
   keywords: [
