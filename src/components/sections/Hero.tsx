@@ -4,7 +4,7 @@ import { useRef } from "react";
 import Image from "next/image";
 import { motion, useScroll, useTransform } from "motion/react";
 import { ArrowRight, MapPin, ShieldCheck } from "lucide-react";
-import { HERO_IMAGE, CONTACT } from "@/lib/constants";
+import { HERO_IMAGE } from "@/lib/constants";
 
 const STATS = [
   { value: "500+", label: "Vehicles Detailed" },

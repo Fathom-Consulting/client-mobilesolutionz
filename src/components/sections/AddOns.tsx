@@ -11,17 +11,11 @@ import {
   Circle,
   RefreshCw,
   ArrowRight,
+  type LucideIcon,
 } from "lucide-react";
 import { ADDONS } from "@/lib/constants";
 
-type LucideIconComponent = React.FC<{
-  size?: number;
-  strokeWidth?: number;
-  className?: string;
-  "aria-hidden"?: boolean | "true" | "false";
-}>;
-
-const ICON_MAP: Record<string, LucideIconComponent> = {
+const ICON_MAP: Record<string, LucideIcon> = {
   Wind,
   Eye,
   Layers,
