@@ -4,19 +4,10 @@ import { useState, useEffect } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { useFormspark } from "@formspark/use-formspark";
 import { Check, ArrowRight } from "lucide-react";
-import { CONTACT, PACKAGES } from "@/lib/constants";
+import { CONTACT, PACKAGES, ADDONS } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 
-const ADDON_NAMES = [
-  "Odor Treatment",
-  "Glass Polish and Coating",
-  "Paint Correction",
-  "Spot Extraction",
-  "Engine Bay Clean-Up",
-  "Interior Ceramic Coating",
-  "Wheel Polish and Coating",
-  "Trim Restoration",
-];
+const ADDON_NAMES = ADDONS.map((a) => a.name);
 
 const formatPhone = (value: string) => {
   const d = value.replace(/\D/g, "");
@@ -32,6 +23,7 @@ export default function BookingForm() {
     boolean
   ];
   const searchParams = useSearchParams();
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
   const [form, setForm] = useState({
     name: "",
@@ -51,7 +43,12 @@ export default function BookingForm() {
     const addon = searchParams.get("addon");
     const maintenance = searchParams.get("maintenance");
     if (pkg) setForm((p) => ({ ...p, package: pkg, maintenancePlan: maintenance ?? "" }));
-    if (addon) setForm((p) => ({ ...p, addons: [...p.addons, addon] }));
+    if (addon) {
+      const matchedAddon = ADDONS.find((a) => a.id === addon);
+      if (matchedAddon) {
+        setForm((p) => ({ ...p, addons: [...p.addons, matchedAddon.name] }));
+      }
+    }
 
     const handler = (e: Event) => {
       const ce = e as CustomEvent;
@@ -93,8 +90,15 @@ export default function BookingForm() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    await submit(form);
-    router.push("/thanks");
+    setSubmitError(null);
+    try {
+      await submit(form);
+      router.push("/thanks");
+    } catch {
+      setSubmitError(
+        "Something went wrong. Please try again or call us directly."
+      );
+    }
   };
 
   const inputClass =
@@ -324,6 +328,12 @@ export default function BookingForm() {
         {submitting ? "Sending..." : "Schedule Consultation"}
         {!submitting && <ArrowRight size={16} strokeWidth={1.5} />}
       </button>
+
+      {submitError && (
+        <p role="alert" className="text-red-400 text-sm font-[var(--font-barlow)] text-center">
+          {submitError}
+        </p>
+      )}
 
       <p className="text-center font-[var(--font-barlow)] text-sm text-[var(--ash)]">
         Or call directly:{" "}
