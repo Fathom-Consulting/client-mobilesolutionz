@@ -28,7 +28,7 @@ export default function About() {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[var(--ink)]/40 to-transparent" />
             </div>
-            <div className="absolute -bottom-4 -right-4 w-full h-full border border-[var(--olive)]/20 -z-10" />
+            <div className="hidden sm:block absolute -bottom-4 -right-4 w-full h-full border border-[var(--olive)]/20 -z-10" />
             <div className="absolute bottom-6 left-6 bg-[var(--ink)]/90 backdrop-blur-sm border border-[var(--olive)]/30 p-4 flex items-center gap-3">
               <ShieldCheck
                 size={20}

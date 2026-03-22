@@ -135,7 +135,7 @@ export default function Pricing() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mt-px bg-[var(--panel)] border border-white/5 p-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6"
+          className="mt-px bg-[var(--panel)] border border-white/5 p-6 sm:p-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 sm:gap-6"
         >
           <div>
             <h3 className="font-[var(--font-bebas)] text-2xl tracking-widest text-[var(--cream)] mb-1">
