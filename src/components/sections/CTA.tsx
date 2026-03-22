@@ -24,7 +24,7 @@ export default function CTA() {
             Book Your Detail
           </h2>
           <div className="olive-divider w-24 mx-auto mb-8" />
-          <p className="font-[var(--font-barlow)] text-[var(--ash)] text-lg max-w-xl mx-auto mb-12 leading-relaxed">
+          <p className="font-[var(--font-barlow)] text-[var(--ash)] text-base sm:text-lg max-w-xl mx-auto mb-12 leading-relaxed">
             Fill out the form and we will confirm your appointment within 24
             hours. Every detail starts with a conversation.
           </p>

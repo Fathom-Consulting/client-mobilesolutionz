@@ -43,7 +43,7 @@ export default function Hero() {
       <div className="absolute inset-0 z-[1] bg-gradient-to-t from-[var(--ink)] via-[var(--ink)]/40 to-transparent" />
 
       <div
-        className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full z-[1] pointer-events-none"
+        className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[min(600px,100vw)] h-[min(600px,100vw)] rounded-full z-[1] pointer-events-none"
         style={{
           background:
             "radial-gradient(circle, rgba(96,108,56,0.15) 0%, transparent 70%)",
@@ -88,7 +88,7 @@ export default function Hero() {
               transition={{ duration: 0.8, delay: 0.28, ease: [0.16, 1, 0.3, 1] }}
               className="block font-[var(--font-bebas)] text-[clamp(3rem,8vw,7rem)] leading-none tracking-widest text-[var(--olive)]"
             >
-              Detailing Studio
+              Auto Detailing
             </motion.span>
           </div>
         </h1>

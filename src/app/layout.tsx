@@ -37,7 +37,7 @@ export const metadata: Metadata = {
     template: "%s | Mobile Solutionz",
   },
   description:
-    "Certified System X installer and premium mobile car detailing studio serving the Rogue Valley. Paint correction, ceramic coating, and full detailing packages brought to your door in Medford, Oregon.",
+    "Certified System X installer and premium mobile auto detailing serving the Rogue Valley. Paint correction, ceramic coating, and full detailing packages brought to your door in Medford, Oregon.",
   keywords: [
     "mobile detailing Medford Oregon",
     "ceramic coating Medford OR",

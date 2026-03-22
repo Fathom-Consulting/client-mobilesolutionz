@@ -43,7 +43,7 @@ export default function Pricing() {
               viewport={{ once: true }}
               transition={{ delay: i * 0.15 }}
               className={cn(
-                "relative flex flex-col bg-[var(--steel)] p-8 hover:bg-[var(--panel)] transition-colors duration-300",
+                "relative flex flex-col bg-[var(--steel)] p-6 sm:p-8 hover:bg-[var(--panel)] transition-colors duration-300",
                 pkg.popular && "ring-1 ring-[var(--olive)]"
               )}
             >
@@ -65,7 +65,7 @@ export default function Pricing() {
                 <p className="font-[var(--font-barlow-condensed)] text-xs tracking-wider uppercase text-[var(--ash)] mb-4">
                   {pkg.tagline}
                 </p>
-                <div className="font-[var(--font-bebas)] text-5xl tracking-wider text-[var(--olive)]">
+                <div className="font-[var(--font-bebas)] text-4xl sm:text-5xl tracking-wider text-[var(--olive)]">
                   {pkg.priceRange}
                 </div>
                 <p className="font-[var(--font-barlow)] text-xs text-[var(--muted)] mt-1">

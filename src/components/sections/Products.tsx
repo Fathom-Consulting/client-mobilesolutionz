@@ -20,7 +20,7 @@ export default function Products() {
           Products We Trust
         </motion.p>
 
-        <div className="grid grid-cols-3 md:grid-cols-6 gap-8 items-center justify-items-center">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-8 items-center justify-items-center">
           {PRODUCTS.map((product, i) => (
             <motion.a
               key={product.name}

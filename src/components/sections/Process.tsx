@@ -32,7 +32,7 @@ export default function Process() {
               transition={{ delay: i * 0.15 }}
               className="relative flex flex-col"
             >
-              <div className="font-[var(--font-bebas)] text-7xl tracking-wider text-[var(--olive)]/20 leading-none mb-4 select-none">
+              <div className="font-[var(--font-bebas)] text-5xl sm:text-7xl tracking-wider text-[var(--olive)]/20 leading-none mb-4 select-none">
                 {step.step}
               </div>
               <div className="w-12 h-0.5 bg-[var(--olive)] mb-6" />

@@ -152,7 +152,7 @@ export default function BookingForm() {
         />
       </div>
 
-      <div className="grid grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
         <div>
           <label htmlFor="year" className={labelClass}>Year</label>
           <input

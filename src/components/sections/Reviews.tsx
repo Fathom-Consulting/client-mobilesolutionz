@@ -40,7 +40,7 @@ export default function Reviews() {
           {items.map((review, i) => (
             <div
               key={i}
-              className="w-80 shrink-0 bg-[var(--steel)] border border-white/5 p-6 flex flex-col gap-4"
+              className="w-[min(80vw,20rem)] shrink-0 bg-[var(--steel)] border border-white/5 p-6 flex flex-col gap-4"
             >
               <div
                 className="flex gap-1"

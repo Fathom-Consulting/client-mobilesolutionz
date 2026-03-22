@@ -65,13 +65,13 @@ export default function Nav() {
         )}
         aria-label="Primary navigation"
       >
-        <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between">
           <Link href="#home" className="group flex flex-col leading-none">
             <span className="font-[var(--font-bebas)] text-2xl tracking-widest text-[var(--cream)]">
               Mobile Solutionz
             </span>
             <span className="text-[10px] tracking-[0.3em] text-[var(--olive)] uppercase font-[var(--font-barlow-condensed)]">
-              Detail Studio
+              Auto Detailing
             </span>
           </Link>
 

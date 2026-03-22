@@ -16,13 +16,13 @@ export default function Footer() {
       role="contentinfo"
     >
       <div className="max-w-7xl mx-auto px-6">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-10 mb-12">
           <div>
             <p className="font-[var(--font-bebas)] text-2xl tracking-widest text-[var(--cream)] mb-1">
               Mobile Solutionz
             </p>
             <p className="font-[var(--font-barlow-condensed)] text-xs tracking-[0.3em] uppercase text-[var(--olive)] mb-4">
-              Detail Studio
+              Auto Detailing
             </p>
             <p className="font-[var(--font-barlow)] text-xs text-[var(--muted)] leading-relaxed">
               Premium mobile detailing serving the Rogue Valley from Medford,

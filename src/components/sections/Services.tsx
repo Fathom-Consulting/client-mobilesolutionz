@@ -55,11 +55,11 @@ export default function Services() {
 
               <div className="absolute inset-0 bg-gradient-to-t from-[var(--ink)]/80 via-transparent to-transparent z-10" />
 
-              <div className="absolute inset-0 z-20 flex flex-col justify-end p-8">
+              <div className="absolute inset-0 z-20 flex flex-col justify-end p-5 sm:p-8">
                 <span className="font-[var(--font-barlow-condensed)] text-xs tracking-[0.3em] uppercase text-[var(--olive)] mb-2 opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-300">
                   {service.tagline}
                 </span>
-                <h3 className="font-[var(--font-bebas)] text-4xl tracking-widest text-[var(--cream)] leading-none mb-3">
+                <h3 className="font-[var(--font-bebas)] text-3xl sm:text-4xl tracking-widest text-[var(--cream)] leading-none mb-3">
                   {service.title}
                 </h3>
                 <p className="font-[var(--font-barlow)] text-sm text-[var(--ash)] leading-relaxed max-w-xs opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-300 delay-75">

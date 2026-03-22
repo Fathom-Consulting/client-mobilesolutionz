@@ -9,7 +9,7 @@ export default function About() {
   return (
     <section id="about" className="py-24 bg-[var(--charcoal)]" aria-label="About Mobile Solutionz">
       <div className="max-w-7xl mx-auto px-6">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -53,7 +53,7 @@ export default function About() {
             transition={{ duration: 0.7, delay: 0.1 }}
           >
             <p className="font-[var(--font-barlow-condensed)] text-xs tracking-[0.3em] uppercase text-[var(--olive)] mb-3">
-              The Detail Studio
+              Mobile Auto Detailing
             </p>
             <h2 className="font-[var(--font-bebas)] text-[clamp(2.5rem,5vw,4rem)] tracking-widest text-[var(--cream)] leading-none mb-6">
               About Mobile Solutionz
