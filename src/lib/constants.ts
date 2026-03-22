@@ -301,6 +301,11 @@ export const PRODUCTS = [
     logo: "https://shinesupply.com/cdn/shop/files/SS-Logo-White.png",
     url: "https://shinesupply.com",
   },
+  {
+    name: "P&S Detail Products",
+    logo: "https://lpsog3i64o.ufs.sh/f/Q40NF8H3o1GE3FFqaa5Cuj1n2vBZt7z6DEeGqpSXAM0Hc9Od",
+    url: "https://pnsdetail.com",
+  },
 ];
 
 // Service Areas
