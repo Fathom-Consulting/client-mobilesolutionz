@@ -58,6 +58,14 @@ export default function Footer() {
             >
               {CONTACT.phone}
             </a>
+            <a
+              href="https://www.instagram.com/mobilesolutionzz"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-[var(--font-barlow)] text-sm text-[var(--ash)] hover:text-[var(--cream)] transition-colors duration-200 block mb-2"
+            >
+              @mobilesolutionzz
+            </a>
             <p className="font-[var(--font-barlow)] text-xs text-[var(--muted)]">
               Medford, Oregon
             </p>

@@ -298,7 +298,7 @@ export const CONTACT = {
   phone: "(541) 326-5822",
   phoneTel: "tel:+15413265822",
   formspark: "YOJFX3S30",
-  instagram: "https://www.instagram.com/mobilesolutionz",
+  instagram: "https://www.instagram.com/mobilesolutionzz",
 };
 
 // Hero
