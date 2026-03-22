@@ -5,7 +5,7 @@ import { Star, ExternalLink } from "lucide-react";
 import { REVIEWS } from "@/lib/constants";
 
 export default function Reviews() {
-  const items = [...REVIEWS, ...REVIEWS, ...REVIEWS];
+  const items = [...REVIEWS, ...REVIEWS];
 
   return (
     <section
@@ -35,7 +35,7 @@ export default function Reviews() {
 
         <div
           className="flex gap-6 animate-ticker"
-          style={{ width: "max-content", animationDuration: "50s" }}
+          style={{ width: "max-content", animationDuration: "70s" }}
         >
           {items.map((review, i) => (
             <div
