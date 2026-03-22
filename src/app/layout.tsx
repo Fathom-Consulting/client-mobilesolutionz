@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Bebas_Neue, Barlow, Barlow_Condensed } from "next/font/google";
+import { Bebas_Neue, Barlow, Barlow_Condensed, Cormorant_Garamond } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
 import Script from "next/script";
 import { getLocalBusinessSchema, getFAQSchema } from "@/lib/schema";
@@ -23,6 +23,14 @@ const barlowCondensed = Barlow_Condensed({
   weight: ["400", "500", "600", "700"],
   subsets: ["latin"],
   variable: "--font-barlow-condensed",
+  display: "swap",
+});
+
+const cormorant = Cormorant_Garamond({
+  weight: ["300", "400", "600"],
+  style: ["normal", "italic"],
+  subsets: ["latin"],
+  variable: "--font-cormorant",
   display: "swap",
 });
 
@@ -94,7 +102,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${bebasNeue.variable} ${barlow.variable} ${barlowCondensed.variable}`}
+      className={`${bebasNeue.variable} ${barlow.variable} ${barlowCondensed.variable} ${cormorant.variable}`}
     >
       <head>
         <Script
