@@ -57,7 +57,7 @@ export default function Hero() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 }}
+          transition={{ delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
           className="inline-flex items-center gap-2 border border-[var(--olive)]/40 bg-[var(--olive)]/10 px-4 py-2 mb-8"
         >
           <ShieldCheck
@@ -70,31 +70,33 @@ export default function Hero() {
           </span>
         </motion.div>
 
-        <div className="overflow-hidden mb-4">
-          <motion.h1
-            initial={{ y: 80, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className="font-[var(--font-bebas)] text-[clamp(3rem,8vw,7rem)] leading-none tracking-widest text-[var(--cream)]"
-          >
-            Premium Mobile
-          </motion.h1>
-        </div>
-        <div className="overflow-hidden mb-8">
-          <motion.h1
-            initial={{ y: 80, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-            className="font-[var(--font-bebas)] text-[clamp(3rem,8vw,7rem)] leading-none tracking-widest text-[var(--olive)]"
-          >
-            Detailing Studio
-          </motion.h1>
-        </div>
+        <h1>
+          <div className="overflow-hidden mb-4">
+            <motion.span
+              initial={{ y: 80, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+              className="block font-[var(--font-bebas)] text-[clamp(3rem,8vw,7rem)] leading-none tracking-widest text-[var(--cream)]"
+            >
+              Premium Mobile
+            </motion.span>
+          </div>
+          <div className="overflow-hidden mb-8">
+            <motion.span
+              initial={{ y: 80, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ duration: 0.8, delay: 0.28, ease: [0.16, 1, 0.3, 1] }}
+              className="block font-[var(--font-bebas)] text-[clamp(3rem,8vw,7rem)] leading-none tracking-widest text-[var(--olive)]"
+            >
+              Detailing Studio
+            </motion.span>
+          </div>
+        </h1>
 
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.4 }}
+          transition={{ delay: 0.36, ease: [0.16, 1, 0.3, 1] }}
           className="font-[var(--font-barlow)] text-lg text-[var(--ash)] max-w-xl mb-4 leading-relaxed"
         >
           Serving the Rogue Valley from Medford, Oregon. We bring the studio to
@@ -104,7 +106,7 @@ export default function Hero() {
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 0.5 }}
+          transition={{ delay: 0.42, ease: [0.16, 1, 0.3, 1] }}
           className="flex items-center gap-2 text-[var(--muted)] text-sm mb-12"
         >
           <MapPin size={14} strokeWidth={1.5} />
@@ -116,7 +118,7 @@ export default function Hero() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.6 }}
+          transition={{ delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
           className="flex flex-col sm:flex-row gap-4 mb-16"
         >
           <a
@@ -137,7 +139,7 @@ export default function Hero() {
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 0.8 }}
+          transition={{ delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
           className="flex flex-wrap gap-12"
         >
           {STATS.map((stat) => (

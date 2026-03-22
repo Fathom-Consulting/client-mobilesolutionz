@@ -35,7 +35,7 @@ export default function Reviews() {
 
         <div
           className="flex gap-6 animate-ticker"
-          style={{ width: "max-content", animationDuration: "40s" }}
+          style={{ width: "max-content", animationDuration: "50s" }}
         >
           {items.map((review, i) => (
             <div
@@ -51,7 +51,7 @@ export default function Reviews() {
                     key={j}
                     size={14}
                     strokeWidth={0}
-                    fill={j < review.rating ? "#606c38" : "#555550"}
+                    fill={j < review.rating ? "var(--olive)" : "var(--muted)"}
                     aria-hidden="true"
                   />
                 ))}

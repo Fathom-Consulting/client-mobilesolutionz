@@ -40,7 +40,7 @@ export default function IntroStrip() {
               key={feature.title}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.3 }}
+              viewport={{ once: true, amount: 0.1 }}
               transition={{ delay: i * 0.1 }}
               className="bg-[var(--charcoal)] p-8 flex flex-col gap-4 hover:bg-[var(--steel)] transition-colors duration-300"
             >

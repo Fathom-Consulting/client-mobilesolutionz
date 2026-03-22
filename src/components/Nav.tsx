@@ -20,11 +20,35 @@ const NAV_LINKS = [
 export default function Nav() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState<string>("");
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 60);
     window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setMobileOpen(false);
+    };
+    window.addEventListener("keydown", onKeyDown);
+
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("keydown", onKeyDown);
+    };
+  }, []);
+
+  useEffect(() => {
+    const sections = document.querySelectorAll("section[id]");
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) setActiveSection(entry.target.id);
+        });
+      },
+      { threshold: 0.4 }
+    );
+    sections.forEach((section) => observer.observe(section));
+    return () => observer.disconnect();
   }, []);
 
   return (
@@ -53,13 +77,23 @@ export default function Nav() {
 
           <ul className="hidden lg:flex items-center gap-8" role="list">
             {NAV_LINKS.map((link) => (
-              <li key={link.href}>
+              <li key={link.href} className="relative">
                 <Link
                   href={link.href}
-                  className="text-[var(--ash)] hover:text-[var(--cream)] text-sm tracking-wider uppercase font-[var(--font-barlow-condensed)] font-medium transition-colors duration-200"
+                  className={cn(
+                    "text-[var(--ash)] hover:text-[var(--cream)] text-sm tracking-wider uppercase font-[var(--font-barlow-condensed)] font-medium transition-colors duration-200",
+                    activeSection === link.href.replace("#", "") && "text-[var(--cream)]"
+                  )}
                 >
                   {link.label}
                 </Link>
+                {activeSection === link.href.replace("#", "") && (
+                  <motion.div
+                    layoutId="nav-indicator"
+                    className="absolute -bottom-1 left-0 right-0 h-px bg-[var(--olive)]"
+                    transition={{ type: "spring", stiffness: 400, damping: 30 }}
+                  />
+                )}
               </li>
             ))}
           </ul>

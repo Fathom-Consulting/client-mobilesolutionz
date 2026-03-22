@@ -75,7 +75,7 @@ export default function AddOns() {
                 </p>
                 <a
                   href={`/booking?addon=${addon.id}`}
-                  className="inline-flex items-center gap-1.5 text-[var(--olive)] text-xs font-[var(--font-barlow-condensed)] tracking-wider uppercase opacity-0 group-hover:opacity-100 transition-opacity duration-200"
+                  className="inline-flex items-center gap-1.5 text-[var(--olive)] text-xs font-[var(--font-barlow-condensed)] tracking-wider uppercase opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-200"
                 >
                   Add to booking <ArrowRight size={12} strokeWidth={1.5} />
                 </a>

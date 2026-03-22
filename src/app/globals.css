@@ -85,6 +85,11 @@
     animation: ticker 30s linear infinite;
   }
 
+  .animate-ticker:hover,
+  .animate-ticker:focus-within {
+    animation-play-state: paused;
+  }
+
   @keyframes fadeUp {
     from { opacity: 0; transform: translateY(24px); }
     to { opacity: 1; transform: translateY(0); }
