@@ -1,7 +1,15 @@
+import type { Metadata } from "next";
 import { Suspense } from "react";
 import Nav from "@/components/Nav";
 import BookingForm from "@/components/sections/BookingForm";
 import Footer from "@/components/sections/Footer";
+
+export const metadata: Metadata = {
+  title: "Book a Detail",
+  description:
+    "Schedule your mobile detail with Mobile Solutionz. Choose from Economy, Protection+, or CeramicPro packages. We come to you in Medford, Ashland, and the Rogue Valley.",
+  alternates: { canonical: "https://mobilesolutionz.com/booking" },
+};
 
 export default function BookingPage() {
   return (

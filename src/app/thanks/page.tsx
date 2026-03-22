@@ -1,5 +1,11 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { CheckCircle } from "lucide-react";
+
+export const metadata: Metadata = {
+  title: "Request Received",
+  robots: { index: false, follow: false },
+};
 
 export default function ThanksPage() {
   return (
