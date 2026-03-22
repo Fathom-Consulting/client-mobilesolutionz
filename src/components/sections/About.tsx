@@ -23,6 +23,7 @@ export default function About() {
                 alt="Chano, founder of Mobile Solutionz, detailing a vehicle"
                 fill
                 loading="lazy"
+                sizes="(max-width: 1024px) 100vw, 50vw"
                 className="object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[var(--ink)]/40 to-transparent" />
@@ -35,7 +36,7 @@ export default function About() {
                 className="text-[var(--olive)]"
               />
               <div>
-                <p className="font-[var(--font-barlow-condensed)] text-xs tracking-[0.15em] uppercase text-[var(--olive)] leading-none">
+                <p className="font-[var(--font-barlow-condensed)] text-xs tracking-[0.15em] uppercase text-[var(--ash)] leading-none">
                   Certified Installer
                 </p>
                 <p className="font-[var(--font-bebas)] text-lg tracking-wider text-[var(--cream)]">

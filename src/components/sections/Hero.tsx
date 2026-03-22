@@ -25,7 +25,7 @@ export default function Hero() {
     <section
       ref={ref}
       id="home"
-      className="relative min-h-screen flex items-end pb-24 overflow-hidden"
+      className="relative min-h-screen flex flex-col justify-end pt-24 pb-16 overflow-hidden"
       aria-label="Hero section"
     >
       <motion.div className="absolute inset-0 z-0" style={{ y: imageY }}>
@@ -34,6 +34,7 @@ export default function Hero() {
           alt="Luxury vehicle in dramatic moody lighting"
           fill
           priority
+          sizes="100vw"
           className="object-cover scale-110"
           style={{ filter: "brightness(0.3) contrast(1.15) saturate(0.7)" }}
         />
@@ -74,7 +75,7 @@ export default function Hero() {
             initial={{ y: 80, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className="font-[var(--font-bebas)] text-[clamp(4rem,12vw,10rem)] leading-none tracking-widest text-[var(--cream)]"
+            className="font-[var(--font-bebas)] text-[clamp(3rem,8vw,7rem)] leading-none tracking-widest text-[var(--cream)]"
           >
             Premium Mobile
           </motion.h1>
@@ -84,7 +85,7 @@ export default function Hero() {
             initial={{ y: 80, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-            className="font-[var(--font-bebas)] text-[clamp(4rem,12vw,10rem)] leading-none tracking-widest text-[var(--olive)]"
+            className="font-[var(--font-bebas)] text-[clamp(3rem,8vw,7rem)] leading-none tracking-widest text-[var(--olive)]"
           >
             Detailing Studio
           </motion.h1>

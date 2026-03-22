@@ -45,6 +45,7 @@ export default function Services() {
                 alt={service.imageAlt}
                 fill
                 loading="lazy"
+                sizes="(max-width: 768px) 100vw, 50vw"
                 className={`object-cover transition-all duration-700 ${
                   focused && focused !== service.id
                     ? "scale-100 brightness-[0.3]"
