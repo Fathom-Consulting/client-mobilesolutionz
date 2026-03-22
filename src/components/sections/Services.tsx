@@ -53,21 +53,21 @@ export default function Services() {
                 }`}
               />
 
-              <div className="absolute inset-0 bg-gradient-to-t from-[var(--ink)]/80 via-transparent to-transparent z-10" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[var(--ink)] via-[var(--ink)]/60 to-[var(--ink)]/20 md:from-[var(--ink)]/80 md:via-transparent md:to-transparent z-10" />
 
               <div className="absolute inset-0 z-20 flex flex-col justify-end p-5 sm:p-8">
-                <span className="font-[var(--font-barlow-condensed)] text-xs tracking-[0.3em] uppercase text-[var(--olive)] mb-2 opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-300">
+                <span className="font-[var(--font-barlow-condensed)] text-xs tracking-[0.3em] uppercase text-[var(--olive)] mb-2 opacity-100 md:opacity-0 md:group-hover:opacity-100 translate-y-0 md:translate-y-4 md:group-hover:translate-y-0 transition-all duration-300">
                   {service.tagline}
                 </span>
                 <h3 className="font-[var(--font-bebas)] text-3xl sm:text-4xl tracking-widest text-[var(--cream)] leading-none mb-3">
                   {service.title}
                 </h3>
-                <p className="font-[var(--font-barlow)] text-sm text-[var(--ash)] leading-relaxed max-w-xs opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-300 delay-75">
+                <p className="font-[var(--font-barlow)] text-sm text-[var(--ash)] leading-relaxed max-w-xs opacity-100 md:opacity-0 md:group-hover:opacity-100 translate-y-0 md:translate-y-4 md:group-hover:translate-y-0 transition-all duration-300 delay-75">
                   {service.description}
                 </p>
                 <a
                   href="#contact"
-                  className="mt-4 inline-flex items-center gap-2 text-[var(--olive)] text-sm font-[var(--font-barlow-condensed)] tracking-wider uppercase opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-300 delay-100"
+                  className="mt-4 inline-flex items-center gap-2 text-[var(--olive)] text-sm font-[var(--font-barlow-condensed)] tracking-wider uppercase opacity-100 md:opacity-0 md:group-hover:opacity-100 translate-y-0 md:translate-y-4 md:group-hover:translate-y-0 transition-all duration-300 delay-100"
                 >
                   Book This Service <ArrowRight size={14} strokeWidth={1.5} />
                 </a>
