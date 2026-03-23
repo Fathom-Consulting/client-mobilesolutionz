@@ -1,8 +1,31 @@
 "use client";
 
-import Image from "next/image";
+import { useState } from "react";
 import { motion } from "motion/react";
 import { PRODUCTS } from "@/lib/constants";
+
+function ProductLogo({ name, logo }: { name: string; logo: string }) {
+  const [failed, setFailed] = useState(false);
+
+  if (failed) {
+    return (
+      <span className="font-[var(--font-barlow-condensed)] text-xs tracking-[0.2em] uppercase text-white">
+        {name}
+      </span>
+    );
+  }
+
+  return (
+    // eslint-disable-next-line @next/next/no-img-element
+    <img
+      src={logo}
+      alt={name}
+      onError={() => setFailed(true)}
+      style={{ height: "36px", width: "auto", maxWidth: "120px", objectFit: "contain" }}
+      className="filter brightness-0 invert"
+    />
+  );
+}
 
 export default function Products() {
   return (
@@ -20,7 +43,7 @@ export default function Products() {
           Products We Trust
         </motion.p>
 
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-8 items-center justify-items-center">
+        <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-7 gap-8 items-center justify-items-center">
           {PRODUCTS.map((product, i) => (
             <motion.a
               key={product.name}
@@ -31,19 +54,10 @@ export default function Products() {
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.07 }}
-              className="opacity-30 hover:opacity-70 transition-opacity duration-300 flex items-center justify-center"
+              className="opacity-30 hover:opacity-70 transition-opacity duration-300 flex items-center justify-center h-10"
               aria-label={product.name}
-              style={{ height: "40px" }}
             >
-              <Image
-                src={product.logo}
-                alt={product.name}
-                width={100}
-                height={40}
-                style={{ width: "auto", height: "40px", objectFit: "contain" }}
-                className="filter brightness-0 invert"
-                unoptimized
-              />
+              <ProductLogo name={product.name} logo={product.logo} />
             </motion.a>
           ))}
         </div>
