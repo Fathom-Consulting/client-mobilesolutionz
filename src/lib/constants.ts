@@ -278,7 +278,7 @@ export const PRODUCTS = [
   },
   {
     name: "Koch Chemie",
-    logo: "https://kcxusa.com/cdn/shop/files/White_Square.png",
+    logo: "https://cdn.brandfetch.io/idQZX48x5r/w/1079/h/1079/theme/dark/icon.png?c=1dxbfHSJFAPEGdCLU4o5B",
     url: "https://kcxusa.com",
   },
   {
