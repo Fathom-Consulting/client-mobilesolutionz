@@ -4,7 +4,7 @@ import { useState } from "react";
 import { motion } from "motion/react";
 import { PRODUCTS } from "@/lib/constants";
 
-function ProductLogo({ name, logo }: { name: string; logo: string }) {
+function ProductLogo({ name, logo, filter }: { name: string; logo: string; filter?: string }) {
   const [failed, setFailed] = useState(false);
 
   if (failed) {
@@ -21,8 +21,13 @@ function ProductLogo({ name, logo }: { name: string; logo: string }) {
       src={logo}
       alt={name}
       onError={() => setFailed(true)}
-      style={{ height: "36px", width: "auto", maxWidth: "120px", objectFit: "contain" }}
-      className="filter brightness-0 invert"
+      style={{
+        height: "52px",
+        width: "auto",
+        maxWidth: "160px",
+        objectFit: "contain",
+        filter: filter ?? "brightness(0) invert(1)",
+      }}
     />
   );
 }
@@ -54,10 +59,10 @@ export default function Products() {
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.07 }}
-              className="opacity-30 hover:opacity-70 transition-opacity duration-300 flex items-center justify-center h-10"
+              className="opacity-30 hover:opacity-70 transition-opacity duration-300 flex items-center justify-center h-14"
               aria-label={product.name}
             >
-              <ProductLogo name={product.name} logo={product.logo} />
+              <ProductLogo name={product.name} logo={product.logo} filter={product.filter} />
             </motion.a>
           ))}
         </div>

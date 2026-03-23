@@ -280,6 +280,7 @@ export const PRODUCTS = [
     name: "Koch Chemie",
     logo: "https://cdn.brandfetch.io/idQZX48x5r/w/1079/h/1079/theme/dark/icon.png?c=1dxbfHSJFAPEGdCLU4o5B",
     url: "https://kcxusa.com",
+    filter: "none",
   },
   {
     name: "CarPro",
@@ -305,6 +306,7 @@ export const PRODUCTS = [
     name: "P&S Detail Products",
     logo: "https://www.detailerschoice.com/cdn/shop/collections/P_S_logo_1670x630.png?v=1668741433",
     url: "https://pnsdetail.com",
+    filter: "invert(1) grayscale(1) brightness(3)",
   },
 ];
 
