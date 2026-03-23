@@ -273,7 +273,7 @@ export const REVIEWS = [
 export const PRODUCTS = [
   {
     name: "System X",
-    logo: "https://www.systemxceramiccoating.com/wp-content/uploads/2021/04/System-X-Logo-White.png",
+    logo: "https://cdn-ikpmjnd.nitrocdn.com/qznJgwnlaTliTICyuZZHbJsdCttURBcT/assets/images/source/rev-7a62f86/www.systemx.com/wp-content/themes/systemx/images/systemx.svg",
     url: "https://www.systemxceramiccoating.com",
   },
   {
@@ -303,7 +303,7 @@ export const PRODUCTS = [
   },
   {
     name: "P&S Detail Products",
-    logo: "https://lpsog3i64o.ufs.sh/f/Q40NF8H3o1GE3FFqaa5Cuj1n2vBZt7z6DEeGqpSXAM0Hc9Od",
+    logo: "https://www.detailerschoice.com/cdn/shop/collections/P_S_logo_1670x630.png?v=1668741433",
     url: "https://pnsdetail.com",
   },
 ];
