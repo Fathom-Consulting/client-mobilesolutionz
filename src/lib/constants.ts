@@ -293,7 +293,7 @@ export const PRODUCTS = [
   },
   {
     name: "SONAX",
-    logo: "https://www.sonax.com/public/images/logo.svg",
+    logo: "/logos/sonax.svg",
     url: "https://www.sonax.com",
   },
   {
@@ -306,6 +306,7 @@ export const PRODUCTS = [
     logo: "https://psdetailproducts.com/cdn/shop/files/P_S_Red_Logo.png?v=1717528232",
     url: "https://pnsdetail.com",
     filter: "none",
+    lightBg: true,
   },
 ];
 
