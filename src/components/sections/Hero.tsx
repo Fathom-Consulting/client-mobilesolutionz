@@ -71,22 +71,22 @@ export default function Hero() {
         </motion.div>
 
         <h1>
-          <div className="overflow-hidden mb-4">
+          <div className="mb-2">
             <motion.span
               initial={{ y: 80, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-              className="block font-[var(--font-cormorant)] font-light text-[clamp(3.5rem,9vw,8rem)] leading-[0.9] tracking-[0.06em] text-[var(--cream)]"
+              className="block font-[var(--font-cormorant)] font-light text-[clamp(2.5rem,7vw,7rem)] leading-[1.05] tracking-[0.06em] text-[var(--cream)]"
             >
               Premium Mobile
             </motion.span>
           </div>
-          <div className="overflow-hidden mb-8">
+          <div className="mb-8">
             <motion.span
               initial={{ y: 80, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.8, delay: 0.28, ease: [0.16, 1, 0.3, 1] }}
-              className="block font-[var(--font-cormorant)] font-light italic text-[clamp(3.5rem,9vw,8rem)] leading-[0.9] tracking-[0.06em] text-[var(--olive)]"
+              className="block font-[var(--font-cormorant)] font-light italic text-[clamp(2.5rem,7vw,7rem)] leading-[1.05] tracking-[0.06em] text-[var(--olive)]"
             >
               Auto Detailing
             </motion.span>

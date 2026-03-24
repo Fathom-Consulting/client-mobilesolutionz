@@ -278,9 +278,8 @@ export const PRODUCTS = [
   },
   {
     name: "Koch Chemie",
-    logo: "https://cdn.brandfetch.io/idQZX48x5r/w/1079/h/1079/theme/dark/icon.png?c=1dxbfHSJFAPEGdCLU4o5B",
+    logo: "https://www.koch-chemie.com/media/content/logos/logo_kochchemie-2025.svg",
     url: "https://kcxusa.com",
-    filter: "none",
   },
   {
     name: "CarPro",
@@ -294,19 +293,19 @@ export const PRODUCTS = [
   },
   {
     name: "SONAX",
-    logo: "https://www.sonax.com/media/image/37/24/f9/logo_sonax_weiss.png",
+    logo: "https://www.sonax.com/public/images/logo.svg",
     url: "https://www.sonax.com",
   },
   {
     name: "Shine Supply",
-    logo: "https://shinesupply.com/cdn/shop/files/SS-Logo-White.png",
+    logo: "https://cdn.shopify.com/s/files/1/0645/8097/files/SS-Logo-Final-blk_480x480.png?v=1643821766",
     url: "https://shinesupply.com",
   },
   {
     name: "P&S Detail Products",
-    logo: "https://www.detailerschoice.com/cdn/shop/collections/P_S_logo_1670x630.png?v=1668741433",
+    logo: "https://psdetailproducts.com/cdn/shop/files/P_S_Red_Logo.png?v=1717528232",
     url: "https://pnsdetail.com",
-    filter: "invert(1) grayscale(1) brightness(3)",
+    filter: "none",
   },
 ];
 
