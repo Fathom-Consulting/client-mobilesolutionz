@@ -79,7 +79,7 @@ export default function Footer() {
           <p className="font-[var(--font-barlow)] text-xs text-[var(--muted)]">
             Site by{" "}
             <a
-              href="https://fathomconsulting.io"
+              href="https://fathom.services"
               target="_blank"
               rel="noopener noreferrer"
               className="text-[var(--ash)] hover:text-[var(--cream)] transition-colors duration-200"
