@@ -305,8 +305,6 @@ export const PRODUCTS = [
     name: "P&S Detail Products",
     logo: "https://psdetailproducts.com/cdn/shop/files/P_S_Red_Logo.png?v=1717528232",
     url: "https://pnsdetail.com",
-    filter: "none",
-    lightBg: true,
   },
 ];
 

@@ -4,7 +4,7 @@ import { useState } from "react";
 import { motion } from "motion/react";
 import { PRODUCTS } from "@/lib/constants";
 
-function ProductLogo({ name, logo, filter, lightBg }: { name: string; logo: string; filter?: string; lightBg?: boolean }) {
+function ProductLogo({ name, logo, filter }: { name: string; logo: string; filter?: string }) {
   const [failed, setFailed] = useState(false);
 
   if (failed) {
@@ -15,31 +15,21 @@ function ProductLogo({ name, logo, filter, lightBg }: { name: string; logo: stri
     );
   }
 
-  // eslint-disable-next-line @next/next/no-img-element
-  const img = (
+  return (
+    // eslint-disable-next-line @next/next/no-img-element
     <img
       src={logo}
       alt={name}
       onError={() => setFailed(true)}
       style={{
-        height: lightBg ? "36px" : "52px",
+        height: "52px",
         width: "auto",
-        maxWidth: "140px",
+        maxWidth: "160px",
         objectFit: "contain",
         filter: filter ?? "brightness(0) invert(1)",
       }}
     />
   );
-
-  if (lightBg) {
-    return (
-      <div style={{ background: "rgba(255,255,255,0.9)", padding: "6px 10px", borderRadius: "3px", display: "inline-flex", alignItems: "center" }}>
-        {img}
-      </div>
-    );
-  }
-
-  return img;
 }
 
 export default function Products() {
@@ -72,7 +62,7 @@ export default function Products() {
               className="opacity-30 hover:opacity-70 transition-opacity duration-300 flex items-center justify-center h-14"
               aria-label={product.name}
             >
-              <ProductLogo name={product.name} logo={product.logo} filter={product.filter} lightBg={product.lightBg} />
+              <ProductLogo name={product.name} logo={product.logo} filter={product.filter} />
             </motion.a>
           ))}
         </div>
