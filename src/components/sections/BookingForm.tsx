@@ -2,7 +2,8 @@
 
 import { useState, useEffect } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
-import { Check, ArrowRight, Upload } from "lucide-react";
+import { Check, ArrowRight, Upload, X } from "lucide-react";
+import { useUploadThing } from "@/lib/uploadthing-client";
 import { CONTACT, PACKAGES, ADDONS } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 
@@ -20,7 +21,21 @@ export default function BookingForm() {
   const searchParams = useSearchParams();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
-  const [photos, setPhotos] = useState<FileList | null>(null);
+  const [photoFiles, setPhotoFiles] = useState<File[]>([]);
+  const [uploadedUrls, setUploadedUrls] = useState<string[]>([]);
+  const [isUploading, setIsUploading] = useState(false);
+
+  const { startUpload } = useUploadThing("vehiclePhotos", {
+    onUploadBegin: () => setIsUploading(true),
+    onClientUploadComplete: (res) => {
+      setUploadedUrls(res.map((f) => f.ufsUrl));
+      setIsUploading(false);
+    },
+    onUploadError: () => {
+      setIsUploading(false);
+      setSubmitError("Photo upload failed. Please try again or remove photos and submit without them.");
+    },
+  });
 
   const [form, setForm] = useState({
     name: "",
@@ -90,6 +105,13 @@ export default function BookingForm() {
     setSubmitError(null);
     setIsSubmitting(true);
     try {
+      let photoUrls = uploadedUrls;
+      if (photoFiles.length > 0 && uploadedUrls.length === 0) {
+        const res = await startUpload(photoFiles);
+        if (!res) throw new Error("Upload failed");
+        photoUrls = res.map((f) => f.ufsUrl);
+      }
+
       const fd = new FormData();
       fd.append("name", form.name);
       fd.append("email", form.email);
@@ -101,8 +123,8 @@ export default function BookingForm() {
       fd.append("addons", form.addons.join(", "));
       fd.append("maintenancePlan", form.maintenancePlan);
       fd.append("message", form.message);
-      if (photos) {
-        Array.from(photos).forEach((file) => fd.append("photos", file));
+      if (photoUrls.length > 0) {
+        fd.append("photos", photoUrls.join("\n"));
       }
       const res = await fetch(`https://submit-form.com/${CONTACT.formspark}`, {
         method: "POST",
@@ -340,13 +362,13 @@ export default function BookingForm() {
           className={cn(
             inputClass,
             "flex items-center gap-3 cursor-pointer",
-            photos && photos.length > 0 ? "border-[var(--olive)]/60" : ""
+            photoFiles.length > 0 ? "border-[var(--olive)]/60" : ""
           )}
         >
           <Upload size={14} strokeWidth={1.5} className="text-[var(--muted)] shrink-0" />
           <span className="text-[var(--muted)]">
-            {photos && photos.length > 0
-              ? `${photos.length} photo${photos.length > 1 ? "s" : ""} selected`
+            {photoFiles.length > 0
+              ? `${photoFiles.length} photo${photoFiles.length > 1 ? "s" : ""} selected`
               : "Choose photos..."}
           </span>
           <input
@@ -355,10 +377,32 @@ export default function BookingForm() {
             name="photos"
             accept="image/*"
             multiple
-            onChange={(e) => setPhotos(e.target.files)}
+            onChange={(e) => setPhotoFiles(e.target.files ? Array.from(e.target.files) : [])}
             className="sr-only"
           />
         </label>
+        {photoFiles.length > 0 && (
+          <div className="flex flex-wrap gap-2 mt-2">
+            {photoFiles.map((file, i) => (
+              <div
+                key={i}
+                className="flex items-center gap-1.5 bg-[var(--steel)] border border-white/10 px-2 py-1"
+              >
+                <span className="font-[var(--font-barlow)] text-xs text-[var(--ash)] max-w-[140px] truncate">
+                  {file.name}
+                </span>
+                <button
+                  type="button"
+                  onClick={() => setPhotoFiles((prev) => prev.filter((_, j) => j !== i))}
+                  className="text-[var(--muted)] hover:text-[var(--cream)] transition-colors"
+                  aria-label={`Remove ${file.name}`}
+                >
+                  <X size={10} strokeWidth={2} />
+                </button>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
 
       <div>
@@ -377,11 +421,11 @@ export default function BookingForm() {
 
       <button
         type="submit"
-        disabled={isSubmitting}
+        disabled={isSubmitting || isUploading}
         className="clip-btn w-full flex items-center justify-center gap-3 bg-[var(--olive)] hover:bg-[var(--olive-lt)] disabled:opacity-50 disabled:cursor-not-allowed text-[var(--cream)] font-[var(--font-barlow-condensed)] font-semibold tracking-widest uppercase py-4 text-base transition-colors duration-200"
       >
-        {isSubmitting ? "Sending..." : "Schedule Consultation"}
-        {!isSubmitting && <ArrowRight size={16} strokeWidth={1.5} />}
+        {isUploading ? "Uploading Photos..." : isSubmitting ? "Sending..." : "Schedule Consultation"}
+        {!isSubmitting && !isUploading && <ArrowRight size={16} strokeWidth={1.5} />}
       </button>
 
       {submitError && (
