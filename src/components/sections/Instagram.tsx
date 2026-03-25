@@ -1,25 +1,45 @@
-"use client";
-
-import Script from "next/script";
-import { motion } from "motion/react";
-import { Instagram as InstagramIcon, ExternalLink } from "lucide-react";
+import Image from "next/image";
+import { Instagram as InstagramIcon, ExternalLink, Play, Layers } from "lucide-react";
 import { CONTACT } from "@/lib/constants";
 
-export default function Instagram() {
+interface BeholdPost {
+  id: string;
+  permalink: string;
+  mediaType: "IMAGE" | "VIDEO" | "CAROUSEL_ALBUM";
+  isReel?: boolean;
+  sizes: {
+    medium: { mediaUrl: string; width: number; height: number };
+  };
+  prunedCaption?: string;
+  caption?: string;
+}
+
+async function fetchFeed(): Promise<BeholdPost[]> {
+  try {
+    const res = await fetch("https://feeds.behold.so/WTmx3W09DNUtgOJpt8MM", {
+      next: { revalidate: 3600 },
+    });
+    if (!res.ok) return [];
+    const data = await res.json();
+    const posts: BeholdPost[] = Array.isArray(data) ? data : (data.posts ?? []);
+    return posts.slice(0, 6);
+  } catch {
+    return [];
+  }
+}
+
+export default async function Instagram() {
+  const posts = await fetchFeed();
+
   return (
     <section
       id="instagram"
       className="py-24 bg-[var(--charcoal)]"
       aria-label="Instagram feed"
     >
-      <div className="max-w-4xl mx-auto px-6">
+      <div className="max-w-7xl mx-auto px-6">
         {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="flex flex-col sm:flex-row sm:items-end justify-between mb-12 gap-4"
-        >
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-12 gap-4">
           <div>
             <p className="font-[var(--font-barlow-condensed)] text-xs tracking-[0.3em] uppercase text-[var(--olive)] mb-3">
               Follow the Work
@@ -39,48 +59,56 @@ export default function Instagram() {
             @mobilesolutionzz
             <ExternalLink size={12} strokeWidth={1.5} />
           </a>
-        </motion.div>
+        </div>
 
-        {/* Instagram profile embed */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.15 }}
-          className="flex justify-center"
-        >
-          <blockquote
-            className="instagram-media"
-            data-instgrm-permalink="https://www.instagram.com/mobilesolutionzz/?utm_source=ig_embed&utm_campaign=loading"
-            data-instgrm-version="14"
-            style={{
-              background: "#FFF",
-              border: 0,
-              borderRadius: "3px",
-              boxShadow: "0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15)",
-              margin: "1px",
-              maxWidth: "540px",
-              minWidth: "280px",
-              padding: 0,
-              width: "calc(100% - 2px)",
-            }}
-          />
-        </motion.div>
+        {/* Grid */}
+        {posts.length > 0 ? (
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-1">
+            {posts.map((post) => (
+              <a
+                key={post.id}
+                href={post.permalink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group relative aspect-square overflow-hidden bg-[var(--steel)] block"
+              >
+                <Image
+                  src={post.sizes.medium.mediaUrl}
+                  alt={post.prunedCaption ?? post.caption ?? "Instagram post"}
+                  fill
+                  sizes="(max-width: 768px) 50vw, 33vw"
+                  className="object-cover transition-transform duration-500 group-hover:scale-105"
+                />
+
+                {/* Hover overlay */}
+                <div className="absolute inset-0 bg-[var(--ink)]/70 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
+                  {(post.prunedCaption || post.caption) && (
+                    <p className="font-[var(--font-barlow)] text-xs text-[var(--ash)] leading-relaxed line-clamp-4">
+                      {post.prunedCaption ?? post.caption}
+                    </p>
+                  )}
+                </div>
+
+                {/* Media type badge */}
+                {post.mediaType === "VIDEO" && (
+                  <div className="absolute top-2 right-2 bg-[var(--ink)]/70 p-1.5 rounded">
+                    <Play size={12} className="text-white fill-white" />
+                  </div>
+                )}
+                {post.mediaType === "CAROUSEL_ALBUM" && (
+                  <div className="absolute top-2 right-2 bg-[var(--ink)]/70 p-1.5 rounded">
+                    <Layers size={12} className="text-white" strokeWidth={1.5} />
+                  </div>
+                )}
+              </a>
+            ))}
+          </div>
+        ) : (
+          <div className="flex items-center justify-center h-48 border border-white/5 text-[var(--muted)] font-[var(--font-barlow-condensed)] text-sm tracking-widest uppercase">
+            Unable to load feed
+          </div>
+        )}
       </div>
-
-      {/* Instagram embed script */}
-      <Script
-        src="https://www.instagram.com/embed.js"
-        strategy="lazyOnload"
-        onLoad={() => {
-          if (
-            typeof window !== "undefined" &&
-            (window as unknown as { instgrm?: { Embeds: { process: () => void } } }).instgrm
-          ) {
-            (window as unknown as { instgrm: { Embeds: { process: () => void } } }).instgrm.Embeds.process();
-          }
-        }}
-      />
     </section>
   );
 }

@@ -11,6 +11,7 @@ const nextConfig: NextConfig = {
       { protocol: "https", hostname: "shinesupply.com" },
       { protocol: "https", hostname: "www.sonax.com" },
       { protocol: "https", hostname: "www.systemxceramiccoating.com" },
+      { protocol: "https", hostname: "behold.pictures" },
     ],
   },
 };
