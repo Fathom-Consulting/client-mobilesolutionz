@@ -21,9 +21,14 @@ export default function BookingForm() {
   const searchParams = useSearchParams();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
+  const [fieldErrors, setFieldErrors] = useState<Partial<Record<string, string>>>({});
   const [photoFiles, setPhotoFiles] = useState<File[]>([]);
+  const [photoSizeError, setPhotoSizeError] = useState<string | null>(null);
   const [uploadedUrls, setUploadedUrls] = useState<string[]>([]);
   const [isUploading, setIsUploading] = useState(false);
+
+  const MAX_PHOTO_SIZE_MB = 8;
+  const MAX_PHOTO_SIZE_BYTES = MAX_PHOTO_SIZE_MB * 1024 * 1024;
 
   const { startUpload } = useUploadThing("vehiclePhotos", {
     onUploadBegin: () => setIsUploading(true),
@@ -100,10 +105,35 @@ export default function BookingForm() {
     }
   };
 
+  const validate = () => {
+    const errors: Partial<Record<string, string>> = {};
+    if (!form.name.trim()) errors.name = "Name is required.";
+    if (!form.email.trim()) {
+      errors.email = "Email is required.";
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) {
+      errors.email = "Enter a valid email address.";
+    }
+    const digits = form.phone.replace(/\D/g, "");
+    if (!form.phone.trim()) {
+      errors.phone = "Phone number is required.";
+    } else if (digits.length !== 10) {
+      errors.phone = "Enter a valid 10-digit phone number.";
+    }
+    return errors;
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setSubmitError(null);
+
+    const errors = validate();
+    if (Object.keys(errors).length > 0) {
+      setFieldErrors(errors);
+      return;
+    }
+    setFieldErrors({});
     setIsSubmitting(true);
+
     try {
       let photoUrls = uploadedUrls;
       if (photoFiles.length > 0 && uploadedUrls.length === 0) {
@@ -112,24 +142,27 @@ export default function BookingForm() {
         photoUrls = res.map((f) => f.ufsUrl);
       }
 
-      const fd = new FormData();
-      fd.append("name", form.name);
-      fd.append("email", form.email);
-      fd.append("phone", form.phone);
-      fd.append("year", form.year);
-      fd.append("make", form.make);
-      fd.append("model", form.model);
-      fd.append("package", form.package);
-      fd.append("addons", form.addons.join(", "));
-      fd.append("maintenancePlan", form.maintenancePlan);
-      fd.append("message", form.message);
-      if (photoUrls.length > 0) {
-        fd.append("photos", photoUrls.join("\n"));
-      }
+      const payload: Record<string, string> = {
+        name: form.name,
+        email: form.email,
+        phone: form.phone,
+        package: form.package,
+        message: form.message,
+      };
+      if (form.year) payload.year = form.year;
+      if (form.make) payload.make = form.make;
+      if (form.model) payload.model = form.model;
+      if (form.addons.length > 0) payload.addons = form.addons.join(", ");
+      if (form.maintenancePlan) payload.maintenancePlan = form.maintenancePlan;
+      if (photoUrls.length > 0) payload.photos = photoUrls.join("\n");
+
       const res = await fetch(`https://submit-form.com/${CONTACT.formspark}`, {
         method: "POST",
-        headers: { Accept: "application/json" },
-        body: fd,
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify(payload),
       });
       if (!res.ok) throw new Error();
       router.push("/thanks");
@@ -142,10 +175,16 @@ export default function BookingForm() {
     }
   };
 
-  const inputClass =
-    "w-full px-4 py-3 bg-[var(--steel)] border border-white/10 focus:outline-none focus:border-[var(--olive)] text-[var(--cream)] placeholder-[var(--muted)] font-[var(--font-barlow)] text-sm transition-colors duration-200";
+  const inputClass = (field?: string) =>
+    cn(
+      "w-full px-4 py-3 bg-[var(--steel)] border focus:outline-none text-[var(--cream)] placeholder-[var(--muted)] font-[var(--font-barlow)] text-sm transition-colors duration-200",
+      field && fieldErrors[field]
+        ? "border-red-400/70 focus:border-red-400"
+        : "border-white/10 focus:border-[var(--olive)]"
+    );
   const labelClass =
     "block mb-2 text-xs font-[var(--font-barlow-condensed)] font-semibold tracking-[0.15em] uppercase text-[var(--ash)]";
+  const errorClass = "mt-1.5 text-xs text-red-400 font-[var(--font-barlow)]";
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6" noValidate>
@@ -158,10 +197,10 @@ export default function BookingForm() {
             name="name"
             value={form.name}
             onChange={handleChange}
-            required
             placeholder="John Doe"
-            className={inputClass}
+            className={inputClass("name")}
           />
+          {fieldErrors.name && <p className={errorClass}>{fieldErrors.name}</p>}
         </div>
         <div>
           <label htmlFor="email" className={labelClass}>Email</label>
@@ -171,10 +210,10 @@ export default function BookingForm() {
             name="email"
             value={form.email}
             onChange={handleChange}
-            required
             placeholder="john@example.com"
-            className={inputClass}
+            className={inputClass("email")}
           />
+          {fieldErrors.email && <p className={errorClass}>{fieldErrors.email}</p>}
         </div>
       </div>
 
@@ -186,11 +225,10 @@ export default function BookingForm() {
           name="phone"
           value={form.phone}
           onChange={handleChange}
-          pattern="\(\d{3}\) \d{3}-\d{4}"
-          required
           placeholder="(541) 000-0000"
-          className={inputClass}
+          className={inputClass("phone")}
         />
+        {fieldErrors.phone && <p className={errorClass}>{fieldErrors.phone}</p>}
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
@@ -203,7 +241,7 @@ export default function BookingForm() {
             value={form.year}
             onChange={handleChange}
             placeholder="2019"
-            className={inputClass}
+            className={inputClass()}
           />
         </div>
         <div>
@@ -215,7 +253,7 @@ export default function BookingForm() {
             value={form.make}
             onChange={handleChange}
             placeholder="Toyota"
-            className={inputClass}
+            className={inputClass()}
           />
         </div>
         <div>
@@ -227,7 +265,7 @@ export default function BookingForm() {
             value={form.model}
             onChange={handleChange}
             placeholder="Camry"
-            className={inputClass}
+            className={inputClass()}
           />
         </div>
       </div>
@@ -240,7 +278,7 @@ export default function BookingForm() {
           value={form.package}
           onChange={handleChange}
           required
-          className={cn(inputClass, "cursor-pointer")}
+          className={cn(inputClass(), "cursor-pointer")}
         >
           <option value="">Select a package</option>
           {PACKAGES.map((p) => (
@@ -262,7 +300,7 @@ export default function BookingForm() {
             name="maintenancePlan"
             value={form.maintenancePlan}
             onChange={handleChange}
-            className={cn(inputClass, "cursor-pointer")}
+            className={cn(inputClass(), "cursor-pointer")}
           >
             <option value="">No maintenance plan</option>
             <option value="interior">Interior</option>
@@ -360,7 +398,7 @@ export default function BookingForm() {
         <label
           htmlFor="photos"
           className={cn(
-            inputClass,
+            inputClass(),
             "flex items-center gap-3 cursor-pointer",
             photoFiles.length > 0 ? "border-[var(--olive)]/60" : ""
           )}
@@ -377,10 +415,25 @@ export default function BookingForm() {
             name="photos"
             accept="image/*"
             multiple
-            onChange={(e) => setPhotoFiles(e.target.files ? Array.from(e.target.files) : [])}
+            onChange={(e) => {
+              const selected = e.target.files ? Array.from(e.target.files) : [];
+              const oversized = selected.filter((f) => f.size > MAX_PHOTO_SIZE_BYTES);
+              if (oversized.length > 0) {
+                setPhotoSizeError(
+                  `${oversized.map((f) => f.name).join(", ")} ${oversized.length === 1 ? "exceeds" : "exceed"} the ${MAX_PHOTO_SIZE_MB}MB limit. Please use a smaller file.`
+                );
+                setPhotoFiles(selected.filter((f) => f.size <= MAX_PHOTO_SIZE_BYTES));
+              } else {
+                setPhotoSizeError(null);
+                setPhotoFiles(selected);
+              }
+            }}
             className="sr-only"
           />
         </label>
+        {photoSizeError && (
+          <p className="font-[var(--font-barlow)] text-xs text-red-400 mt-1.5">{photoSizeError}</p>
+        )}
         {photoFiles.length > 0 && (
           <div className="flex flex-wrap gap-2 mt-2">
             {photoFiles.map((file, i) => (
@@ -393,7 +446,10 @@ export default function BookingForm() {
                 </span>
                 <button
                   type="button"
-                  onClick={() => setPhotoFiles((prev) => prev.filter((_, j) => j !== i))}
+                  onClick={() => {
+                    setPhotoFiles((prev) => prev.filter((_, j) => j !== i));
+                    setPhotoSizeError(null);
+                  }}
                   className="text-[var(--muted)] hover:text-[var(--cream)] transition-colors"
                   aria-label={`Remove ${file.name}`}
                 >
@@ -415,7 +471,7 @@ export default function BookingForm() {
           required
           rows={4}
           placeholder="Tell us about your vehicle and what you are looking for..."
-          className={inputClass}
+          className={inputClass()}
         />
       </div>
 
