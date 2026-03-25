@@ -21,8 +21,8 @@ export default function ThanksPage() {
           Request Received
         </h1>
         <p className="font-[var(--font-barlow)] text-[var(--ash)] leading-relaxed mb-10">
-          We&apos;ve received your request and will be in touch within 24 hours
-          to confirm your appointment.
+          We&apos;ve received your request. Chano will reach out within 24 hours
+          to discuss your vehicle and schedule your detail.
         </p>
         <Link
           href="/"
