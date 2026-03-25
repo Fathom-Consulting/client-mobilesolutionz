@@ -14,7 +14,11 @@ export async function GET(req: Request) {
   cutoff.setDate(cutoff.getDate() - RETENTION_DAYS);
 
   const { files } = await utapi.listFiles();
-  const stale = files.filter((f) => new Date(f.uploadedAt) < cutoff);
+  const stale = files.filter(
+    (f) =>
+      f.customId?.startsWith("vehicle-photo::") &&
+      new Date(f.uploadedAt) < cutoff
+  );
 
   if (stale.length === 0) {
     return NextResponse.json({ deleted: 0, message: "Nothing to clean up." });
