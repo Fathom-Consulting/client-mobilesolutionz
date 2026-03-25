@@ -16,28 +16,39 @@ bun run lint     # ESLint
 
 ## Architecture
 
-**Single-page app** with hash-based navigation (`#services`, `#pricing`, `#contact`). The `app/page.tsx` is the main landing page composed of section components. Hash in the URL updates dynamically via `history.replaceState()` on scroll.
+**Single-page app** with hash-based navigation (`#services`, `#pricing`, `#about`). The `src/app/page.tsx` is the main landing page composed of section components. A dedicated `/booking` page hosts the booking form.
 
-**Add-on pages** (`app/addons/*/page.tsx`) each render the shared `AddOnPage` component with specific props — add new add-ons by following that pattern.
-
-**Path alias:** `@/*` maps to `app/` (e.g., `@/components/Header`).
+**Path alias:** `@/*` maps to `src/` (e.g., `@/components/Nav`).
 
 ### Key Files
 
-- `app/page.tsx` — Main landing page, composes all section components
-- `app/layout.tsx` — Root layout, metadata, Vercel Analytics
-- `app/components/ContactForm.tsx` — Booking form; reads URL query params (`?package=`, `?addon=`) to pre-populate selections, submits via Formspark
-- `app/api/video/route.ts` — Server route that proxies Pexels API to return the hero background video URL
-- `app/images.json` — CDN URL mappings for all site images (Cloudinary + custom UFS hosting)
+- `src/app/page.tsx` — Main landing page, composes all section components
+- `src/app/layout.tsx` — Root layout, metadata, JSON-LD schemas, Vercel Analytics
+- `src/app/booking/page.tsx` — Standalone booking page
+- `src/app/thanks/page.tsx` — Post-submission confirmation page
+- `src/app/api/uploadthing/core.ts` — UploadThing file router (vehicle photo uploads)
+- `src/app/api/uploadthing/route.ts` — UploadThing Next.js route handler
+- `src/lib/constants.ts` — All site data: packages, addons, services, reviews, products, contact info
+- `src/lib/schema.ts` — JSON-LD SEO schemas (LocalBusiness, FAQ)
+- `src/lib/uploadthing-client.ts` — Client-side UploadThing helpers (`useUploadThing`)
 
 ### Styling
 
-Tailwind CSS only — no CSS modules. Brand color is `#606c38` (olive green). Dark theme throughout. Custom animations (`fade-in`, `check-bounce`) defined in `app/globals.css`. shadcn/ui components use the New York style variant.
+Tailwind CSS only — no CSS modules. Brand color is `#606c38` (olive green). Dark theme throughout. CSS custom properties defined in `src/app/globals.css` (`--ink`, `--charcoal`, `--steel`, `--panel`, `--olive`, `--cream`, `--ash`, `--muted`). Animations (`fade-in`, `ticker`) defined in globals.css.
 
 ### Forms
 
-Formspark handles all form submissions (`@formspark/use-formspark`). After submission, users are redirected to `/thanks`. The contact form dynamically filters add-ons based on selected package (some are included, others are purchasable).
+`src/components/sections/BookingForm.tsx` handles bookings:
+- Submits as JSON to Formspark (`https://submit-form.com/{id}`)
+- Photos upload to UploadThing first; CDN URLs are included in the Formspark payload
+- Client-side validation: name, email (format), phone (10-digit) required
+- Images over 7MB are auto-compressed via canvas before upload
+- `_replyto` field set so Chano can reply directly to the customer from his inbox
 
-### Images & Video
+### Images
 
-All images served from external CDNs — URLs in `app/images.json`. Hero video fetched client-side from the `/api/video` route which calls Pexels. `next.config.mjs` whitelists the relevant image domains.
+All images served from external CDNs (Cloudinary, Behold, UploadThing). No local image assets except logos in `public/logos/` (self-hosted SVGs for SONAX and P&S). Remote domains whitelisted in `next.config.ts`.
+
+### Instagram Feed
+
+`src/components/sections/Instagram.tsx` is an async server component that fetches from the Behold.so JSON feed API with a 1-hour revalidate cache. Feed ID: `WTmx3W09DNUtgOJpt8MM`.

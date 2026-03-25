@@ -9,13 +9,9 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@formspark/use-formspark": "^0.1.39",
-    "@radix-ui/react-slot": "^1.1.1",
     "@uploadthing/react": "^7.3.3",
     "@vercel/analytics": "^1.4.1",
-    "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
-    "framer-motion": "^11.18.1",
     "lucide-react": "^0.473.0",
     "motion": "^12.38.0",
     "next": "^16.2.1",
