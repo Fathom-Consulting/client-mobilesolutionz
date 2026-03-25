@@ -21,8 +21,8 @@ export default function ThanksPage() {
           Request Received
         </h1>
         <p className="font-[var(--font-barlow)] text-[var(--ash)] leading-relaxed mb-10">
-          We will review your vehicle details and confirm your appointment
-          within 24 hours. Check your email for a confirmation.
+          We&apos;ve received your request and will be in touch within 24 hours
+          to confirm your appointment.
         </p>
         <Link
           href="/"

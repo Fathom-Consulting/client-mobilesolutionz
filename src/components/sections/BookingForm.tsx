@@ -188,6 +188,7 @@ export default function BookingForm() {
       const payload: Record<string, string> = {
         name: form.name,
         email: form.email,
+        _replyto: form.email,
         phone: form.phone,
         package: form.package,
         message: form.message,
