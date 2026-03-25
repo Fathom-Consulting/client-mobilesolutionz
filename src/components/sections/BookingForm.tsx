@@ -8,6 +8,52 @@ import { CONTACT, PACKAGES, ADDONS } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 
 const ADDON_NAMES = ADDONS.map((a) => a.name);
+const MAX_PHOTO_MB = 7; // target ceiling after compression
+const MAX_PHOTO_BYTES = MAX_PHOTO_MB * 1024 * 1024;
+
+async function compressImage(file: File): Promise<File> {
+  return new Promise((resolve) => {
+    const img = new Image();
+    const url = URL.createObjectURL(file);
+    img.onload = () => {
+      URL.revokeObjectURL(url);
+      // Scale dimensions proportionally to hit target size
+      const scale = Math.min(1, Math.sqrt(MAX_PHOTO_BYTES / file.size));
+      const canvas = document.createElement("canvas");
+      canvas.width = Math.floor(img.width * scale);
+      canvas.height = Math.floor(img.height * scale);
+      const ctx = canvas.getContext("2d")!;
+      ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+      canvas.toBlob(
+        (blob) => {
+          if (blob) {
+            const compressed = new File(
+              [blob],
+              file.name.replace(/\.[^.]+$/, ".jpg"),
+              { type: "image/jpeg" }
+            );
+            // If still over limit (high-entropy images), drop quality further
+            if (compressed.size > MAX_PHOTO_BYTES) {
+              canvas.toBlob(
+                (b2) => resolve(b2 ? new File([b2], compressed.name, { type: "image/jpeg" }) : file),
+                "image/jpeg",
+                0.6
+              );
+            } else {
+              resolve(compressed);
+            }
+          } else {
+            resolve(file);
+          }
+        },
+        "image/jpeg",
+        0.82
+      );
+    };
+    img.onerror = () => { URL.revokeObjectURL(url); resolve(file); };
+    img.src = url;
+  });
+}
 
 const formatPhone = (value: string) => {
   const d = value.replace(/\D/g, "");
@@ -23,12 +69,9 @@ export default function BookingForm() {
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [fieldErrors, setFieldErrors] = useState<Partial<Record<string, string>>>({});
   const [photoFiles, setPhotoFiles] = useState<File[]>([]);
-  const [photoSizeError, setPhotoSizeError] = useState<string | null>(null);
+  const [isCompressing, setIsCompressing] = useState(false);
   const [uploadedUrls, setUploadedUrls] = useState<string[]>([]);
   const [isUploading, setIsUploading] = useState(false);
-
-  const MAX_PHOTO_SIZE_MB = 8;
-  const MAX_PHOTO_SIZE_BYTES = MAX_PHOTO_SIZE_MB * 1024 * 1024;
 
   const { startUpload } = useUploadThing("vehiclePhotos", {
     onUploadBegin: () => setIsUploading(true),
@@ -154,7 +197,7 @@ export default function BookingForm() {
       if (form.model) payload.model = form.model;
       if (form.addons.length > 0) payload.addons = form.addons.join(", ");
       if (form.maintenancePlan) payload.maintenancePlan = form.maintenancePlan;
-      if (photoUrls.length > 0) payload.photos = photoUrls.join("\n");
+      if (photoUrls.length > 0) (payload as Record<string, unknown>).photos = photoUrls;
 
       const res = await fetch(`https://submit-form.com/${CONTACT.formspark}`, {
         method: "POST",
@@ -405,7 +448,9 @@ export default function BookingForm() {
         >
           <Upload size={14} strokeWidth={1.5} className="text-[var(--muted)] shrink-0" />
           <span className="text-[var(--muted)]">
-            {photoFiles.length > 0
+            {isCompressing
+              ? "Optimizing photos..."
+              : photoFiles.length > 0
               ? `${photoFiles.length} photo${photoFiles.length > 1 ? "s" : ""} selected`
               : "Choose photos..."}
           </span>
@@ -415,25 +460,21 @@ export default function BookingForm() {
             name="photos"
             accept="image/*"
             multiple
-            onChange={(e) => {
+            onChange={async (e) => {
               const selected = e.target.files ? Array.from(e.target.files) : [];
-              const oversized = selected.filter((f) => f.size > MAX_PHOTO_SIZE_BYTES);
-              if (oversized.length > 0) {
-                setPhotoSizeError(
-                  `${oversized.map((f) => f.name).join(", ")} ${oversized.length === 1 ? "exceeds" : "exceed"} the ${MAX_PHOTO_SIZE_MB}MB limit. Please use a smaller file.`
-                );
-                setPhotoFiles(selected.filter((f) => f.size <= MAX_PHOTO_SIZE_BYTES));
-              } else {
-                setPhotoSizeError(null);
-                setPhotoFiles(selected);
-              }
+              if (selected.length === 0) return;
+              setIsCompressing(true);
+              const processed = await Promise.all(
+                selected.map((f) => f.size > MAX_PHOTO_BYTES ? compressImage(f) : Promise.resolve(f))
+              );
+              setPhotoFiles((prev) => [...prev, ...processed]);
+              setIsCompressing(false);
+              // reset input so the same file can be re-selected if removed
+              e.target.value = "";
             }}
             className="sr-only"
           />
         </label>
-        {photoSizeError && (
-          <p className="font-[var(--font-barlow)] text-xs text-red-400 mt-1.5">{photoSizeError}</p>
-        )}
         {photoFiles.length > 0 && (
           <div className="flex flex-wrap gap-2 mt-2">
             {photoFiles.map((file, i) => (
@@ -446,10 +487,7 @@ export default function BookingForm() {
                 </span>
                 <button
                   type="button"
-                  onClick={() => {
-                    setPhotoFiles((prev) => prev.filter((_, j) => j !== i));
-                    setPhotoSizeError(null);
-                  }}
+                  onClick={() => setPhotoFiles((prev) => prev.filter((_, j) => j !== i))}
                   className="text-[var(--muted)] hover:text-[var(--cream)] transition-colors"
                   aria-label={`Remove ${file.name}`}
                 >
@@ -477,11 +515,11 @@ export default function BookingForm() {
 
       <button
         type="submit"
-        disabled={isSubmitting || isUploading}
+        disabled={isSubmitting || isUploading || isCompressing}
         className="clip-btn w-full flex items-center justify-center gap-3 bg-[var(--olive)] hover:bg-[var(--olive-lt)] disabled:opacity-50 disabled:cursor-not-allowed text-[var(--cream)] font-[var(--font-barlow-condensed)] font-semibold tracking-widest uppercase py-4 text-base transition-colors duration-200"
       >
-        {isUploading ? "Uploading Photos..." : isSubmitting ? "Sending..." : "Schedule Consultation"}
-        {!isSubmitting && !isUploading && <ArrowRight size={16} strokeWidth={1.5} />}
+        {isCompressing ? "Optimizing Photos..." : isUploading ? "Uploading Photos..." : isSubmitting ? "Sending..." : "Schedule Consultation"}
+        {!isSubmitting && !isUploading && !isCompressing && <ArrowRight size={16} strokeWidth={1.5} />}
       </button>
 
       {submitError && (
