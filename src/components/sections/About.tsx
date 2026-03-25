@@ -19,7 +19,7 @@ export default function About() {
           >
             <div className="relative aspect-[4/5] overflow-hidden">
               <Image
-                src="https://lpsog3i64o.ufs.sh/f/Q40NF8H3o1GE2uxySWUdiRU0fAyw9EBIPc6XOYxzWJ3utmSV"
+                src="https://lpsog3i64o.ufs.sh/f/Q40NF8H3o1GEWdlBWXukFr4RidIt5HQxo3uC6JfGaLYzmnvD"
                 alt="Chano, founder of Mobile Solutionz, detailing a vehicle"
                 fill
                 loading="lazy"
@@ -29,17 +29,17 @@ export default function About() {
               <div className="absolute inset-0 bg-gradient-to-t from-[var(--ink)]/40 to-transparent" />
             </div>
             <div className="hidden sm:block absolute -bottom-4 -right-4 w-full h-full border border-[var(--olive)]/20 -z-10" />
-            <div className="absolute bottom-6 left-6 bg-[var(--ink)]/90 backdrop-blur-sm border border-[var(--olive)]/30 p-4 flex items-center gap-3">
+            <div className="absolute bottom-6 left-6 right-6 sm:right-auto bg-[var(--ink)] border-l-2 border-l-[var(--olive)] border-y border-r border-y-[var(--olive)]/20 border-r-[var(--olive)]/20 px-5 py-4 flex items-center gap-4">
               <ShieldCheck
-                size={20}
-                strokeWidth={1.5}
-                className="text-[var(--olive)]"
+                size={28}
+                strokeWidth={1.2}
+                className="text-[var(--olive)] shrink-0"
               />
               <div>
-                <p className="font-[var(--font-barlow-condensed)] text-xs tracking-[0.15em] uppercase text-[var(--ash)] leading-none">
+                <p className="font-[var(--font-barlow-condensed)] text-[10px] tracking-[0.35em] uppercase text-[var(--olive)] leading-none mb-1.5">
                   Certified Installer
                 </p>
-                <p className="font-[var(--font-bebas)] text-lg tracking-wider text-[var(--cream)]">
+                <p className="font-[var(--font-bebas)] text-2xl tracking-[0.15em] text-[var(--cream)] leading-none">
                   System X
                 </p>
               </div>
