@@ -122,7 +122,7 @@ export default function Hero() {
           className="flex flex-col sm:flex-row gap-4 mb-16"
         >
           <a
-            href="#contact"
+            href="/booking"
             className="clip-btn inline-flex items-center justify-center gap-3 bg-[var(--olive)] hover:bg-[var(--olive-lt)] text-[var(--cream)] font-[var(--font-barlow-condensed)] font-semibold tracking-widest uppercase px-10 py-4 text-base transition-colors duration-200"
           >
             Book a Detail

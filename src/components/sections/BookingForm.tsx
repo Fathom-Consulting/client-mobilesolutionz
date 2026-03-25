@@ -2,8 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
-import { useFormspark } from "@formspark/use-formspark";
-import { Check, ArrowRight } from "lucide-react";
+import { Check, ArrowRight, Upload } from "lucide-react";
 import { CONTACT, PACKAGES, ADDONS } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 
@@ -18,12 +17,10 @@ const formatPhone = (value: string) => {
 
 export default function BookingForm() {
   const router = useRouter();
-  const [submit, submitting] = useFormspark({ formId: CONTACT.formspark }) as [
-    (data: Record<string, unknown>) => Promise<void>,
-    boolean
-  ];
   const searchParams = useSearchParams();
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
+  const [photos, setPhotos] = useState<FileList | null>(null);
 
   const [form, setForm] = useState({
     name: "",
@@ -91,13 +88,35 @@ export default function BookingForm() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setSubmitError(null);
+    setIsSubmitting(true);
     try {
-      await submit(form);
+      const fd = new FormData();
+      fd.append("name", form.name);
+      fd.append("email", form.email);
+      fd.append("phone", form.phone);
+      fd.append("year", form.year);
+      fd.append("make", form.make);
+      fd.append("model", form.model);
+      fd.append("package", form.package);
+      fd.append("addons", form.addons.join(", "));
+      fd.append("maintenancePlan", form.maintenancePlan);
+      fd.append("message", form.message);
+      if (photos) {
+        Array.from(photos).forEach((file) => fd.append("photos", file));
+      }
+      const res = await fetch(`https://submit-form.com/${CONTACT.formspark}`, {
+        method: "POST",
+        headers: { Accept: "application/json" },
+        body: fd,
+      });
+      if (!res.ok) throw new Error();
       router.push("/thanks");
     } catch {
       setSubmitError(
         "Something went wrong. Please try again or call us directly."
       );
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -307,6 +326,42 @@ export default function BookingForm() {
       </div>
 
       <div>
+        <label htmlFor="photos" className={labelClass}>
+          Vehicle Photos{" "}
+          <span className="text-[var(--muted)] normal-case font-normal tracking-normal text-[11px]">
+            — optional but recommended
+          </span>
+        </label>
+        <p className="font-[var(--font-barlow)] text-xs text-[var(--muted)] mb-2">
+          Add clear photos of your vehicle&apos;s current condition to receive a more accurate quote.
+        </p>
+        <label
+          htmlFor="photos"
+          className={cn(
+            inputClass,
+            "flex items-center gap-3 cursor-pointer",
+            photos && photos.length > 0 ? "border-[var(--olive)]/60" : ""
+          )}
+        >
+          <Upload size={14} strokeWidth={1.5} className="text-[var(--muted)] shrink-0" />
+          <span className="text-[var(--muted)]">
+            {photos && photos.length > 0
+              ? `${photos.length} photo${photos.length > 1 ? "s" : ""} selected`
+              : "Choose photos..."}
+          </span>
+          <input
+            type="file"
+            id="photos"
+            name="photos"
+            accept="image/*"
+            multiple
+            onChange={(e) => setPhotos(e.target.files)}
+            className="sr-only"
+          />
+        </label>
+      </div>
+
+      <div>
         <label htmlFor="message" className={labelClass}>Message</label>
         <textarea
           id="message"
@@ -322,11 +377,11 @@ export default function BookingForm() {
 
       <button
         type="submit"
-        disabled={submitting}
+        disabled={isSubmitting}
         className="clip-btn w-full flex items-center justify-center gap-3 bg-[var(--olive)] hover:bg-[var(--olive-lt)] disabled:opacity-50 disabled:cursor-not-allowed text-[var(--cream)] font-[var(--font-barlow-condensed)] font-semibold tracking-widest uppercase py-4 text-base transition-colors duration-200"
       >
-        {submitting ? "Sending..." : "Schedule Consultation"}
-        {!submitting && <ArrowRight size={16} strokeWidth={1.5} />}
+        {isSubmitting ? "Sending..." : "Schedule Consultation"}
+        {!isSubmitting && <ArrowRight size={16} strokeWidth={1.5} />}
       </button>
 
       {submitError && (

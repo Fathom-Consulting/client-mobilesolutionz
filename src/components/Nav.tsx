@@ -109,7 +109,7 @@ export default function Nav() {
               </span>
             </a>
             <a
-              href="#contact"
+              href="/booking"
               className="clip-btn bg-[var(--olive)] hover:bg-[var(--olive-lt)] text-[var(--cream)] text-sm font-[var(--font-barlow-condensed)] font-semibold tracking-widest uppercase px-6 py-2.5 transition-colors duration-200"
             >
               Book Now
@@ -169,7 +169,7 @@ export default function Nav() {
             </nav>
             <div className="px-8 pb-10">
               <a
-                href="#contact"
+                href="/booking"
                 onClick={() => setMobileOpen(false)}
                 className="clip-btn block bg-[var(--olive)] text-center text-[var(--cream)] font-[var(--font-barlow-condensed)] font-semibold tracking-widest uppercase py-4 text-lg"
               >

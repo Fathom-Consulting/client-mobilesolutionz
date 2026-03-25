@@ -72,7 +72,8 @@ export const PACKAGES = [
       "Spot extraction included",
     ],
     exterior: [
-      "Iron decon remover and fender scrub",
+      "Iron decon remover (paint and wheels)",
+      "Fender scrub",
       "Clay bar decontamination",
       "Premium paint sealant",
       "Plastic and trim protection and conditioning",
@@ -85,6 +86,7 @@ export const PACKAGES = [
     name: "CeramicPro",
     priceRange: "$800 – $1,400",
     tagline: "The complete protection package for serious owners.",
+    includesText: "Includes everything in Protection Plus, plus:",
     interior: [
       "Steam and shampoo extraction",
       "Leather and panel protection and conditioning",
@@ -92,14 +94,8 @@ export const PACKAGES = [
     exterior: [
       "Ceramic coating on all painted surfaces (1-2 stage paint correction if needed)",
       "Trim and plastic conditioning and protection",
-      "Glass polish and ceramic coat",
-      "Wheel polish and ceramic coat",
     ],
-    includedAddons: [
-      "Glass Polish and Coating",
-      "Wheel Polish and Coating",
-      "Trim Restoration",
-    ] as string[],
+    includedAddons: ["Trim Restoration"] as string[],
     popular: false,
     badge: "Most Complete",
   },
@@ -162,6 +158,13 @@ export const ADDONS = [
     description:
       "Faded black trim restored to deep, rich color. Treatment bonds to plastic for long-lasting protection against UV graying.",
     icon: "RefreshCw",
+  },
+  {
+    id: "pet-hair",
+    name: "Pet Hair Removal",
+    description:
+      "Additional charge for vehicles with excessive pet hair. Labor-intensive extraction to account for the extra time and effort required. Automatically applied when the vehicle is heavily covered.",
+    icon: "Scissors",
   },
 ];
 

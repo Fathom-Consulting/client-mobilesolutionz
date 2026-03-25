@@ -62,9 +62,14 @@ export default function Pricing() {
                 <h3 className="font-[var(--font-bebas)] text-3xl tracking-widest text-[var(--cream)] mb-1">
                   {pkg.name}
                 </h3>
-                <p className="font-[var(--font-barlow-condensed)] text-xs tracking-wider uppercase text-[var(--ash)] mb-4">
+                <p className="font-[var(--font-barlow-condensed)] text-xs tracking-wider uppercase text-[var(--ash)] mb-2">
                   {pkg.tagline}
                 </p>
+                {"includesText" in pkg && pkg.includesText && (
+                  <p className="font-[var(--font-barlow)] text-xs text-[var(--olive)]/70 italic mb-4">
+                    {pkg.includesText as string}
+                  </p>
+                )}
                 <div className="font-[var(--font-bebas)] text-4xl sm:text-5xl tracking-wider text-[var(--olive)]">
                   {pkg.priceRange}
                 </div>
