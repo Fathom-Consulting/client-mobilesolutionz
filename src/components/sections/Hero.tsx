@@ -140,10 +140,10 @@ export default function Hero() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
-          className="flex flex-wrap gap-12"
+          className="flex flex-wrap gap-8 sm:gap-12"
         >
           {STATS.map((stat, i) => (
-            <div key={stat.value} className={`flex flex-col gap-1 ${i > 0 ? "pl-12 border-l border-white/10" : ""}`}>
+            <div key={stat.value} className={`flex flex-col gap-1 ${i > 0 ? "pl-8 sm:pl-12 border-l border-white/10" : ""}`}>
               <span className="font-[var(--font-bebas)] text-4xl tracking-wider text-[var(--cream)]">
                 {stat.value}
               </span>

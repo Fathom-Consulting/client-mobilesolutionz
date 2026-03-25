@@ -110,7 +110,7 @@ export default function Nav() {
             </a>
             <a
               href="/booking"
-              className="clip-btn bg-[var(--olive)] hover:bg-[var(--olive-lt)] text-[var(--cream)] text-sm font-[var(--font-barlow-condensed)] font-semibold tracking-widest uppercase px-6 py-2.5 transition-colors duration-200"
+              className="clip-btn bg-[var(--olive)] hover:bg-[var(--olive-lt)] text-[var(--cream)] text-sm font-[var(--font-barlow-condensed)] font-semibold tracking-widest uppercase px-6 py-3 transition-colors duration-200"
             >
               Book Now
             </a>
