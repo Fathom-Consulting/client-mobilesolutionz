@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   title: "Book a Detail",
   description:
     "Schedule your mobile detail with Mobile Solutionz. Choose from Economy, Protection+, or CeramicPro packages. We come to you in Medford, Ashland, and the Rogue Valley.",
-  alternates: { canonical: "https://mobilesolutionz.com/booking" },
+  alternates: { canonical: "https://mobile-solutionz.com/booking" },
 };
 
 export default function BookingPage() {

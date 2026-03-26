@@ -34,14 +34,12 @@ const cormorant = Cormorant_Garamond({
   display: "swap",
 });
 
-const SITE_URL = "https://mobilesolutionz.com";
-const OG_IMAGE =
-  "https://lpsog3i64o.ufs.sh/f/Q40NF8H3o1GE2uxySWUdiRU0fAyw9EBIPc6XOYxzWJ3utmSV";
+const SITE_URL = "https://mobile-solutionz.com";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "Mobile Solutionz | Premium Mobile Detailing — Medford, Oregon",
+    default: "Mobile Solutionz | Premium Mobile Detailing",
     template: "%s | Mobile Solutionz",
   },
   description:
@@ -73,24 +71,15 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: SITE_URL,
     siteName: "Mobile Solutionz",
-    title: "Mobile Solutionz | Premium Mobile Detailing — Medford, Oregon",
+    title: "Mobile Solutionz | Premium Mobile Detailing",
     description:
       "Certified System X installer. Paint correction, ceramic coating, interior and exterior detailing brought to your door in the Rogue Valley.",
-    images: [
-      {
-        url: OG_IMAGE,
-        width: 1200,
-        height: 630,
-        alt: "Mobile Solutionz — Premium Mobile Car Detailing in Medford, Oregon",
-      },
-    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Mobile Solutionz | Premium Mobile Detailing",
     description:
       "Certified System X installer serving Medford, Ashland, and the Rogue Valley. We bring the studio to your driveway.",
-    images: [OG_IMAGE],
   },
 };
 
