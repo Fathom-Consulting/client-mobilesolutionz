@@ -41,11 +41,6 @@ export default function Pricing() {
                 ? PACKAGES.find((p) => p.id === pkg.inheritsFrom)
                 : null;
 
-            const grandparentPkg =
-              parentPkg && "inheritsFrom" in parentPkg && parentPkg.inheritsFrom
-                ? PACKAGES.find((p) => p.id === parentPkg.inheritsFrom)
-                : null;
-
             return (
               <motion.div
                 key={pkg.id}
@@ -85,15 +80,6 @@ export default function Pricing() {
                 </div>
 
                 <div className="olive-divider mb-6" />
-
-                {/* Inherited features from grandparent (shown as a compact callout) */}
-                {grandparentPkg && (
-                  <div className="mb-4 px-3 py-2 bg-white/[0.03] border border-white/[0.06] rounded-sm">
-                    <p className="font-[var(--font-barlow-condensed)] text-[10px] tracking-[0.25em] uppercase text-[var(--muted)]">
-                      Includes all {grandparentPkg.name} features
-                    </p>
-                  </div>
-                )}
 
                 {/* Inherited features from parent */}
                 {parentPkg && (
