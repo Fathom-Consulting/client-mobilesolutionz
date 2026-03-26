@@ -103,6 +103,9 @@ export default function RootLayout({
       className={`${bebasNeue.variable} ${barlow.variable} ${barlowCondensed.variable} ${cormorant.variable}`}
     >
       <head>
+        <link rel="icon" href={FAVICON} />
+        <link rel="shortcut icon" href={FAVICON} />
+        <link rel="apple-touch-icon" href={FAVICON} />
         <Script
           id="local-business-schema"
           type="application/ld+json"
