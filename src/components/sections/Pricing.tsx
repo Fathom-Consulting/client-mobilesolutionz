@@ -35,105 +35,163 @@ export default function Pricing() {
         </motion.p>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-white/5">
-          {PACKAGES.map((pkg, i) => (
-            <motion.div
-              key={pkg.id}
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.15 }}
-              className={cn(
-                "relative flex flex-col bg-[var(--steel)] p-6 sm:p-8 hover:bg-[var(--panel)] transition-colors duration-300",
-                pkg.popular && "ring-1 ring-[var(--olive)]"
-              )}
-            >
-              {pkg.badge && (
-                <span className="absolute top-0 right-0 bg-[var(--olive)] text-[var(--ink)] text-[10px] font-[var(--font-barlow-condensed)] font-bold tracking-[0.2em] uppercase px-3 py-1.5">
-                  {pkg.badge}
-                </span>
-              )}
-              {pkg.popular && !pkg.badge && (
-                <span className="absolute top-0 right-0 bg-[var(--olive)]/20 border border-[var(--olive)]/40 text-[var(--olive)] text-[10px] font-[var(--font-barlow-condensed)] font-bold tracking-[0.2em] uppercase px-3 py-1.5">
-                  Popular
-                </span>
-              )}
+          {PACKAGES.map((pkg, i) => {
+            const parentPkg =
+              "inheritsFrom" in pkg && pkg.inheritsFrom
+                ? PACKAGES.find((p) => p.id === pkg.inheritsFrom)
+                : null;
 
-              <div className="mb-6">
-                <h3 className="font-[var(--font-bebas)] text-3xl tracking-widest text-[var(--cream)] mb-1">
-                  {pkg.name}
-                </h3>
-                <p className="font-[var(--font-barlow-condensed)] text-xs tracking-wider uppercase text-[var(--ash)] mb-2">
-                  {pkg.tagline}
-                </p>
-                {"includesText" in pkg && pkg.includesText && (
-                  <p className="font-[var(--font-barlow)] text-xs text-[var(--olive)]/70 italic mb-4">
-                    {pkg.includesText as string}
-                  </p>
+            const grandparentPkg =
+              parentPkg && "inheritsFrom" in parentPkg && parentPkg.inheritsFrom
+                ? PACKAGES.find((p) => p.id === parentPkg.inheritsFrom)
+                : null;
+
+            return (
+              <motion.div
+                key={pkg.id}
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.15 }}
+                className={cn(
+                  "relative flex flex-col bg-[var(--steel)] p-6 sm:p-8 hover:bg-[var(--panel)] transition-colors duration-300",
+                  pkg.popular && "ring-1 ring-[var(--olive)]"
                 )}
-                <div className="font-[var(--font-bebas)] text-4xl sm:text-5xl tracking-wider text-[var(--olive)]">
-                  {pkg.priceRange}
-                </div>
-                <p className="font-[var(--font-barlow)] text-xs text-[var(--muted)] mt-1">
-                  Starting range. Varies by vehicle size and condition.
-                </p>
-              </div>
+              >
+                {pkg.badge && (
+                  <span className="absolute top-0 right-0 bg-[var(--olive)] text-[var(--ink)] text-[10px] font-[var(--font-barlow-condensed)] font-bold tracking-[0.2em] uppercase px-3 py-1.5">
+                    {pkg.badge}
+                  </span>
+                )}
+                {pkg.popular && !pkg.badge && (
+                  <span className="absolute top-0 right-0 bg-[var(--olive)]/20 border border-[var(--olive)]/40 text-[var(--olive)] text-[10px] font-[var(--font-barlow-condensed)] font-bold tracking-[0.2em] uppercase px-3 py-1.5">
+                    Popular
+                  </span>
+                )}
 
-              <div className="olive-divider mb-6" />
-
-              {pkg.interior.length > 0 && (
-                <div className="mb-4">
-                  <p className="font-[var(--font-barlow-condensed)] text-[10px] tracking-[0.3em] uppercase text-[var(--muted)] mb-3">
-                    Interior
-                  </p>
-                  <ul className="space-y-2">
-                    {pkg.interior.map((item) => (
-                      <li key={item} className="flex items-start gap-3">
-                        <Check
-                          size={14}
-                          strokeWidth={1.5}
-                          className="text-[var(--olive)] mt-0.5 shrink-0"
-                        />
-                        <span className="font-[var(--font-barlow)] text-sm text-[var(--ash)] leading-snug">
-                          {item}
-                        </span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              )}
-
-              {pkg.exterior.length > 0 && (
                 <div className="mb-6">
-                  <p className="font-[var(--font-barlow-condensed)] text-[10px] tracking-[0.3em] uppercase text-[var(--muted)] mb-3">
-                    Exterior
+                  <h3 className="font-[var(--font-bebas)] text-3xl tracking-widest text-[var(--cream)] mb-1">
+                    {pkg.name}
+                  </h3>
+                  <p className="font-[var(--font-barlow-condensed)] text-xs tracking-wider uppercase text-[var(--ash)] mb-2">
+                    {pkg.tagline}
                   </p>
-                  <ul className="space-y-2">
-                    {pkg.exterior.map((item) => (
-                      <li key={item} className="flex items-start gap-3">
-                        <Check
-                          size={14}
-                          strokeWidth={1.5}
-                          className="text-[var(--olive)] mt-0.5 shrink-0"
-                        />
-                        <span className="font-[var(--font-barlow)] text-sm text-[var(--ash)] leading-snug">
-                          {item}
-                        </span>
-                      </li>
-                    ))}
-                  </ul>
+                  <div className="font-[var(--font-bebas)] text-4xl sm:text-5xl tracking-wider text-[var(--olive)]">
+                    {pkg.priceRange}
+                  </div>
+                  <p className="font-[var(--font-barlow)] text-xs text-[var(--muted)] mt-1">
+                    Starting range. Varies by vehicle size and condition.
+                  </p>
                 </div>
-              )}
 
-              <div className="mt-auto">
-                <a
-                  href={`/booking?package=${encodeURIComponent(pkg.name)}`}
-                  className="clip-btn flex items-center justify-center gap-2 bg-[var(--olive)]/20 hover:bg-[var(--olive)] border border-[var(--olive)]/40 hover:border-[var(--olive)] text-[var(--olive)] hover:text-[var(--cream)] font-[var(--font-barlow-condensed)] font-semibold tracking-widest uppercase text-sm py-3.5 transition-all duration-200"
-                >
-                  Book {pkg.name} <ArrowRight size={14} strokeWidth={1.5} />
-                </a>
-              </div>
-            </motion.div>
-          ))}
+                <div className="olive-divider mb-6" />
+
+                {/* Inherited features from grandparent (shown as a compact callout) */}
+                {grandparentPkg && (
+                  <div className="mb-4 px-3 py-2 bg-white/[0.03] border border-white/[0.06] rounded-sm">
+                    <p className="font-[var(--font-barlow-condensed)] text-[10px] tracking-[0.25em] uppercase text-[var(--muted)]">
+                      Includes all {grandparentPkg.name} features
+                    </p>
+                  </div>
+                )}
+
+                {/* Inherited features from parent */}
+                {parentPkg && (
+                  <div className="mb-5">
+                    <p className="font-[var(--font-barlow-condensed)] text-[10px] tracking-[0.3em] uppercase text-[var(--muted)] mb-3">
+                      Everything in {parentPkg.name}
+                    </p>
+                    <ul className="space-y-2">
+                      {[...parentPkg.interior, ...parentPkg.exterior].map((item) => (
+                        <li key={item} className="flex items-start gap-3">
+                          <Check
+                            size={14}
+                            strokeWidth={1.5}
+                            className="text-[var(--olive)]/40 mt-0.5 shrink-0"
+                          />
+                          <span className="font-[var(--font-barlow)] text-sm text-[var(--muted)] leading-snug">
+                            {item}
+                          </span>
+                        </li>
+                      ))}
+                    </ul>
+                    <div className="mt-4 border-t border-white/[0.06]" />
+                  </div>
+                )}
+
+                {/* New features in this tier */}
+                {(pkg.interior.length > 0 || pkg.exterior.length > 0) && (
+                  <div className="mb-6">
+                    {parentPkg && (
+                      <p className="font-[var(--font-barlow-condensed)] text-[10px] tracking-[0.3em] uppercase text-[var(--olive)] mb-3 mt-4">
+                        {pkg.name} Adds
+                      </p>
+                    )}
+
+                    {pkg.interior.length > 0 && (
+                      <div className={cn(parentPkg ? "" : "mb-4")}>
+                        {!parentPkg && (
+                          <p className="font-[var(--font-barlow-condensed)] text-[10px] tracking-[0.3em] uppercase text-[var(--muted)] mb-3">
+                            Interior
+                          </p>
+                        )}
+                        <ul className="space-y-2">
+                          {pkg.interior.map((item) => (
+                            <li key={item} className="flex items-start gap-3">
+                              <Check
+                                size={14}
+                                strokeWidth={1.5}
+                                className="text-[var(--olive)] mt-0.5 shrink-0"
+                              />
+                              <span className="font-[var(--font-barlow)] text-sm text-[var(--ash)] leading-snug">
+                                {item}
+                              </span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+
+                    {pkg.exterior.length > 0 && (
+                      <div className={cn(pkg.interior.length > 0 && "mt-4")}>
+                        {!parentPkg && (
+                          <p className="font-[var(--font-barlow-condensed)] text-[10px] tracking-[0.3em] uppercase text-[var(--muted)] mb-3 mt-4">
+                            Exterior
+                          </p>
+                        )}
+                        {!parentPkg && pkg.interior.length > 0 && (
+                          <div className="mb-3" />
+                        )}
+                        <ul className="space-y-2">
+                          {pkg.exterior.map((item) => (
+                            <li key={item} className="flex items-start gap-3">
+                              <Check
+                                size={14}
+                                strokeWidth={1.5}
+                                className="text-[var(--olive)] mt-0.5 shrink-0"
+                              />
+                              <span className="font-[var(--font-barlow)] text-sm text-[var(--ash)] leading-snug">
+                                {item}
+                              </span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+                  </div>
+                )}
+
+                <div className="mt-auto">
+                  <a
+                    href={`/booking?package=${encodeURIComponent(pkg.name)}`}
+                    className="clip-btn flex items-center justify-center gap-2 bg-[var(--olive)]/20 hover:bg-[var(--olive)] border border-[var(--olive)]/40 hover:border-[var(--olive)] text-[var(--olive)] hover:text-[var(--cream)] font-[var(--font-barlow-condensed)] font-semibold tracking-widest uppercase text-sm py-3.5 transition-all duration-200"
+                  >
+                    Book {pkg.name} <ArrowRight size={14} strokeWidth={1.5} />
+                  </a>
+                </div>
+              </motion.div>
+            );
+          })}
         </div>
 
         <motion.div
