@@ -2,11 +2,11 @@ export function getLocalBusinessSchema() {
   return {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
-    "@id": "https://mobilesolutionz.com/#business",
+    "@id": "https://mobile-solutionz.com/#business",
     name: "Mobile Solutionz",
     description:
       "Premium mobile car detailing studio serving the Rogue Valley. Certified System X installer offering paint correction, ceramic coating, interior and exterior detailing at your location in Medford, Oregon.",
-    url: "https://mobilesolutionz.com",
+    url: "https://mobile-solutionz.com",
     telephone: "+15413265822",
     image: "https://lpsog3i64o.ufs.sh/f/Q40NF8H3o1GE2uxySWUdiRU0fAyw9EBIPc6XOYxzWJ3utmSV",
     priceRange: "$$",
