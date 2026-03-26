@@ -36,6 +36,7 @@ const cormorant = Cormorant_Garamond({
 
 const SITE_URL = "https://mobile-solutionz.com";
 const OG_IMAGE = "https://lpsog3i64o.ufs.sh/f/Q40NF8H3o1GEYL7S7hNCkxDM1Iwo5HYWKcXCJ2PZjlqvbQS0";
+const FAVICON = "https://lpsog3i64o.ufs.sh/f/Q40NF8H3o1GEOBfDruFdqaXDiUTKCx1JlgBVAWs0FkPznfNm";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -67,6 +68,11 @@ export const metadata: Metadata = {
     },
   },
   alternates: { canonical: SITE_URL },
+  icons: {
+    icon: FAVICON,
+    shortcut: FAVICON,
+    apple: FAVICON,
+  },
   openGraph: {
     type: "website",
     locale: "en_US",
