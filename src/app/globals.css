@@ -1,0 +1,109 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --ink: #0c0c0c;
+    --charcoal: #141414;
+    --steel: #1e1e1e;
+    --panel: #252525;
+    --olive: #606c38;
+    --olive-lt: #7a8a47;
+    --olive-dk: #4a5229;
+    --cream: #e8e3d4;
+    --ash: #a0a09a;
+    --muted: #555550;
+
+    --background: 0 0% 5%;
+    --foreground: 60 9% 92%;
+    --card: 0 0% 8%;
+    --card-foreground: 60 9% 92%;
+    --popover: 0 0% 8%;
+    --popover-foreground: 60 9% 92%;
+    --primary: 83 30% 32%;
+    --primary-foreground: 60 9% 92%;
+    --secondary: 0 0% 11%;
+    --secondary-foreground: 60 9% 92%;
+    --muted-hsl: 0 0% 15%;
+    --muted-foreground: 0 0% 64%;
+    --accent: 0 0% 15%;
+    --accent-foreground: 60 9% 92%;
+    --destructive: 0 63% 31%;
+    --destructive-foreground: 60 9% 92%;
+    --border: 0 0% 15%;
+    --input: 0 0% 15%;
+    --ring: 83 30% 32%;
+    --radius: 0.5rem;
+  }
+}
+
+@layer base {
+  * {
+    box-sizing: border-box;
+    border-color: hsl(var(--border));
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--ink);
+    color: var(--cream);
+    font-family: var(--font-barlow), system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.4;
+  }
+}
+
+@layer utilities {
+  .clip-btn {
+    clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+  }
+
+  .olive-divider {
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--olive), transparent);
+  }
+
+  @keyframes ticker {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  .animate-ticker {
+    animation: ticker 30s linear infinite;
+  }
+
+  .animate-ticker:hover,
+  .animate-ticker:focus-within {
+    animation-play-state: paused;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .animate-fade-up {
+    animation: fadeUp 0.6s ease-out forwards;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
