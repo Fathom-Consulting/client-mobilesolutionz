@@ -5,6 +5,11 @@ export const alt = "Mobile Solutionz — Premium Mobile Detailing in Medford, Or
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
+const LOGO =
+  "https://lpsog3i64o.ufs.sh/f/Q40NF8H3o1GEBjs2Ejo9mYyqLZCIFHU20rv6bAaGlhj5fpoX";
+const HERO =
+  "https://lpsog3i64o.ufs.sh/f/Q40NF8H3o1GEMgTeNELGIJHax2lP6TN5yh9RsdMu1tOZ3e0E";
+
 export default function OGImage() {
   return new ImageResponse(
     (
@@ -12,111 +17,172 @@ export default function OGImage() {
         style={{
           width: "1200px",
           height: "630px",
-          background: "#0d0d0d",
+          background: "#080808",
           display: "flex",
-          flexDirection: "column",
-          justifyContent: "flex-end",
-          padding: "72px 80px",
-          fontFamily: "sans-serif",
           position: "relative",
+          overflow: "hidden",
         }}
       >
-        {/* Olive accent bar */}
+        {/* Car image — right half, fading left */}
+        <img
+          src={HERO}
+          style={{
+            position: "absolute",
+            top: 0,
+            right: 0,
+            width: "620px",
+            height: "630px",
+            objectFit: "cover",
+            objectPosition: "center",
+            filter: "brightness(0.35) contrast(1.1) saturate(0.6)",
+          }}
+        />
+
+        {/* Gradient fade: dark left → transparent right */}
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            background:
+              "linear-gradient(to right, #080808 45%, rgba(8,8,8,0.85) 60%, rgba(8,8,8,0.2) 100%)",
+          }}
+        />
+
+        {/* Olive radial glow — left side */}
+        <div
+          style={{
+            position: "absolute",
+            top: "-100px",
+            left: "-100px",
+            width: "700px",
+            height: "700px",
+            borderRadius: "50%",
+            background:
+              "radial-gradient(circle, rgba(96,108,56,0.14) 0%, transparent 65%)",
+          }}
+        />
+
+        {/* Left accent bar */}
         <div
           style={{
             position: "absolute",
             top: 0,
             left: 0,
-            width: "6px",
+            width: "4px",
             height: "100%",
-            background: "#606c38",
+            background: "linear-gradient(to bottom, transparent, #606c38 30%, #606c38 70%, transparent)",
           }}
         />
 
-        {/* Subtle olive glow */}
+        {/* Content */}
         <div
           style={{
-            position: "absolute",
-            top: "50%",
-            left: "50%",
-            transform: "translate(-50%, -50%)",
-            width: "700px",
-            height: "700px",
-            borderRadius: "50%",
-            background:
-              "radial-gradient(circle, rgba(96,108,56,0.18) 0%, transparent 70%)",
-          }}
-        />
-
-        {/* Top badge */}
-        <div
-          style={{
-            position: "absolute",
-            top: "56px",
-            left: "86px",
+            position: "relative",
             display: "flex",
-            alignItems: "center",
-            gap: "10px",
-            borderLeft: "2px solid #606c38",
-            paddingLeft: "14px",
+            flexDirection: "column",
+            justifyContent: "space-between",
+            padding: "56px 72px",
+            width: "680px",
+            height: "100%",
           }}
         >
-          <span
+          {/* Logo */}
+          <img
+            src={LOGO}
             style={{
-              fontSize: "13px",
-              letterSpacing: "0.2em",
-              textTransform: "uppercase",
-              color: "#a8a89a",
+              width: "180px",
+              objectFit: "contain",
+              objectPosition: "left",
+              opacity: 0.95,
             }}
-          >
-            Medford, Oregon · System X Certified
-          </span>
-        </div>
+          />
 
-        {/* Headline */}
-        <div style={{ display: "flex", flexDirection: "column", gap: "4px", marginBottom: "32px" }}>
-          <span
-            style={{
-              fontSize: "88px",
-              fontWeight: 300,
-              color: "#f0ebe3",
-              letterSpacing: "0.04em",
-              lineHeight: 1,
-            }}
-          >
-            Premium Mobile
-          </span>
-          <span
-            style={{
-              fontSize: "88px",
-              fontWeight: 300,
-              fontStyle: "italic",
-              color: "#606c38",
-              letterSpacing: "0.04em",
-              lineHeight: 1,
-            }}
-          >
-            Auto Detailing
-          </span>
-        </div>
+          {/* Headline block */}
+          <div style={{ display: "flex", flexDirection: "column", gap: "2px" }}>
+            {/* Eyebrow */}
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: "12px",
+                marginBottom: "20px",
+              }}
+            >
+              <div style={{ width: "32px", height: "1px", background: "#606c38" }} />
+              <span
+                style={{
+                  fontSize: "12px",
+                  letterSpacing: "0.28em",
+                  textTransform: "uppercase",
+                  color: "#606c38",
+                  fontFamily: "sans-serif",
+                }}
+              >
+                Medford, Oregon · System X Certified
+              </span>
+            </div>
 
-        {/* Description + CTA row */}
-        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-          <span style={{ fontSize: "22px", color: "#8a8a7a", maxWidth: "600px", lineHeight: 1.5 }}>
-            We bring the studio to your driveway. Serving the Rogue Valley.
-          </span>
+            <span
+              style={{
+                fontSize: "80px",
+                fontWeight: 300,
+                color: "#f0ebe3",
+                letterSpacing: "0.02em",
+                lineHeight: 1,
+                fontFamily: "serif",
+              }}
+            >
+              Premium Mobile
+            </span>
+            <span
+              style={{
+                fontSize: "80px",
+                fontWeight: 300,
+                fontStyle: "italic",
+                color: "#606c38",
+                letterSpacing: "0.02em",
+                lineHeight: 1.05,
+                fontFamily: "serif",
+              }}
+            >
+              Auto Detailing
+            </span>
+          </div>
+
+          {/* Bottom row */}
           <div
             style={{
-              background: "#606c38",
-              color: "#f0ebe3",
-              fontSize: "16px",
-              letterSpacing: "0.2em",
-              textTransform: "uppercase",
-              padding: "16px 32px",
-              fontWeight: 600,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              borderTop: "1px solid rgba(255,255,255,0.08)",
+              paddingTop: "24px",
             }}
           >
-            Book a Detail
+            <span
+              style={{
+                fontSize: "16px",
+                color: "#6e6e5e",
+                letterSpacing: "0.05em",
+                fontFamily: "sans-serif",
+              }}
+            >
+              We bring the studio to your driveway.
+            </span>
+            <div
+              style={{
+                background: "#606c38",
+                color: "#f0ebe3",
+                fontSize: "13px",
+                letterSpacing: "0.2em",
+                textTransform: "uppercase",
+                padding: "12px 28px",
+                fontWeight: 600,
+                fontFamily: "sans-serif",
+              }}
+            >
+              Book a Detail
+            </div>
           </div>
         </div>
       </div>
