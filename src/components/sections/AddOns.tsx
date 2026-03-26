@@ -75,6 +75,11 @@ export default function AddOns() {
                 <p className="font-[var(--font-barlow)] text-xs text-[var(--ash)] leading-relaxed flex-1">
                   {addon.description}
                 </p>
+                {addon.id === "pet-hair" && (
+                  <p className="text-[10px] font-[var(--font-barlow-condensed)] tracking-[0.2em] uppercase text-[var(--olive)] border-l-2 border-[var(--olive)]/40 pl-2.5">
+                    Auto-applied if significant pet hair is present
+                  </p>
+                )}
                 <a
                   href={`/booking?addon=${addon.id}`}
                   className="inline-flex items-center gap-1.5 text-[var(--olive)] text-xs font-[var(--font-barlow-condensed)] tracking-wider uppercase opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-200"
