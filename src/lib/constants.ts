@@ -66,6 +66,7 @@ export const PACKAGES = [
     name: "Protection+",
     priceRange: "$400 – $600",
     tagline: "Deep restoration with lasting paint protection.",
+    inheritsFrom: "economy",
     interior: [
       "Deep clean and steam disinfectant",
       "Leather and panel protection and conditioning",
@@ -86,14 +87,14 @@ export const PACKAGES = [
     name: "CeramicPro",
     priceRange: "$800 – $1,400",
     tagline: "The complete protection package for serious owners.",
-    includesText: "Includes everything in Protection Plus, plus:",
+    inheritsFrom: "protection-plus",
     interior: [
-      "Steam and shampoo extraction",
-      "Leather and panel protection and conditioning",
+      "Full steam and shampoo extraction",
+      "Ceramic coating on interior leather and vinyl",
     ],
     exterior: [
-      "Ceramic coating on all painted surfaces (1-2 stage paint correction if needed)",
-      "Trim and plastic conditioning and protection",
+      "Ceramic coating on all painted surfaces",
+      "1–2 stage paint correction (as needed)",
     ],
     includedAddons: ["Trim Restoration"] as string[],
     popular: false,
