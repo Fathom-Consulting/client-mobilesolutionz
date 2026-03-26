@@ -58,14 +58,14 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-          className="inline-flex items-center gap-2 border border-[var(--olive)]/60 bg-[var(--ink)]/75 backdrop-blur-sm px-4 py-2 mb-8"
+          className="hidden sm:inline-flex items-center gap-2 bg-[var(--ink)] border-l-2 border-l-[var(--olive)] border-y border-r border-y-[var(--olive)]/20 border-r-[var(--olive)]/20 px-4 py-2.5 mb-8"
         >
           <ShieldCheck
             size={14}
             strokeWidth={1.5}
-            className="text-[var(--olive)]"
+            className="text-[var(--olive)] shrink-0"
           />
-          <span className="font-[var(--font-barlow-condensed)] text-sm tracking-[0.2em] uppercase text-[var(--olive)]">
+          <span className="font-[var(--font-barlow-condensed)] text-sm tracking-[0.2em] uppercase text-[var(--cream)]">
             Proud Authorized Installer of System X
           </span>
         </motion.div>
@@ -97,7 +97,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.36, ease: [0.16, 1, 0.3, 1] }}
-          className="font-[var(--font-barlow)] text-lg text-[var(--ash)] max-w-xl mb-4 leading-relaxed"
+          className="font-[var(--font-barlow)] text-lg text-[var(--ash)] max-w-xl mb-6 sm:mb-4 leading-relaxed"
         >
           Serving the Rogue Valley from Medford, Oregon. We bring the studio to
           your driveway.
@@ -107,7 +107,7 @@ export default function Hero() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.42, ease: [0.16, 1, 0.3, 1] }}
-          className="flex items-center gap-2 text-[var(--muted)] text-sm mb-12"
+          className="hidden sm:flex items-center gap-2 text-[var(--muted)] text-sm mb-12"
         >
           <MapPin size={14} strokeWidth={1.5} />
           <span className="font-[var(--font-barlow-condensed)] tracking-wider uppercase text-xs">
@@ -119,7 +119,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
-          className="flex flex-col sm:flex-row gap-4 mb-16"
+          className="flex flex-col sm:flex-row gap-4 mb-10 sm:mb-16"
         >
           <a
             href="/booking"
@@ -130,7 +130,7 @@ export default function Hero() {
           </a>
           <a
             href="#services"
-            className="inline-flex items-center justify-center gap-3 border border-white/20 hover:border-[var(--olive)]/60 text-[var(--cream)] font-[var(--font-barlow-condensed)] font-semibold tracking-widest uppercase px-10 py-4 text-base transition-colors duration-200"
+            className="hidden sm:inline-flex items-center justify-center gap-3 border border-white/20 hover:border-[var(--olive)]/60 text-[var(--cream)] font-[var(--font-barlow-condensed)] font-semibold tracking-widest uppercase px-10 py-4 text-base transition-colors duration-200"
           >
             View Services
           </a>
@@ -140,14 +140,14 @@ export default function Hero() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
-          className="flex flex-wrap gap-8 sm:gap-12"
+          className="flex gap-0 sm:gap-12"
         >
           {STATS.map((stat, i) => (
-            <div key={stat.value} className={`flex flex-col gap-1 ${i > 0 ? "pl-8 sm:pl-12 border-l border-white/10" : ""}`}>
-              <span className="font-[var(--font-bebas)] text-4xl tracking-wider text-[var(--cream)]">
+            <div key={stat.value} className={`flex flex-col gap-1 flex-1 sm:flex-none ${i > 0 ? "pl-4 sm:pl-12 border-l border-white/10" : ""}`}>
+              <span className="font-[var(--font-bebas)] text-2xl sm:text-4xl tracking-wider text-[var(--cream)] whitespace-nowrap">
                 {stat.value}
               </span>
-              <span className="font-[var(--font-barlow-condensed)] text-xs tracking-[0.2em] uppercase text-[var(--muted)]">
+              <span className="font-[var(--font-barlow-condensed)] text-[10px] sm:text-xs tracking-[0.15em] sm:tracking-[0.2em] uppercase text-[var(--muted)]">
                 {stat.label}
               </span>
             </div>

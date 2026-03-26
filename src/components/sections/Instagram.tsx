@@ -53,7 +53,7 @@ export default async function Instagram() {
             href={CONTACT.instagram}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 font-[var(--font-barlow-condensed)] text-sm tracking-[0.2em] uppercase text-[var(--olive)] hover:text-[var(--olive-lt)] border border-[var(--olive)]/30 hover:border-[var(--olive)]/60 px-5 py-3 transition-all duration-200 self-start"
+            className="inline-flex items-center gap-2 font-[var(--font-barlow-condensed)] text-sm tracking-[0.2em] uppercase text-[var(--cream)] bg-[var(--olive)] hover:bg-[var(--olive-lt)] px-5 py-3 transition-colors duration-200 self-start"
           >
             <InstagramIcon size={14} strokeWidth={1.5} />
             @mobilesolutionzz

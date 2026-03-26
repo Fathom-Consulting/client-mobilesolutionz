@@ -6,7 +6,7 @@ export const SERVICES = [
     tagline: "Showroom clean, every surface.",
     description:
       "Deep cleaning, steam disinfection, leather conditioning, and extraction. Your interior restored to a standard you can feel.",
-    image: "https://lpsog3i64o.ufs.sh/f/Q40NF8H3o1GEel5l9l1YUF6gVRC0tq3JWhyxMB8ADKm4uXok",
+    image: "https://lpsog3i64o.ufs.sh/f/Q40NF8H3o1GEmyNQ168XwZhbxMAy5GrFBCd7T2Og9sWv13ij",
     imageAlt: "Interior detailing in progress",
   },
   {
@@ -15,7 +15,7 @@ export const SERVICES = [
     tagline: "Precision wash. Protected finish.",
     description:
       "Two-bucket hand wash, clay bar decontamination, iron remover, and premium paint sealant. The kind of clean that lasts.",
-    image: "https://lpsog3i64o.ufs.sh/f/Q40NF8H3o1GEc7ZVTPv9gWdEhp5MAzDaHO8TGNFxlqPX7LkV",
+    image: "https://lpsog3i64o.ufs.sh/f/Q40NF8H3o1GEMQQOGCLGIJHax2lP6TN5yh9RsdMu1tOZ3e0E",
     imageAlt: "Exterior detailing on a luxury vehicle",
   },
   {
@@ -24,7 +24,7 @@ export const SERVICES = [
     tagline: "Remove scratches. Restore depth.",
     description:
       "Machine polishing to remove swirl marks, light scratches, and oxidation. A prerequisite for any ceramic coating application.",
-    image: "https://lpsog3i64o.ufs.sh/f/Q40NF8H3o1GEACNH3C6uRskFr3X0f9ejdlp61Ya4zCvtE7PQ",
+    image: "https://lpsog3i64o.ufs.sh/f/Q40NF8H3o1GE7SZzhLnikbMVNOXLTEl9CfKDAPeSn4gy3Jch",
     imageAlt: "Paint correction on a dark vehicle hood",
   },
   {
@@ -33,7 +33,7 @@ export const SERVICES = [
     tagline: "Long-term protection. Unmatched gloss.",
     description:
       "Certified System X application with years of hydrophobic protection. Self-cleaning properties that keep your car looking detailed longer.",
-    image: "https://lpsog3i64o.ufs.sh/f/Q40NF8H3o1GEkqy9JcXZmR9Sp1D8tv3qrHXMf04jJWAxgiCK",
+    image: "https://lpsog3i64o.ufs.sh/f/Q40NF8H3o1GEBJERpOo9mYyqLZCIFHU20rv6bAaGlhj5fpoX",
     imageAlt: "Ceramic coating application on a luxury vehicle",
   },
 ];
@@ -348,4 +348,4 @@ export const CONTACT = {
 
 // Hero
 export const HERO_IMAGE =
-  "https://images.unsplash.com/photo-1544636331-e26879cd4d9b?q=80&w=2874&auto=format&fit=crop";
+  "https://lpsog3i64o.ufs.sh/f/Q40NF8H3o1GEMgTeNELGIJHax2lP6TN5yh9RsdMu1tOZ3e0E";

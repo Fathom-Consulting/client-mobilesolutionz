@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { CONTACT } from "@/lib/constants";
 
 const NAV_LINKS = [
@@ -18,12 +19,14 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-6">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-10 mb-12">
           <div>
-            <p className="font-[var(--font-bebas)] text-2xl tracking-widest text-[var(--cream)] mb-1">
-              Mobile Solutionz
-            </p>
-            <p className="font-[var(--font-barlow-condensed)] text-xs tracking-[0.3em] uppercase text-[var(--olive)] mb-4">
-              Auto Detailing
-            </p>
+            <Image
+              src="https://lpsog3i64o.ufs.sh/f/Q40NF8H3o1GEBjs2Ejo9mYyqLZCIFHU20rv6bAaGlhj5fpoX"
+              alt="Mobile Solutionz"
+              width={160}
+              height={80}
+              className="mb-4 opacity-90 mx-auto md:mx-0"
+              style={{ objectFit: "contain", objectPosition: "left" }}
+            />
             <p className="font-[var(--font-barlow)] text-xs text-[var(--muted)] leading-relaxed">
               Premium mobile detailing serving the Rogue Valley from Medford,
               Oregon.

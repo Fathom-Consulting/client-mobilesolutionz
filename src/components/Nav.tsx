@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Phone, Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 import { cn } from "@/lib/utils";
@@ -18,6 +19,8 @@ const NAV_LINKS = [
 ];
 
 export default function Nav() {
+  const pathname = usePathname();
+  const isHome = pathname === "/";
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [activeSection, setActiveSection] = useState<string>("");
@@ -66,27 +69,36 @@ export default function Nav() {
         aria-label="Primary navigation"
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between">
-          <Link href="#home" className="group flex flex-col leading-none">
+          <a href={isHome ? "#home" : "/#home"} className="group flex flex-col leading-none">
             <span className="font-[var(--font-bebas)] text-2xl tracking-widest text-[var(--cream)]">
               Mobile Solutionz
             </span>
             <span className="text-[10px] tracking-[0.3em] text-[var(--olive)] uppercase font-[var(--font-barlow-condensed)]">
               Auto Detailing
             </span>
-          </Link>
+          </a>
 
           <ul className="hidden lg:flex items-center gap-8" role="list">
             {NAV_LINKS.map((link) => (
               <li key={link.href} className="relative">
-                <Link
-                  href={link.href}
-                  className={cn(
-                    "text-[var(--ash)] hover:text-[var(--cream)] text-sm tracking-wider uppercase font-[var(--font-barlow-condensed)] font-medium transition-colors duration-200",
-                    activeSection === link.href.replace("#", "") && "text-[var(--cream)]"
-                  )}
-                >
-                  {link.label}
-                </Link>
+                {isHome ? (
+                  <Link
+                    href={link.href}
+                    className={cn(
+                      "text-[var(--ash)] hover:text-[var(--cream)] text-sm tracking-wider uppercase font-[var(--font-barlow-condensed)] font-medium transition-colors duration-200",
+                      activeSection === link.href.replace("#", "") && "text-[var(--cream)]"
+                    )}
+                  >
+                    {link.label}
+                  </Link>
+                ) : (
+                  <a
+                    href={`/${link.href}`}
+                    className="text-[var(--ash)] hover:text-[var(--cream)] text-sm tracking-wider uppercase font-[var(--font-barlow-condensed)] font-medium transition-colors duration-200"
+                  >
+                    {link.label}
+                  </a>
+                )}
                 {activeSection === link.href.replace("#", "") && (
                   <motion.div
                     layoutId="nav-indicator"
@@ -157,13 +169,13 @@ export default function Nav() {
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: i * 0.07 }}
                 >
-                  <Link
-                    href={link.href}
+                  <a
+                    href={isHome ? link.href : `/${link.href}`}
                     onClick={() => setMobileOpen(false)}
                     className="block font-[var(--font-bebas)] text-5xl tracking-widest text-[var(--cream)] hover:text-[var(--olive)] transition-colors duration-200"
                   >
                     {link.label}
-                  </Link>
+                  </a>
                 </motion.div>
               ))}
             </nav>
