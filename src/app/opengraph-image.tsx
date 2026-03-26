@@ -10,7 +10,22 @@ const LOGO =
 const HERO =
   "https://lpsog3i64o.ufs.sh/f/Q40NF8H3o1GEMgTeNELGIJHax2lP6TN5yh9RsdMu1tOZ3e0E";
 
-export default function OGImage() {
+export default async function OGImage() {
+  const [logoSrc, heroSrc] = await Promise.all([
+    fetch(LOGO)
+      .then((r) => r.arrayBuffer())
+      .then(
+        (buf) =>
+          `data:image/png;base64,${btoa(String.fromCharCode(...new Uint8Array(buf)))}`
+      ),
+    fetch(HERO)
+      .then((r) => r.arrayBuffer())
+      .then(
+        (buf) =>
+          `data:image/jpeg;base64,${btoa(String.fromCharCode(...new Uint8Array(buf)))}`
+      ),
+  ]);
+
   return new ImageResponse(
     (
       <div
@@ -23,9 +38,9 @@ export default function OGImage() {
           overflow: "hidden",
         }}
       >
-        {/* Car image — right half, fading left */}
+        {/* Car photo — right half */}
         <img
-          src={HERO}
+          src={heroSrc}
           style={{
             position: "absolute",
             top: 0,
@@ -33,8 +48,18 @@ export default function OGImage() {
             width: "620px",
             height: "630px",
             objectFit: "cover",
-            objectPosition: "center",
-            filter: "brightness(0.35) contrast(1.1) saturate(0.6)",
+          }}
+        />
+
+        {/* Darken the car photo */}
+        <div
+          style={{
+            position: "absolute",
+            top: 0,
+            right: 0,
+            width: "620px",
+            height: "630px",
+            background: "rgba(8,8,8,0.68)",
           }}
         />
 
@@ -42,23 +67,23 @@ export default function OGImage() {
         <div
           style={{
             position: "absolute",
-            inset: 0,
+            inset: "0",
             background:
-              "linear-gradient(to right, #080808 45%, rgba(8,8,8,0.85) 60%, rgba(8,8,8,0.2) 100%)",
+              "linear-gradient(to right, #080808 42%, rgba(8,8,8,0.7) 58%, rgba(8,8,8,0.15) 100%)",
           }}
         />
 
-        {/* Olive radial glow — left side */}
+        {/* Olive radial glow */}
         <div
           style={{
             position: "absolute",
-            top: "-100px",
-            left: "-100px",
-            width: "700px",
-            height: "700px",
+            top: "-80px",
+            left: "-80px",
+            width: "640px",
+            height: "640px",
             borderRadius: "50%",
             background:
-              "radial-gradient(circle, rgba(96,108,56,0.14) 0%, transparent 65%)",
+              "radial-gradient(circle, rgba(96,108,56,0.18) 0%, transparent 65%)",
           }}
         />
 
@@ -70,7 +95,8 @@ export default function OGImage() {
             left: 0,
             width: "4px",
             height: "100%",
-            background: "linear-gradient(to bottom, transparent, #606c38 30%, #606c38 70%, transparent)",
+            background:
+              "linear-gradient(to bottom, transparent 0%, #606c38 25%, #606c38 75%, transparent 100%)",
           }}
         />
 
@@ -88,31 +114,31 @@ export default function OGImage() {
         >
           {/* Logo */}
           <img
-            src={LOGO}
+            src={logoSrc}
             style={{
-              width: "180px",
+              width: "176px",
+              height: "72px",
               objectFit: "contain",
-              objectPosition: "left",
-              opacity: 0.95,
             }}
           />
 
           {/* Headline block */}
-          <div style={{ display: "flex", flexDirection: "column", gap: "2px" }}>
-            {/* Eyebrow */}
+          <div style={{ display: "flex", flexDirection: "column" }}>
             <div
               style={{
                 display: "flex",
                 alignItems: "center",
                 gap: "12px",
-                marginBottom: "20px",
+                marginBottom: "18px",
               }}
             >
-              <div style={{ width: "32px", height: "1px", background: "#606c38" }} />
+              <div
+                style={{ width: "28px", height: "1px", background: "#606c38" }}
+              />
               <span
                 style={{
                   fontSize: "12px",
-                  letterSpacing: "0.28em",
+                  letterSpacing: "0.26em",
                   textTransform: "uppercase",
                   color: "#606c38",
                   fontFamily: "sans-serif",
@@ -124,7 +150,7 @@ export default function OGImage() {
 
             <span
               style={{
-                fontSize: "80px",
+                fontSize: "82px",
                 fontWeight: 300,
                 color: "#f0ebe3",
                 letterSpacing: "0.02em",
@@ -136,7 +162,7 @@ export default function OGImage() {
             </span>
             <span
               style={{
-                fontSize: "80px",
+                fontSize: "82px",
                 fontWeight: 300,
                 fontStyle: "italic",
                 color: "#606c38",
@@ -149,20 +175,20 @@ export default function OGImage() {
             </span>
           </div>
 
-          {/* Bottom row */}
+          {/* Bottom strip */}
           <div
             style={{
               display: "flex",
               alignItems: "center",
               justifyContent: "space-between",
-              borderTop: "1px solid rgba(255,255,255,0.08)",
-              paddingTop: "24px",
+              borderTop: "1px solid rgba(255,255,255,0.07)",
+              paddingTop: "22px",
             }}
           >
             <span
               style={{
-                fontSize: "16px",
-                color: "#6e6e5e",
+                fontSize: "15px",
+                color: "#6a6a5a",
                 letterSpacing: "0.05em",
                 fontFamily: "sans-serif",
               }}
@@ -173,10 +199,10 @@ export default function OGImage() {
               style={{
                 background: "#606c38",
                 color: "#f0ebe3",
-                fontSize: "13px",
-                letterSpacing: "0.2em",
+                fontSize: "12px",
+                letterSpacing: "0.22em",
                 textTransform: "uppercase",
-                padding: "12px 28px",
+                padding: "12px 26px",
                 fontWeight: 600,
                 fontFamily: "sans-serif",
               }}
