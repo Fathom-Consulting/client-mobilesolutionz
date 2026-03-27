@@ -202,7 +202,117 @@ export default function Pricing() {
             Get a Custom Quote <ArrowRight size={14} strokeWidth={1.5} />
           </a>
         </motion.div>
+
+        {/* Maintenance Plans */}
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="mt-20"
+        >
+          <p className="font-[var(--font-barlow-condensed)] text-xs tracking-[0.3em] uppercase text-[var(--olive)] mb-3">
+            Keep It Perfect
+          </p>
+          <h2 className="font-[var(--font-bebas)] text-[clamp(2rem,4vw,3.5rem)] tracking-widest text-[var(--cream)] leading-none">
+            Maintenance Plans
+          </h2>
+          <div className="olive-divider w-24 mt-4 mb-4" />
+          <p className="font-[var(--font-barlow)] text-[var(--ash)] text-sm max-w-xl mb-10">
+            Available with Protection+ or CeramicPro. Monthly recurring service
+            to keep your vehicle looking its best between full details.
+          </p>
+        </motion.div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-white/5">
+          {MAINTENANCE_PLANS.map((plan, i) => (
+            <motion.div
+              key={plan.id}
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.15 }}
+              className="relative flex flex-col bg-[var(--steel)] p-6 sm:p-8 hover:bg-[var(--panel)] transition-colors duration-300"
+            >
+              <div className="mb-6">
+                <h3 className="font-[var(--font-bebas)] text-3xl tracking-widest text-[var(--cream)] mb-1">
+                  {plan.name}
+                </h3>
+                <p className="font-[var(--font-barlow-condensed)] text-xs tracking-wider uppercase text-[var(--ash)] mb-2">
+                  {plan.tagline}
+                </p>
+                <div className="font-[var(--font-bebas)] text-4xl sm:text-5xl tracking-wider text-[var(--olive)]">
+                  {plan.price}
+                </div>
+                <p className="font-[var(--font-barlow)] text-xs text-[var(--muted)] mt-1">
+                  Per month. Billed at time of service.
+                </p>
+              </div>
+
+              <div className="olive-divider mb-6" />
+
+              <ul className="space-y-2 mb-6 flex-1">
+                {plan.features.map((feature) => (
+                  <li key={feature} className="flex items-start gap-3">
+                    <Check
+                      size={14}
+                      strokeWidth={1.5}
+                      className="text-[var(--olive)] mt-0.5 shrink-0"
+                    />
+                    <span className="font-[var(--font-barlow)] text-sm text-[var(--ash)] leading-snug">
+                      {feature}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+
+              <div className="mt-auto">
+                <a
+                  href={`/booking?maintenance=${plan.id}`}
+                  className="clip-btn flex items-center justify-center gap-2 bg-[var(--olive)]/20 hover:bg-[var(--olive)] border border-[var(--olive)]/40 hover:border-[var(--olive)] text-[var(--olive)] hover:text-[var(--cream)] font-[var(--font-barlow-condensed)] font-semibold tracking-widest uppercase text-sm py-3.5 transition-all duration-200"
+                >
+                  Add {plan.name} Plan <ArrowRight size={14} strokeWidth={1.5} />
+                </a>
+              </div>
+            </motion.div>
+          ))}
+        </div>
       </div>
     </section>
   );
 }
+
+const MAINTENANCE_PLANS = [
+  {
+    id: "interior",
+    name: "Interior",
+    tagline: "Monthly interior upkeep.",
+    price: "$100 – $150/mo",
+    features: [
+      "Monthly interior touch-up and wipe-down",
+      "Spot extraction as needed",
+      "Priority scheduling",
+    ],
+  },
+  {
+    id: "exterior",
+    name: "Exterior",
+    tagline: "Monthly exterior protection.",
+    price: "$100 – $150/mo",
+    features: [
+      "Monthly hand wash and dry",
+      "Tire shine and trim refresh",
+      "Priority scheduling",
+    ],
+  },
+  {
+    id: "both",
+    name: "Interior + Exterior",
+    tagline: "Complete monthly maintenance.",
+    price: "$150 – $200/mo",
+    features: [
+      "Full monthly interior and exterior detail",
+      "Spot extraction and paint protection top-up",
+      "Priority scheduling",
+    ],
+  },
+];
