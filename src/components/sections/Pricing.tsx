@@ -205,7 +205,7 @@ export default function Pricing() {
 
         {/* Maintenance Plans */}
         <section className="mt-20 relative overflow-hidden border border-white/8 bg-[linear-gradient(180deg,rgba(255,255,255,0.03),rgba(255,255,255,0.01))]">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(149,166,70,0.16),transparent_28%),radial-gradient(circle_at_bottom_left,rgba(255,255,255,0.04),transparent_32%)]" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,rgba(255,255,255,0.04),transparent_32%)]" />
           <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[var(--olive)]/60 to-transparent" />
 
           <div className="relative px-6 py-10 sm:px-8 sm:py-12 lg:px-12 lg:py-14">
@@ -237,9 +237,9 @@ export default function Pricing() {
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.08 }}
-                className="relative overflow-hidden border border-[var(--olive)]/20 bg-black/20 p-6 sm:p-7 backdrop-blur-sm"
+                className="relative overflow-hidden border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.04),rgba(255,255,255,0.015))] p-6 sm:p-7 backdrop-blur-sm"
               >
-                <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(149,166,70,0.14),transparent_45%)]" />
+                <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[var(--olive)]/55 to-transparent" />
                 <div className="relative">
                   <p className="font-[var(--font-barlow-condensed)] text-[11px] tracking-[0.32em] uppercase text-[var(--olive)] mb-3">
                     Plans Start At
