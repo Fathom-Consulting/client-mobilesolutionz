@@ -204,78 +204,126 @@ export default function Pricing() {
         </motion.div>
 
         {/* Maintenance Plans */}
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="mt-20"
-        >
-          <p className="font-[var(--font-barlow-condensed)] text-xs tracking-[0.3em] uppercase text-[var(--olive)] mb-3">
-            Keep It Perfect
-          </p>
-          <h2 className="font-[var(--font-bebas)] text-[clamp(2rem,4vw,3.5rem)] tracking-widest text-[var(--cream)] leading-none">
-            Maintenance Plans
-          </h2>
-          <div className="olive-divider w-24 mt-4 mb-4" />
-          <p className="font-[var(--font-barlow)] text-[var(--ash)] text-sm max-w-xl mb-10">
-            Available with Protection+ or CeramicPro. Monthly recurring service
-            to keep your vehicle looking its best between full details.
-          </p>
-        </motion.div>
+        <section className="mt-20 relative overflow-hidden border border-white/8 bg-[linear-gradient(180deg,rgba(255,255,255,0.03),rgba(255,255,255,0.01))]">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,rgba(255,255,255,0.04),transparent_32%)]" />
+          <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[var(--olive)]/60 to-transparent" />
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-white/5">
-          {MAINTENANCE_PLANS.map((plan, i) => (
+          <div className="relative px-6 py-10 sm:px-8 sm:py-12 lg:px-12 lg:py-14">
             <motion.div
-              key={plan.id}
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: i * 0.15 }}
-              className="relative flex flex-col bg-[var(--steel)] p-6 sm:p-8 hover:bg-[var(--panel)] transition-colors duration-300"
+              className="grid gap-10 border-b border-white/8 pb-10 lg:grid-cols-[minmax(0,1.15fr)_minmax(320px,0.85fr)] lg:items-end"
             >
-              <div className="mb-6">
-                <h3 className="font-[var(--font-bebas)] text-3xl tracking-widest text-[var(--cream)] mb-1">
-                  {plan.name}
-                </h3>
-                <p className="font-[var(--font-barlow-condensed)] text-xs tracking-wider uppercase text-[var(--ash)] mb-2">
-                  {plan.tagline}
+              <div className="max-w-2xl">
+                <p className="font-[var(--font-barlow-condensed)] text-xs tracking-[0.35em] uppercase text-[var(--olive)] mb-4">
+                  Keep It Perfect
                 </p>
-                <div className="font-[var(--font-bebas)] text-4xl sm:text-5xl tracking-wider text-[var(--olive)]">
-                  {plan.price}
-                </div>
-                <p className="font-[var(--font-barlow)] text-xs text-[var(--muted)] mt-1">
-                  Per month. Billed at time of service.
+                <h2 className="font-[var(--font-bebas)] text-[clamp(2.8rem,7vw,6rem)] tracking-[0.08em] text-[var(--cream)] leading-[0.92]">
+                  Maintenance
+                  <br />
+                  Plans
+                </h2>
+                <div className="olive-divider w-24 mt-5 mb-5" />
+                <p className="font-[var(--font-barlow)] text-[15px] sm:text-lg text-[var(--ash)] leading-relaxed max-w-xl">
+                  Available with Protection+ or CeramicPro. Weekly, biweekly,
+                  and monthly visits keep the finish sharp and the interior
+                  reset between full details.
                 </p>
               </div>
 
-              <div className="olive-divider mb-6" />
-
-              <ul className="space-y-2 mb-6 flex-1">
-                {plan.features.map((feature) => (
-                  <li key={feature} className="flex items-start gap-3">
-                    <Check
-                      size={14}
-                      strokeWidth={1.5}
-                      className="text-[var(--olive)] mt-0.5 shrink-0"
-                    />
-                    <span className="font-[var(--font-barlow)] text-sm text-[var(--ash)] leading-snug">
-                      {feature}
+              <motion.div
+                initial={{ opacity: 0, scale: 0.96 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.08 }}
+                className="relative overflow-hidden border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.04),rgba(255,255,255,0.015))] p-6 sm:p-7 backdrop-blur-sm"
+              >
+                <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[var(--olive)]/55 to-transparent" />
+                <div className="relative">
+                  <p className="font-[var(--font-barlow-condensed)] text-[11px] tracking-[0.32em] uppercase text-[var(--olive)] mb-3">
+                    Plans Start At
+                  </p>
+                  <div className="font-[var(--font-bebas)] text-[clamp(4rem,10vw,7rem)] leading-[0.88] tracking-[0.06em] text-[var(--cream)]">
+                    $100
+                    <span className="block font-[var(--font-barlow-condensed)] text-base sm:text-lg tracking-[0.34em] uppercase text-[var(--ash)] mt-3">
+                      per month
                     </span>
-                  </li>
-                ))}
-              </ul>
-
-              <div className="mt-auto">
-                <a
-                  href={`/booking?maintenance=${plan.id}`}
-                  className="clip-btn flex items-center justify-center gap-2 bg-[var(--olive)]/20 hover:bg-[var(--olive)] border border-[var(--olive)]/40 hover:border-[var(--olive)] text-[var(--olive)] hover:text-[var(--cream)] font-[var(--font-barlow-condensed)] font-semibold tracking-widest uppercase text-sm py-3.5 transition-all duration-200"
-                >
-                  Add {plan.name} Plan <ArrowRight size={14} strokeWidth={1.5} />
-                </a>
-              </div>
+                  </div>
+                  <p className="mt-4 font-[var(--font-barlow)] text-sm text-[var(--ash)] leading-relaxed max-w-sm">
+                    Final pricing shifts with the amount of service needed
+                    across the month.
+                  </p>
+                  <div className="mt-6 flex flex-wrap gap-2.5">
+                    {MAINTENANCE_SCHEDULES.map((schedule) => (
+                      <span
+                        key={schedule}
+                        className="border border-white/10 bg-white/[0.03] px-3 py-2 font-[var(--font-barlow-condensed)] text-[11px] tracking-[0.26em] uppercase text-[var(--cream)]"
+                      >
+                        {schedule}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </motion.div>
             </motion.div>
-          ))}
-        </div>
+
+            <div className="grid grid-cols-1 gap-8 pt-8 md:grid-cols-3 md:gap-0 md:divide-x md:divide-white/8">
+              {MAINTENANCE_PLANS.map((plan, i) => (
+                <motion.article
+                  key={plan.id}
+                  initial={{ opacity: 0, y: 24 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  whileHover={{ y: -6 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.12 }}
+                  className={cn(
+                    "group relative flex flex-col",
+                    i === 0 && "md:pr-8",
+                    i === 1 && "md:px-8",
+                    i === 2 && "md:pl-8"
+                  )}
+                >
+                  <div className="mb-8">
+                    <p className="font-[var(--font-barlow-condensed)] text-[11px] tracking-[0.34em] uppercase text-[var(--olive)] mb-3">
+                      {plan.label}
+                    </p>
+                    <h3 className="font-[var(--font-bebas)] text-[clamp(2rem,4vw,3.1rem)] tracking-[0.08em] text-[var(--cream)] leading-none mb-3">
+                      {plan.name}
+                    </h3>
+                    <p className="font-[var(--font-barlow)] text-sm text-[var(--ash)] leading-relaxed max-w-sm">
+                      {plan.tagline}
+                    </p>
+                  </div>
+
+                  <div className="h-px w-full bg-gradient-to-r from-[var(--olive)]/70 via-[var(--olive)]/18 to-transparent mb-8 transition-all duration-300 group-hover:via-[var(--olive)]/50" />
+
+                  <ul className="space-y-3 mb-8 flex-1">
+                    {plan.features.map((feature) => (
+                      <li key={feature} className="flex items-start gap-3">
+                        <Check
+                          size={14}
+                          strokeWidth={1.6}
+                          className="text-[var(--olive)] mt-0.5 shrink-0"
+                        />
+                        <span className="font-[var(--font-barlow)] text-sm text-[var(--ash)] leading-snug">
+                          {feature}
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+
+                  <a
+                    href={`/booking?maintenance=${plan.id}`}
+                    className="inline-flex items-center gap-2 font-[var(--font-barlow-condensed)] text-sm tracking-[0.2em] uppercase text-[var(--olive)] transition-all duration-200 group-hover:text-[var(--cream)]"
+                  >
+                    Choose {plan.name} <ArrowRight size={14} strokeWidth={1.5} />
+                  </a>
+                </motion.article>
+              ))}
+            </div>
+          </div>
+        </section>
       </div>
     </section>
   );
@@ -284,35 +332,37 @@ export default function Pricing() {
 const MAINTENANCE_PLANS = [
   {
     id: "interior",
+    label: "Cabin Reset",
     name: "Interior",
-    tagline: "Monthly interior upkeep.",
-    price: "$100 – $150/mo",
+    tagline: "For drivers who want the cabin to stay fresh, clean, and ready every week.",
     features: [
-      "Monthly interior touch-up and wipe-down",
+      "Interior touch-up and wipe-down",
       "Spot extraction as needed",
       "Priority scheduling",
     ],
   },
   {
     id: "exterior",
+    label: "Finish Upkeep",
     name: "Exterior",
-    tagline: "Monthly exterior protection.",
-    price: "$100 – $150/mo",
+    tagline: "For maintaining gloss, protection, and that just-detailed finish between washes.",
     features: [
-      "Monthly hand wash and dry",
+      "Hand wash and dry",
       "Tire shine and trim refresh",
       "Priority scheduling",
     ],
   },
   {
     id: "both",
+    label: "Full-Cycle Care",
     name: "Interior + Exterior",
-    tagline: "Complete monthly maintenance.",
-    price: "$150 – $200/mo",
+    tagline: "For owners who want the complete reset every visit with no compromise.",
     features: [
-      "Full monthly interior and exterior detail",
+      "Full interior and exterior detail",
       "Spot extraction and paint protection top-up",
       "Priority scheduling",
     ],
   },
 ];
+
+const MAINTENANCE_SCHEDULES = ["Weekly", "Biweekly", "Monthly"];

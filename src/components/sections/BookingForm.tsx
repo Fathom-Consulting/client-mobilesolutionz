@@ -337,8 +337,12 @@ export default function BookingForm() {
       {(form.package === "Protection+" || form.package === "CeramicPro") && (
         <div>
           <label htmlFor="maintenancePlan" className={labelClass}>
-            Maintenance Plan ($100-$200/month, optional)
+            Maintenance Plan (optional)
           </label>
+          <p className="font-[var(--font-barlow)] text-xs text-[var(--muted)] mb-3">
+            Weekly, biweekly, and monthly plans available. Starting at $100 and
+            subject to change depending on the amount of services for the month.
+          </p>
           <select
             id="maintenancePlan"
             name="maintenancePlan"
