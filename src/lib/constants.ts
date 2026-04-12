@@ -90,7 +90,6 @@ export const PACKAGES = [
     inheritsFrom: "protection-plus",
     interior: [
       "Full steam and shampoo extraction",
-      "Ceramic coating on interior leather and vinyl",
     ],
     exterior: [
       "Ceramic coating on all painted surfaces",
