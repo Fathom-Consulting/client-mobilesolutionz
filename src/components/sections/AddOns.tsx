@@ -11,6 +11,7 @@ import {
   Circle,
   RefreshCw,
   Scissors,
+  Sparkles,
   ArrowRight,
   type LucideIcon,
 } from "lucide-react";
@@ -26,6 +27,7 @@ const ICON_MAP: Record<string, LucideIcon> = {
   Circle,
   RefreshCw,
   Scissors,
+  Sparkles,
 };
 
 export default function AddOns() {

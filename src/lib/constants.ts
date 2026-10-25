@@ -125,6 +125,13 @@ export const ADDONS = [
     icon: "Layers",
   },
   {
+    id: "water-spot-removal",
+    name: "Water Spot Removal",
+    description:
+      "Removes hard water spots and mineral etching from paint and glass, restoring a clear, spotless finish.",
+    icon: "Sparkles",
+  },
+  {
     id: "spot-extraction",
     name: "Spot Extraction",
     description:
